@@ -7,3 +7,4 @@ export class Model{
         return model(identifier, modelSchema)
     }
 }
+

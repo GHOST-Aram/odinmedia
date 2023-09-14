@@ -1,3 +1,11 @@
+export const error404 = (req, res) =>{
+	res.status(404).json( {
+			error: {
+			status: 404,
+			message: 'Resource not found.' 
+		}
+	})
+}
 export const error500 = (err, req, res, next) =>{
     if(err){
 		res.status(500).json({
@@ -7,13 +15,4 @@ export const error500 = (err, req, res, next) =>{
 		  }
 	  });
 	}
-}
-
-export const error404 = (req, res) =>{
-	res.status(404).json( {
-			error: {
-			status: 404,
-			message: 'Resource not found.' 
-		}
-	})
 }
