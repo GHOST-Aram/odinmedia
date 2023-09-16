@@ -13,10 +13,7 @@ const config = (app) =>{
     const mongoUrl = process.env.MONGODB_URI
     
     
-    mongoose.connect(process.env.MONGODB_URI, {
-        useUnifiedTopology: true,
-        useNewUrlParser: true
-    })
+    mongoose.connect(process.env.MONGODB_URI)
     .then(result => console.log("Connected to DB"))
     .catch((error =>console.log("Some thing went wrong: ", error.message)))
     
@@ -55,11 +52,7 @@ const config = (app) =>{
         resave: true,
         saveUninitialized: true,
         store: MongoStore.create({
-            mongoUrl: process.env.MONGODB_URI,
-            mongoOptions: {
-                useUnifiedTopology: true,
-                useNewUrlParser: true,
-            }
+            mongoUrl: process.env.MONGODB_URI
         }),
         cookie: {
             maxAge: 24 * 60 * 60 * 1000
