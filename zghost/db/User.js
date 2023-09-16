@@ -1,4 +1,4 @@
-import { ModelSchema, Model } from "./model";
+import { ModelSchema, Model } from "./model.js";
 
 const userModel = new ModelSchema({
     profileId: String,
