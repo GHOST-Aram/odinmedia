@@ -25,27 +25,7 @@ const config = (app) =>{
     app.set('view engine', 'jade');
     app.use(express.static('public'));
 
-
-
-
-    // Authentication config
-    // auth.useFacebookStrategy({
-    //     clientID: process.env.FACEBOOK_CLIENT_ID,
-    //     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    //     callbackUrl: `http://localhost:${port}/auth/facebook`
-    // })
-    // auth.setUpSession({
-    //     secret: process.env.SESSION_SECRET,
-    //     mongoUrl: mongoUrl,
-    //     maxAge: 3600 * 24 * 1000
-    // })
-
     auth.useFacebookStrategy()
-    auth.initialize()
-    auth.authSession()
-    auth.serializeUser()
-    auth.deserializeUser()
-
     //Sessions setup
     app.use(session({ 
         secret: process.env.SESSION_SECRET,
@@ -58,6 +38,11 @@ const config = (app) =>{
             maxAge: 24 * 60 * 60 * 1000
         }
     }))
+    app.use(auth.initialize())
+    app.use(auth.authSession())
+    auth.serializeUser()
+    auth.deserializeUser()
+
 
 }
 

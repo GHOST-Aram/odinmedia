@@ -1,15 +1,12 @@
 import passport from 'passport';
 import FacebookStrategy from 'passport-facebook'
 import { User } from '../db/User.js';
-import session from 'express-session';
-import MongoStore from 'connect-mongo'
-import { app } from './init.js';
 
 export const useFacebookStrategy = () => passport.use(new FacebookStrategy(
 	{
 		clientID: process.env.FACEBOOK_CLIENT_ID,
 		clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-		callbackURL: "http://localhost:3000/auth/facebook",
+		callbackURL: `http://localhost:${process.env.PORT}/auth/facebook`,
 		profileFields: [
 			'id', 
 			'displayName', 
@@ -20,6 +17,7 @@ export const useFacebookStrategy = () => passport.use(new FacebookStrategy(
 		]
 	},
 	async (token, refreshToken, profile, done) => {
+		console.log(profile)
 		try {
 			const user = await User.findOne({profileId: profile.id})
 			if(user){

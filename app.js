@@ -20,13 +20,28 @@ app.get('/auth/passport',
 passport.authenticate('facebook', { scope: 'email'})
 )
 
+const isLoggedIn = (req, res, next) => {
+	if(req.isAuthenticated()){
+		next()
+	} else{
+		res.redirect('/auth/facebook')
+	}
+}
+app.get('/friends', isLoggedIn, (res, req) =>{
+	res.json({user: req.user})
+})
+
 app.get('/auth/facebook', 
 	passport.authenticate('facebook'), (req, res) =>{
 		res.json({user: req.user})
 	}
 )
 app.get('/profile', (req, res) => {
-	res.json({ message: "You are a valid user" })
+	if(req.isAuthenticated()) 
+		res.json({ message: "You are a valid user" })
+	else
+		res.json({ message: "Not authenticated"})
+
 })
 
 app.get('/failed', (req, res) =>{
