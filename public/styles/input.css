@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;400;500;700&display=swap');
+*{
+    /* font-family: 'Work Sans', sans-serif; */
+}
+*:focus{
+    outline: dotted 2px #3b82f6;
+}
+input:hover, button:hover, a:hover{
+    cursor: pointer;
+}
+ body{
+    padding-block: 1rem;
+    padding-inline: clamp(1rem, calc(1rem + 5vw), 10%);
+ }
