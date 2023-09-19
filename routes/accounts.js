@@ -10,7 +10,15 @@ accountsRouter.get('/auth/facebook',
 )
 
 accountsRouter.get('/login', (req, res) => {
-	res.render('login', { data : null, errors: null })
+	res.render('accounts/login', { 
+		title:'Login', data : null, errors: null 
+	})
 })
+accountsRouter.get('/sign-up', (req, res) => {
+	res.render('accounts/sign-up', { 
+		title: 'Sign up', data : null, errors: null 
+	})
+})
+
 
 export {accountsRouter}

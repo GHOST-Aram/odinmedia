@@ -1,29 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles.css">
-    <script src="scripts/script.js" defer></script>
-    <title>OdinBook | Accounts </title>
-</head>
-<body>
+<%-include('../partials/head.ejs') %>
     <main>
         <h1 
             class="text-blue-500 font-bold text-center text-xl mb-4">
-                Welcome to OdinMedia
+                Log in to OdinMedia
             </h1>
         <section>
-            <div class="container space-y-4">
+            <div class="container space-y-4 lg:w-3/5">
 
                 <form 
                     action="" 
                     method="post"
-                    class="space-y-4 p-4 rounded-lg shadow-md shadow-slate-400"
+                    class="space-y-4 p-4 rounded-lg shadow-md shadow-slate-400
+                        
+                    "
                 >
                     <div class="flex flex-col">
                         <label for="email"
-                            class="font-md text-lg"
+                            class="font-md text-xl"
                         >
                             Email
                         </label>
@@ -37,7 +30,7 @@
                     </div>
                     <div class="flex flex-col">
                         <label for="password"
-                            class="font-md text-lg"
+                            class="font-md text-xl"
                         >
                             Password
                         </label>
@@ -59,20 +52,32 @@
                     </div>
                 </form>
                 <div
-                    class="p-4 rounded-lg shadow-md shadow-slate-400"
+                    class="p-4 rounded-lg shadow-md shadow-slate-400 flex flex-col gap-4
+                        lg:flex-row
+                    "
                 >
-                <a href="/auth/facebook">
+                <a href="/auth/facebook" class="lg:w-full">
                     <button 
-                        class="w-full bg-blue-500 text-white font-bold py-2 rounded-sm"
+                        class="w-full bg-blue-500  py-2 rounded-sm"
                         type="button" 
                     >
-                        LOGIN WITH FACEBOOK
+                        <i class="fa-brands fa-facebook text-white font-bold font-xl">
+                            LOGIN WITH FACEBOOK
+                        </i> 
+                    </button>
+                </a>
+                <a href="/sign-up" class="lg:w-full">
+                    <button 
+                        class="w-full bg-green-500 text-white font-bold py-2 rounded-sm"
+                        type="button" 
+                    >
+                        CREATE NEW ACCOUNT
                     </button>
                 </a>
                 </div>
             </div>
         </section>
     </main>
-    <%-include('./partials/footer.ejs') %>
+    <%-include('../partials/footer.ejs') %>
 </body>
 </html>

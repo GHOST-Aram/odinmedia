@@ -11,7 +11,12 @@
 input:hover, button:hover, a:hover{
     cursor: pointer;
 }
+input{
+    font-size: 1.5rem;
+}
  body{
     padding-block: 1rem;
-    padding-inline: clamp(1rem, calc(1rem + 5vw), 10%);
- }
+}
+.container{
+    margin: auto;
+}
