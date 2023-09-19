@@ -1,21 +1,16 @@
 import express from 'express'
 import morgan from 'morgan';
 import * as auth from './auth.js'
-import mongoose from 'mongoose';
 import { connectDB } from '../utils/server.js';
 import MongoStore from 'connect-mongo';
 import session from 'express-session';
-
 import 'dotenv/config.js'
 
 const config = (app) =>{
-    const port = process.env.PORT
     const mongoUrl = process.env.MONGODB_URI
     
-    
-    mongoose.connect(process.env.MONGODB_URI)
-    .then(result => console.log("Connected to DB"))
-    .catch((error =>console.log("Some thing went wrong: ", error.message)))
+    //Connect DB
+    connectDB(mongoUrl)
     
     //Server configs
     app.use(express.json());
@@ -32,14 +27,15 @@ const config = (app) =>{
         resave: true,
         saveUninitialized: true,
         store: MongoStore.create({
-            mongoUrl: process.env.MONGODB_URI
+            mongoUrl: mongoUrl
         }),
         cookie: {
-            maxAge: 24 * 60 * 60 * 1000
+            maxAge: 24 * 60 * 60 * 1000,
+            secure: true
         }
     }))
+    app.use(auth.authenticateSession())
     app.use(auth.initialize())
-    app.use(auth.authSession())
     auth.serializeUser()
     auth.deserializeUser()
 

@@ -1,4 +1,4 @@
-import passport from 'passport';
+import passport, { authenticate } from 'passport';
 import FacebookStrategy from 'passport-facebook'
 import { User } from '../db/User.js';
 
@@ -17,7 +17,6 @@ export const useFacebookStrategy = () => passport.use(new FacebookStrategy(
 		]
 	},
 	async (token, refreshToken, profile, done) => {
-		console.log(profile)
 		try {
 			const user = await User.findOne({profileId: profile.id})
 			if(user){
@@ -35,7 +34,6 @@ export const useFacebookStrategy = () => passport.use(new FacebookStrategy(
 
 				return done(null, newUser)
 			}
-			
 		} catch (error) {
 			return done(error, false)
 		}
@@ -44,18 +42,33 @@ export const useFacebookStrategy = () => passport.use(new FacebookStrategy(
 
 
 export const initialize = () => passport.initialize()
-export const authSession = () => passport.session()
+export const authenticateSession = () => passport.session()
 
 export const serializeUser = () => passport.serializeUser((user, done) =>{
-	return done(null, user.id)
+	process.nextTick(() =>{
+		return done(null, user.id)
+	})
 })
 
 export const deserializeUser = () => passport.deserializeUser(
     async(id, done) =>{
+
     try {
-        const user = await User.findById(id)
-        return done (null, user)
-    } catch (error) {
+		const user = await User.findById(id)
+		return done (null, user)
+	} catch (error) {
         return done (error, false)
     }       
 })
+
+export const authenticate = (strategy) => passport.authenticate(strategy)
+
+export const isLoggedIn = (req, res, next) => {
+	if(req.isAuthenticated()){
+		next()
+	} else{
+		res.status(401).json({
+			error: 'Access denied. User not authenticated.'
+		})
+	}
+}
