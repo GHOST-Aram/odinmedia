@@ -1,4 +1,4 @@
-import passport, { authenticate } from 'passport';
+import passport from 'passport';
 import FacebookStrategy from 'passport-facebook'
 import { User } from '../db/User.js';
 
