@@ -6,7 +6,8 @@ import MongoStore from 'connect-mongo';
 import session from 'express-session';
 import 'dotenv/config.js'
 import cors from 'cors'
-const config = (app) =>{
+import { app } from './init.js';
+const config = () =>{
     const mongoUrl = process.env.MONGODB_URI
     
     //Connect DB
@@ -21,7 +22,6 @@ const config = (app) =>{
     app.set('view engine', 'ejs');
     app.use(express.static('public'));
 
-    auth.useFacebookStrategy()
     //Sessions setup
     app.use(session({ 
         secret: process.env.SESSION_SECRET,
@@ -35,8 +35,9 @@ const config = (app) =>{
             secure: true
         }
     }))
-    app.use(auth.authenticateSession())
-    app.use(auth.initialize())
+    auth.useFacebookStrategy()
+    auth.authenticateSession()
+    auth.initialize()
     auth.serializeUser()
     auth.deserializeUser()
 

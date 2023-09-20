@@ -1,12 +1,13 @@
 import passport from 'passport';
 import FacebookStrategy from 'passport-facebook'
 import { User } from '../db/User.js';
+import { app } from './init.js';
 
 export const useFacebookStrategy = () => passport.use(new FacebookStrategy(
 	{
 		clientID: process.env.FACEBOOK_CLIENT_ID,
 		clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-		callbackURL: `http://localhost:${process.env.PORT}/auth/facebook`,
+		callbackURL: `http://localhost:${process.env.PORT}/auth/facebook/callback`,
 		profileFields: [
 			'id', 
 			'displayName', 
@@ -41,8 +42,8 @@ export const useFacebookStrategy = () => passport.use(new FacebookStrategy(
 ))
 
 
-export const initialize = () => passport.initialize()
-export const authenticateSession = () => passport.session()
+export const initialize = () => app.use(passport.initialize())
+export const authenticateSession = () => app.use(passport.session())
 
 export const serializeUser = () => passport.serializeUser((user, done) =>{
 	process.nextTick(() =>{
@@ -61,7 +62,8 @@ export const deserializeUser = () => passport.deserializeUser(
     }       
 })
 
-export const authenticate = (strategy) => passport.authenticate(strategy)
+export const authenticate = (strategy) => passport.authenticate(
+	strategy)
 
 export const isLoggedIn = (req, res, next) => {
 	if(req.isAuthenticated()){

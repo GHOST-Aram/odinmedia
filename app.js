@@ -4,7 +4,7 @@ import { config } from './zghost/app/config.js';
 import { internalServerError, notFoundError } from './zghost/utils/errors.js';
 import { indexRouter } from "./routes/index.js";
 
-config(app)
+config()
 app.use(indexRouter)
 app.use(accountsRouter)
 
