@@ -5,8 +5,8 @@ import { internalServerError, notFoundError } from './zghost/utils/errors.js';
 import { indexRouter } from "./routes/index.js";
 
 config()
-app.use(indexRouter)
-app.use(accountsRouter)
+app.use('/', indexRouter)
+app.use('/auth',accountsRouter)
 
 //Error handling
 app.use(notFoundError)

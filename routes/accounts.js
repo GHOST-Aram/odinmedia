@@ -4,13 +4,13 @@ import { Router } from "../zghost/app/init.js"
 
 const accountsRouter = Router()
 
-accountsRouter.get('/auth/facebook', 
+accountsRouter.get('/facebook', 
 	authenticate('facebook')
 )
 
-accountsRouter.get('/auth/facebook/callback', 
+accountsRouter.get('/facebook/callback', 
 	authenticate('facebook', {
-		failureRedirect: '/login',
+		failureRedirect: 'auth/login',
 	})
 , (req, res) =>{
 	if(req.isAuthenticated()){
