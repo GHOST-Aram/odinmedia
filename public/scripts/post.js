@@ -25,14 +25,15 @@ commentContainer.appendChild(commentText)
 commentAuthorContainer.className = 'flex flex-row gap-2 items-center'
 commentAuthorImage.className = 'h-8 w-8 rounded-full'
 textArea.className = (
-    `w-full font-light p-2 bg-slate-400 
-    border rounded-sm text-sm text-white`
+    `w-full font-light p-2  
+    border rounded-sm text-sm text-gray-500`
 )
 sendBtn.className = ('bg-blue-500 text-white font-md px-4 py-2 rounded-sm')
 commentText.className = 'font-light text-md text-gray-500'
 commentContainer.className = 'p-2 rounded-sm bg-slate-300'
 
-
+//Add attributes and values
+textArea.setAttribute('placeholder', 'What do you have in mind?')
 sendBtn.textContent = 'SEND'
 
 
@@ -43,6 +44,11 @@ commentBtns.forEach(btn =>{
         post.appendChild(textArea)
         post.appendChild(sendBtn)
         textArea.focus()
+
+        textArea.addEventListener('blur', (e) =>{
+            post.removeChild(textArea)
+            post.removeChild(sendBtn)
+        })
 
         sendBtn.addEventListener('click', (e) =>{
             
