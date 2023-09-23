@@ -54,9 +54,10 @@ commentBtns.forEach(btn =>{
                 commentContainer.className = 'p-2 rounded-sm bg-slate-300'
                 commentContainer.appendChild(commentAuthorContainer)
                 commentContainer.appendChild(commentText)
-    
-        
-                currentCommentSection.appendChild(commentContainer)
+                
+                const replies = document.querySelector('#current-post .comments') 
+                replies.prepend(commentContainer)
+                
                 textArea.value = ''
                 commentForm.classList.toggle('hidden')
             }
