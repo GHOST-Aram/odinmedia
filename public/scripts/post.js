@@ -14,6 +14,7 @@ const commentAuthorImage = document.createElement('img')
 const commentAuthorName = document.createElement('h1')
 const commentAuthorContainer = document.createElement('div')
 const commentContainer=document.createElement('div')
+const commentInputContainer = document.createElement('div')
 
 
 //Add author name and image nodes
@@ -42,15 +43,20 @@ sendBtn.textContent = 'SEND'
 
 commentBtns.forEach(btn =>{
     btn.addEventListener('click', (e) =>{
+        //Find post node
         const post = btn.parentElement.parentElement
         
+        //Mark as current post
         post.setAttribute('id', 'current-post')
 
         const currentCommentSection = document.querySelector('#current-post .comment-section')
-        console.log(currentCommentSection)
 
-        currentCommentSection.appendChild(textArea)
-        currentCommentSection.appendChild(sendBtn)
+        //Put textarea and send button in one div before adding them to comment section
+        commentInputContainer.appendChild(textArea)
+        commentInputContainer.appendChild(sendBtn)
+
+        //Add coment input container to current comment section
+        currentCommentSection.prepend(commentInputContainer)
         textArea.focus()
 
         currentCommentSection.addEventListener('blur', (e) =>{
