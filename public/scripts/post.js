@@ -18,7 +18,6 @@ commentBtns.forEach(btn =>{
         post.setAttribute('id', 'current-post')
         
         //Get comment node and elements for current post
-        const currentCommentSection = document.querySelector('#current-post .comment-section')
         const commentForm = document.querySelector('#current-post .comment-form')
         const textArea = document.querySelector('#current-post textarea')
         const replyBtn = document.querySelector('#current-post .comment-form button')
@@ -32,7 +31,6 @@ commentBtns.forEach(btn =>{
         replyBtn.addEventListener('click', (e) =>{
             
             if(textArea.value.trim() !== ''){
-
                 const commentText = document.createElement('p')
                 commentText.textContent = textArea.value
                 commentText.className = 'font-light text-md text-gray-900'
@@ -57,7 +55,7 @@ commentBtns.forEach(btn =>{
                 
                 const replies = document.querySelector('#current-post .comments') 
                 replies.prepend(commentContainer)
-                
+
                 textArea.value = ''
                 commentForm.classList.toggle('hidden')
             }
