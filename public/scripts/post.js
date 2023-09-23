@@ -27,45 +27,45 @@ commentBtns.forEach(btn =>{
         commentForm.classList.toggle('hidden')
         textArea.focus()
         
-        commentForm.addEventListener('blur', (e) =>{
-            commentForm.classList.toggle('hidden')
-        })
-    
+
+        
         replyBtn.addEventListener('click', (e) =>{
+            
+            if(textArea.value.trim() !== ''){
+
+                const commentText = document.createElement('p')
+                commentText.textContent = textArea.value
+                commentText.className = 'font-light text-md text-gray-900'
+                
+                const commentAuthorImage = document.createElement('img')
+                commentAuthorImage.src = 'https://randomuser.me/api/portraits/men/83.jpg'
+                commentAuthorImage.className = 'h-8 w-8 rounded-full'
+                
+                const commentAuthorName = document.createElement('h1')
+                commentAuthorName.textContent = 'Erick Juoles'
+                
+                
+                const commentAuthorContainer = document.createElement('div')
+                commentAuthorContainer.className = 'flex flex-row gap-2 items-center'
+                commentAuthorContainer.appendChild(commentAuthorImage)
+                commentAuthorContainer.appendChild(commentAuthorName)
+                
+                const commentContainer=document.createElement('div')
+                commentContainer.className = 'p-2 rounded-sm bg-slate-300'
+                commentContainer.appendChild(commentAuthorContainer)
+                commentContainer.appendChild(commentText)
     
-            commentText.textContent = textArea.value
-            commentAuthorName.textContent = 'Erick Juoles'
-            commentAuthorImage.src = 'https://randomuser.me/api/portraits/men/83.jpg'
-    
-            currentCommentSection.appendChild(commentContainer)
-            textArea.value = ''
-            commentForm.classList.toggle('hidden')
+        
+                currentCommentSection.appendChild(commentContainer)
+                textArea.value = ''
+                commentForm.classList.toggle('hidden')
+            }
         })
 
         //New comment elements
-        const commentText = document.createElement('p')
-        const commentAuthorImage = document.createElement('img')
-        const commentAuthorName = document.createElement('h1')
-        const commentAuthorContainer = document.createElement('div')
-        const commentContainer=document.createElement('div')
         
         
-        //Add author name and image nodes
-        commentAuthorContainer.appendChild(commentAuthorImage)
-        commentAuthorContainer.appendChild(commentAuthorName)
         
-        //Add username and image nodes to comment container node 
-        commentContainer.appendChild(commentAuthorContainer)
-        commentContainer.appendChild(commentText)
-        
-        //Styles
-        commentAuthorContainer.className = 'flex flex-row gap-2 items-center'
-        commentAuthorImage.className = 'h-8 w-8 rounded-full'
-        
-        commentText.className = 'font-light text-md text-gray-900'
-        commentContainer.className = 'p-2 rounded-sm bg-slate-300'
-        
-        //Add attributes and values
 
 
     })
