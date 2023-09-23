@@ -1,24 +1,53 @@
+
 // Get interactionn buttons
 const commentBtns = document.querySelectorAll('button.comment-btn')
 const likeBtns = document.querySelectorAll('button.like-btn')
 const shareBtns = document.querySelectorAll('button.share-btn')
-const confirmShareBtn = document.querySelector('button#confirm-share')
-const confirmShareContainer = document.querySelector('div.confirm-share')
+const closeAlertDialogButton = document.querySelector('button#confirm-share')
+const shareAlertDialogContainer = document.querySelector('div.confirm-share')
 
 
 
 
 commentBtns.forEach(btn =>{
     btn.addEventListener('click', (e) =>{
-        //Create elements
-        const textArea = document.createElement('textarea')
-        const sendBtn = document.createElement('button')
+        //Find  current post node
+        const post = btn.parentElement.parentElement
+        
+        //Mark as current post
+        post.setAttribute('id', 'current-post')
+        
+        //Get comment node and elements for current post
+        const currentCommentSection = document.querySelector('#current-post .comment-section')
+        const commentForm = document.querySelector('#current-post .comment-form')
+        const textArea = document.querySelector('#current-post textarea')
+        const replyBtn = document.querySelector('#current-post .comment-form button')
+    
+        // diaplay comment form
+        commentForm.classList.toggle('hidden')
+        textArea.focus()
+        
+        commentForm.addEventListener('blur', (e) =>{
+            commentForm.classList.toggle('hidden')
+        })
+    
+        replyBtn.addEventListener('click', (e) =>{
+    
+            commentText.textContent = textArea.value
+            commentAuthorName.textContent = 'Erick Juoles'
+            commentAuthorImage.src = 'https://randomuser.me/api/portraits/men/83.jpg'
+    
+            currentCommentSection.appendChild(commentContainer)
+            textArea.value = ''
+            commentForm.classList.toggle('hidden')
+        })
+
+        //New comment elements
         const commentText = document.createElement('p')
         const commentAuthorImage = document.createElement('img')
         const commentAuthorName = document.createElement('h1')
         const commentAuthorContainer = document.createElement('div')
         const commentContainer=document.createElement('div')
-        const commentInputContainer = document.createElement('div')
         
         
         //Add author name and image nodes
@@ -32,47 +61,11 @@ commentBtns.forEach(btn =>{
         //Styles
         commentAuthorContainer.className = 'flex flex-row gap-2 items-center'
         commentAuthorImage.className = 'h-8 w-8 rounded-full'
-        textArea.className = (
-            `w-full font-light p-2 h-32 
-            border rounded-sm text-sm text-gray-500`
-        )
-        sendBtn.className = ('bg-blue-500 text-white font-md px-4 py-2 rounded-sm')
-        commentText.className = 'font-light text-md text-gray-500'
+        
+        commentText.className = 'font-light text-md text-gray-900'
         commentContainer.className = 'p-2 rounded-sm bg-slate-300'
         
         //Add attributes and values
-        textArea.setAttribute('placeholder', 'What do you have in mind?')
-        sendBtn.textContent = 'SEND'
-        //Find post node
-        const post = btn.parentElement.parentElement
-        
-        //Mark as current post
-        post.setAttribute('id', 'current-post')
-
-        const currentCommentSection = document.querySelector('#current-post .comment-section')
-
-        //Put textarea and send button in one div before adding them to comment section
-        commentInputContainer.appendChild(textArea)
-        commentInputContainer.appendChild(sendBtn)
-
-        //Add coment input container to current comment section
-        currentCommentSection.prepend(commentInputContainer)
-        textArea.focus()
-
-        currentCommentSection.addEventListener('blur', (e) =>{
-            currentCommentSection.removeChild(commentInputContainer)
-        })
-
-        sendBtn.addEventListener('click', (e) =>{
-
-            commentText.textContent = textArea.value
-            commentAuthorName.textContent = 'Erick Juoles'
-            commentAuthorImage.src = 'https://randomuser.me/api/portraits/men/83.jpg'
-
-            currentCommentSection.appendChild(commentContainer)
-
-            currentCommentSection.removeChild(commentInputContainer)
-        })
 
 
     })
@@ -86,13 +79,13 @@ likeBtns.forEach(btn =>{
 
 shareBtns.forEach(btn =>{
     btn.addEventListener('click', (e) =>{
-        confirmShareContainer.classList.toggle('hidden')
-        confirmShareBtn.focus()
+        shareAlertDialogContainer.classList.toggle('hidden')
+        closeAlertDialogButton.focus()
     })
 })
 
-confirmShareBtn.addEventListener('click', () =>{
-    confirmShareContainer.classList.add('hidden')
+closeAlertDialogButton.addEventListener('click', () =>{
+    shareAlertDialogContainer.classList.add('hidden')
 })
 
 
