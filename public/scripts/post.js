@@ -5,6 +5,7 @@ const shareBtns = document.querySelectorAll('button.share-btn')
 const confirmShareBtn = document.querySelector('button#confirm-share')
 const confirmShareContainer = document.querySelector('div.confirm-share')
 
+
 //Create elements
 const textArea = document.createElement('textarea')
 const sendBtn = document.createElement('button')
@@ -43,13 +44,18 @@ commentBtns.forEach(btn =>{
     btn.addEventListener('click', (e) =>{
         const post = btn.parentElement.parentElement
         
-        post.appendChild(textArea)
-        post.appendChild(sendBtn)
+        post.setAttribute('id', 'current-post')
+
+        const currentCommentSection = document.querySelector('#current-post .comment-section')
+        console.log(currentCommentSection)
+
+        currentCommentSection.appendChild(textArea)
+        currentCommentSection.appendChild(sendBtn)
         textArea.focus()
 
-        textArea.addEventListener('blur', (e) =>{
-            post.removeChild(textArea)
-            post.removeChild(sendBtn)
+        currentCommentSection.addEventListener('blur', (e) =>{
+            currentCommentSection.removeChild(textArea)
+            currentCommentSection.removeChild(sendBtn)
         })
 
         sendBtn.addEventListener('click', (e) =>{
@@ -58,10 +64,10 @@ commentBtns.forEach(btn =>{
             commentAuthorName.textContent = 'Erick Juoles'
             commentAuthorImage.src = 'https://randomuser.me/api/portraits/men/83.jpg'
 
-            post.appendChild(commentContainer)
+            currentCommentSection.appendChild(commentContainer)
 
-            post.removeChild(textArea)
-            post.removeChild(sendBtn)
+            currentCommentSection.removeChild(textArea)
+            currentCommentSection.removeChild(sendBtn)
         })
 
 
