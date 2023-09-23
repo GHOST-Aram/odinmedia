@@ -3,8 +3,8 @@ import { Router } from "../zghost/app/init.js";
 
 const indexRouter = Router()
 
-indexRouter.get('/', isLoggedIn, (req, res) => {
-    res.render('index', { user: req.user })
+indexRouter.get('/', (req, res) => {
+    res.render('index', { user: req.user, title: 'Home' })
 })
 
 export {indexRouter}

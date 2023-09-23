@@ -14,9 +14,7 @@ input:hover, button:hover, a:hover{
 input{
     font-size: 1.5rem;
 }
- body{
-    padding-block: 1rem;
-}
+
 .container{
     margin: auto;
 }
