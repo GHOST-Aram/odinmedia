@@ -2,6 +2,8 @@
 const commentBtns = document.querySelectorAll('button.comment-btn')
 const likeBtns = document.querySelectorAll('button.like-btn')
 const shareBtns = document.querySelectorAll('button.share-btn')
+const confirmShareBtn = document.querySelector('button#confirm-share')
+const confirmShareContainer = document.querySelector('div.confirm-share')
 
 //Create elements
 const textArea = document.createElement('textarea')
@@ -10,8 +12,8 @@ const commentText = document.createElement('p')
 const commentAuthorImage = document.createElement('img')
 const commentAuthorName = document.createElement('h1')
 const commentAuthorContainer = document.createElement('div')
-
 const commentContainer=document.createElement('div')
+
 
 //Add author name and image nodes
 commentAuthorContainer.appendChild(commentAuthorImage)
@@ -25,7 +27,7 @@ commentContainer.appendChild(commentText)
 commentAuthorContainer.className = 'flex flex-row gap-2 items-center'
 commentAuthorImage.className = 'h-8 w-8 rounded-full'
 textArea.className = (
-    `w-full font-light p-2  
+    `w-full font-light p-2 h-32 
     border rounded-sm text-sm text-gray-500`
 )
 sendBtn.className = ('bg-blue-500 text-white font-md px-4 py-2 rounded-sm')
@@ -51,7 +53,7 @@ commentBtns.forEach(btn =>{
         })
 
         sendBtn.addEventListener('click', (e) =>{
-            
+
             commentText.textContent = textArea.value
             commentAuthorName.textContent = 'Erick Juoles'
             commentAuthorImage.src = 'https://randomuser.me/api/portraits/men/83.jpg'
@@ -71,4 +73,16 @@ likeBtns.forEach(btn =>{
         btn.classList.toggle('text-red-500')
     })
 })
+
+shareBtns.forEach(btn =>{
+    btn.addEventListener('click', (e) =>{
+        confirmShareContainer.classList.toggle('hidden')
+        confirmShareBtn.focus()
+    })
+})
+
+confirmShareBtn.addEventListener('click', () =>{
+    confirmShareContainer.classList.add('hidden')
+})
+
 

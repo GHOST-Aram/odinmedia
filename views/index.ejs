@@ -2,12 +2,18 @@
    <%-include('./partials/header.ejs') %>
    <main>
         <aside class="hidden"></aside>
-        <section class="container space-y-4 lg:w-2/5"> 
+        <section 
+            aria-live="polite"
+            class="container space-y-4 lg:w-2/5"
+        > 
+        <div class="relative">
             <%-include('./partials/post.ejs') %>
+            <%-include('./partials/confirm-share.ejs') %>
+        </div>
         </section>
         <aside class="hidden"></aside>
    </main>
-    <%-include('./partials/footer.ejs') %>
+   <%-include('./partials/footer.ejs') %>
 </body>
 <script src="/scripts/post.js" ></script>
 </html>
