@@ -1,25 +1,30 @@
     <%-include('./partials/head.ejs') %>
    <%-include('./partials/header.ejs') %>
-   <main class="lg:flex lg:flex-row lg:gap-4 pt-20">
+   <main class="lg:flex lg:flex-row lg:gap-4 lg:pt-20 xl:pt-20">
        <%-include('./partials/side-nav') %>
         <section 
             aria-live="polite"
             class="container space-y-4 w-full lg:w-3/5 xl:w-2/5 "
         > 
-        <div class="my-2 border rounded-md">
+        <div class="my-2 border rounded-md lg:hidden xl:hidden">
             <%-include('./partials/post-creater.ejs') %>
         </div>
-        <hr>
+        <hr class="lg:hidden xl:hidden">
         <div class="relative">
             <%-include('./partials/post.ejs') %>
             <%-include('./partials/confirm-share.ejs') %>
         </div>
         </section>
-        <aside class=" hidden p-4 border-l w-2/5 xl:block">
-            
-        </aside>
+        <section class="w-2/5 hidden xl:block">
+            <aside class="p-4 border-l w-2/5 fixed top-20 bottom-0 space-y-2">
+                <div class="border rounded-md">
+                    <%-include('./partials/post-creater.ejs') %>
+                </div>
+                <hr>
+                <%-include('./partials/footer.ejs') %>
+            </aside>
+        </section>
    </main>
-   <%-include('./partials/footer.ejs') %>
 </body>
 <script src="/scripts/post.js" type="module"></script>
 <script src="/scripts/utils/comment-author-container.js" type="module"></script>

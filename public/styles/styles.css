@@ -612,6 +612,10 @@ video {
   bottom: 0px;
 }
 
+.top-24 {
+  top: 6rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -1028,6 +1032,10 @@ input{
   .lg\:gap-4 {
     gap: 1rem;
   }
+
+  .lg\:pt-20 {
+    padding-top: 5rem;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -1035,7 +1043,15 @@ input{
     display: block;
   }
 
+  .xl\:hidden {
+    display: none;
+  }
+
   .xl\:w-2\/5 {
     width: 40%;
+  }
+
+  .xl\:pt-20 {
+    padding-top: 5rem;
   }
 }
