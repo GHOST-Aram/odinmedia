@@ -9,11 +9,8 @@ const shareBtns = document.querySelectorAll('button.share-btn')
 commentBtns.forEach(btn =>{
     btn.addEventListener('click', (e) =>{
         //Find  current post node
-        const post = btn.parentElement.parentElement
-        
-        //Mark as current post
-        post.setAttribute('id', 'current-post')
-        
+        const post = getParentPost(btn)        
+        setId(post, 'current-post')        
         //Get comment node and elements for current post
         const commentForm = document.querySelector('#current-post .comment-form')
         const textArea = document.querySelector('#current-post textarea')
@@ -103,6 +100,11 @@ const createTextNode = (text) =>{
     return commentText
 }
 
+const getParentPost = (element) =>{
+    const post = element.parentElement.parentElement
+
+    return post
+}
 const hideCommentForm = () =>{
     const commentForm = document.querySelector('#current-post .comment-form')
     const textArea = document.querySelector('#current-post textarea')
@@ -110,7 +112,12 @@ const hideCommentForm = () =>{
     textArea.value = ''
     commentForm.classList.add('hidden')
 }
+
 const renderComment = (commentContainer) =>{
     const replies = document.querySelector('#current-post .comments') 
     replies.prepend(commentContainer)
+}
+const setId = (post, id) =>{
+    post.setAttribute('id', id)
+
 }
