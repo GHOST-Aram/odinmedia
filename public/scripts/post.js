@@ -40,8 +40,7 @@ commentBtns.forEach(btn =>{
                 commentContainer.appendChild(commentAuthorContainer)
                 commentContainer.appendChild(commentText)
                 
-                const replies = document.querySelector('#current-post .comments') 
-                replies.prepend(commentContainer)
+                renderComment(commentContainer)
 
                 textArea.value = ''
                 commentForm.classList.toggle('hidden')
@@ -102,3 +101,7 @@ const createTextNode = (text) =>{
     return commentText
 }
 
+const renderComment = (commentContainer) =>{
+    const replies = document.querySelector('#current-post .comments') 
+    replies.prepend(commentContainer)
+}
