@@ -1,4 +1,3 @@
-
 // Get interactionn buttons
 const commentBtns = document.querySelectorAll('button.comment-btn')
 const likeBtns = document.querySelectorAll('button.like-btn')
@@ -35,18 +34,10 @@ commentBtns.forEach(btn =>{
                 commentText.textContent = textArea.value
                 commentText.className = 'font-light text-md text-gray-900'
                 
-                const commentAuthorImage = document.createElement('img')
-                commentAuthorImage.src = 'https://randomuser.me/api/portraits/men/83.jpg'
-                commentAuthorImage.className = 'h-8 w-8 rounded-full'
-                
-                const commentAuthorName = document.createElement('h1')
-                commentAuthorName.textContent = 'Erick Juoles'
-                
-                
-                const commentAuthorContainer = document.createElement('div')
-                commentAuthorContainer.className = 'flex flex-row gap-2 items-center'
-                commentAuthorContainer.appendChild(commentAuthorImage)
-                commentAuthorContainer.appendChild(commentAuthorName)
+                const commentAuthorContainer = createCommentAuthorContainer({
+                    authorName: 'James Jacobs',
+                    authorImageSrc: 'https://randomuser.me/api/portraits/men/83.jpg'
+                })
                 
                 const commentContainer=document.createElement('div')
                 commentContainer.className = 'p-2 rounded-sm bg-slate-300'
@@ -79,5 +70,25 @@ shareBtns.forEach(btn =>{
 closeAlertDialogButton.addEventListener('click', () =>{
     shareAlertDialogContainer.classList.add('hidden')
 })
+
+
+const createCommentAuthorContainer = ({
+    authorName, authorImageSrc
+}) =>{
+    const commentAuthorImage = document.createElement('img')
+    commentAuthorImage.src = authorImageSrc
+    commentAuthorImage.className = 'h-8 w-8 rounded-full'
+    
+    const commentAuthorName = document.createElement('h1')
+    commentAuthorName.textContent = authorName
+    
+    
+    const commentAuthorContainer = document.createElement('div')
+    commentAuthorContainer.className = 'flex flex-row gap-2 items-center'
+    commentAuthorContainer.appendChild(commentAuthorImage)
+    commentAuthorContainer.appendChild(commentAuthorName)
+
+    return commentAuthorContainer
+}
 
 
