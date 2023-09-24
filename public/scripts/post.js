@@ -41,9 +41,8 @@ commentBtns.forEach(btn =>{
                 commentContainer.appendChild(commentText)
                 
                 renderComment(commentContainer)
-
-                textArea.value = ''
-                commentForm.classList.toggle('hidden')
+                hideCommentForm()
+                
             }
         })
     })
@@ -101,6 +100,13 @@ const createTextNode = (text) =>{
     return commentText
 }
 
+const hideCommentForm = () =>{
+    const commentForm = document.querySelector('#current-post .comment-form')
+    const textArea = document.querySelector('#current-post textarea')
+
+    textArea.value = ''
+    commentForm.classList.add('hidden')
+}
 const renderComment = (commentContainer) =>{
     const replies = document.querySelector('#current-post .comments') 
     replies.prepend(commentContainer)
