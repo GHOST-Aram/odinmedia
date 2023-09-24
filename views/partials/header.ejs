@@ -1,23 +1,30 @@
 <header class="bg-blue-500 mb-4">
         <div class="container py-4 px-2 flex flex-row justify-between">
             <h1 class="text-white font-bold text-xl">OdinMedia</h1>
-            <ul class="flex flex-row justify-center gap-8 items-center" >
+            <ul class="flex flex-col justify-center gap-8 items-center md:flex-row lg:hidden" >
+                <li >
+                    <a href="/"
+                        class="text-slate-400 font-bold 
+                            text-xl visited:text-white 
+                            visited:p-2"
+                    >
+                        <i class="fa-solid fa-house"></i> Home
+                    </a>
+                </li>
                 <li>
-                    <li>
-                        <a href="/"
-                            class="text-slate-400 font-bold 
-                                text-xl visited:text-white
-                                visited:p-2"
-                        >
-                            <i class="fa-solid fa-house"></i>
-                        </a>
-                    </li>
                     <a href="/people"
                         class="text-slate-400 text-xl 
                             visited:text-white font-bold"
                     >
-                        <i class="fa-solid fa-users-line">
-                        </i>
+                        <i class="fa-solid fa-users-line"></i> People
+                    </a>
+                </li>
+                <li>
+                    <a href="/people"
+                        class="text-slate-400 text-xl 
+                            visited:text-white font-bold"
+                    >
+                        <i class="fa-solid fa-users-line"></i> Friends
                     </a>
                 </li>
             </ul>

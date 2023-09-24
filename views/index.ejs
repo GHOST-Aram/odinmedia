@@ -1,10 +1,10 @@
     <%-include('./partials/head.ejs') %>
    <%-include('./partials/header.ejs') %>
-   <main>
-        <aside class="hidden"></aside>
+   <main class="lg:flex lg:flex-row lg:gap-4">
+       <%-include('./partials/side-nav') %>
         <section 
             aria-live="polite"
-            class="container space-y-4 lg:w-2/5"
+            class="container space-y-4 w-full lg:w-3/5 xl:w-2/5 "
         > 
         <div class="my-2 border rounded-md">
             <%-include('./partials/post-creater.ejs') %>
@@ -15,7 +15,9 @@
             <%-include('./partials/confirm-share.ejs') %>
         </div>
         </section>
-        <aside class="hidden"></aside>
+        <aside class=" hidden p-4 border-l w-2/5 xl:block">
+            
+        </aside>
    </main>
    <%-include('./partials/footer.ejs') %>
 </body>
