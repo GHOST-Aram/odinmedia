@@ -30,10 +30,7 @@ commentBtns.forEach(btn =>{
         replyBtn.addEventListener('click', (e) =>{
             
             if(textArea.value.trim() !== ''){
-                const commentText = document.createElement('p')
-                commentText.textContent = textArea.value
-                commentText.className = 'font-light text-md text-gray-900'
-                
+                const commentText = createTextNode(textArea.value)
                 const commentAuthorContainer = createCommentAuthorContainer({
                     authorName: 'James Jacobs',
                     authorImageSrc: 'https://randomuser.me/api/portraits/men/83.jpg'
@@ -91,4 +88,12 @@ const createCommentAuthorContainer = ({
     return commentAuthorContainer
 }
 
+
+const createTextNode = (text) =>{
+    const commentText = document.createElement('p')
+    commentText.textContent = text
+    commentText.className = 'font-light text-md text-gray-900'
+    
+    return commentText
+}
 
