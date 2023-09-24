@@ -2,8 +2,6 @@
 const commentBtns = document.querySelectorAll('button.comment-btn')
 const likeBtns = document.querySelectorAll('button.like-btn')
 const shareBtns = document.querySelectorAll('button.share-btn')
-const closeAlertDialogButton = document.querySelector('button#confirm-share')
-const shareAlertDialogContainer = document.querySelector('div.confirm-share')
 
 
 
@@ -55,16 +53,21 @@ likeBtns.forEach(btn =>{
 })
 
 shareBtns.forEach(btn =>{
-    btn.addEventListener('click', (e) =>{
-        shareAlertDialogContainer.classList.toggle('hidden')
-        closeAlertDialogButton.focus()
+    btn.addEventListener('click', alertUser)
+})
+
+
+function alertUser(){
+    const closeAlertDialogButton = document.querySelector('button#confirm-share')
+    const shareAlertDialogContainer = document.querySelector('div.confirm-share')
+    
+    shareAlertDialogContainer.classList.toggle('hidden')
+    closeAlertDialogButton.focus()
+
+    closeAlertDialogButton.addEventListener('click', () =>{
+        shareAlertDialogContainer.classList.add('hidden')
     })
-})
-
-closeAlertDialogButton.addEventListener('click', () =>{
-    shareAlertDialogContainer.classList.add('hidden')
-})
-
+}
 
 const createCommentAuthorContainer = ({
     authorName, authorImageSrc
