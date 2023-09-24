@@ -36,8 +36,7 @@ commentBtns.forEach(btn =>{
                     authorImageSrc: 'https://randomuser.me/api/portraits/men/83.jpg'
                 })
                 
-                const commentContainer=document.createElement('div')
-                commentContainer.className = 'p-2 rounded-sm bg-slate-300'
+                const commentContainer = createCommentContainer()
                 commentContainer.appendChild(commentAuthorContainer)
                 commentContainer.appendChild(commentText)
                 
@@ -88,6 +87,12 @@ const createCommentAuthorContainer = ({
     return commentAuthorContainer
 }
 
+const createCommentContainer = () =>{
+    const commentContainer=document.createElement('div')
+    commentContainer.className = 'p-2 rounded-sm bg-slate-300'
+
+    return commentContainer
+}
 
 const createTextNode = (text) =>{
     const commentText = document.createElement('p')
