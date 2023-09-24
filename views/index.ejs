@@ -6,6 +6,10 @@
             aria-live="polite"
             class="container space-y-4 lg:w-2/5"
         > 
+        <div class="my-2 border rounded-md">
+            <%-include('./partials/post-creater.ejs') %>
+        </div>
+        <hr>
         <div class="relative">
             <%-include('./partials/post.ejs') %>
             <%-include('./partials/confirm-share.ejs') %>

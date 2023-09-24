@@ -60,13 +60,6 @@ commentBtns.forEach(btn =>{
                 commentForm.classList.toggle('hidden')
             }
         })
-
-        //New comment elements
-        
-        
-        
-
-
     })
 })
 
