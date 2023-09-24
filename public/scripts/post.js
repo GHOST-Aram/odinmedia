@@ -8,21 +8,14 @@ const shareBtns = document.querySelectorAll('button.share-btn')
 
 commentBtns.forEach(btn =>{
     btn.addEventListener('click', (e) =>{
-        //Find  current post node
         const post = getParentPost(btn)        
-        setId(post, 'current-post')        
-        //Get comment node and elements for current post
-        const commentForm = document.querySelector('#current-post .comment-form')
-        const textArea = document.querySelector('#current-post textarea')
-        const replyBtn = document.querySelector('#current-post .comment-form button')
-    
-        // diaplay comment form
-        commentForm.classList.toggle('hidden')
-        textArea.focus()
         
-
+        setId(post, 'current-post')                
+        toggleCommentForm()
         
+        const replyBtn = getElement('#current-post .comment-form button')
         replyBtn.addEventListener('click', (e) =>{
+            const textArea = document.querySelector('#current-post textarea')
             
             if(textArea.value.trim() !== ''){
                 const commentText = createTextNode(textArea.value)
@@ -99,6 +92,9 @@ const createTextNode = (text) =>{
     
     return commentText
 }
+const getElement = (params) =>{
+    return document.querySelector(params)
+}
 
 const getParentPost = (element) =>{
     const post = element.parentElement.parentElement
@@ -120,4 +116,13 @@ const renderComment = (commentContainer) =>{
 const setId = (post, id) =>{
     post.setAttribute('id', id)
 
+}
+
+const toggleCommentForm = () =>{
+    const commentForm = document.querySelector('#current-post .comment-form')
+    const textArea = document.querySelector('#current-post textarea')
+    commentForm.classList.toggle('hidden')
+    if(!commentForm.classList.contains('hidden')){
+        textArea.focus()
+    }
 }
