@@ -1,5 +1,6 @@
 import { Router } from "../zghost/app/init.js";
 import { Post } from "../models/post.js";
+import { Comment } from "../models/comment.js";
 
 const contentRouter = Router()
 
@@ -57,6 +58,19 @@ contentRouter.get('/comments', (req, res) =>{
 
     ]
     res.json({ comments })
+})
+
+contentRouter.post('/comment', (req, res) =>{
+    const comment = new Comment({...req.body})
+    console.log(comment)
+
+    res.json({comment: {
+        author: {
+            name: 'James Tipis',
+            pictureUrl: 'https://randomuser.me/api/portraits/men/83.jpg',
+        },
+        ...req.body
+    }  })
 })
 
 export {contentRouter}

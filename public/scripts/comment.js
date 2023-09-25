@@ -1,32 +1,27 @@
-// Get interactionn buttons
 const commentBtns = getAllElements('button.comment-btn')
 
 commentBtns.forEach(btn =>{
+    
     btn.addEventListener('click', async(e) =>{
+        const post = getParentPost(btn)        
+        setId(post, 'current-post')  
+        const replyBtn = getElement('#current-post .comment-form button')
+
         fetchComments().then(result =>{
             result.comments.forEach(comment =>{
                 renderComment(comment)
             })
         })
 
-        const post = getParentPost(btn)        
-        
-        setId(post, 'current-post')                
         toggleCommentForm()
         
-        const replyBtn = getElement('#current-post .comment-form button')
-        replyBtn.addEventListener('click', (e) =>{
+        replyBtn.addEventListener('click', async(e) =>{
             const textArea = document.querySelector('#current-post textarea')
             
             if(textArea.value.trim() !== ''){
-                const comment = {
-                    author: {
-                        name: 'James Tipis',
-                        pictureUrl: 'https://randomuser.me/api/portraits/men/83.jpg',
-                    },
-                    text: textArea.value
-                }
-                renderComment(comment)
+                const response = await postComment({text: textArea.value})
+                console.log(response.comment)
+                renderComment(response.comment)
                 hideCommentForm()
             }
         })
@@ -135,4 +130,20 @@ const toggleCommentForm = () =>{
     if(!commentForm.classList.contains('hidden')){
         textArea.focus()
     }
+}
+
+const postComment = async(data) =>{
+    const response = await fetch(
+        'http://localhost:8000/content/comment', {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify(data),
+            headers:{
+                'Content-type': 'application/json'
+            }
+        }
+    )
+    const comment = await response.json()
+
+    return comment
 }
