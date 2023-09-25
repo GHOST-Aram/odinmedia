@@ -8,19 +8,19 @@ contentRouter.post('/post', async(req, res, next) =>{
     console.log("Post: ", req.body)
 
     try {
-        const post = await Post.create({
+        const post = new Post({
             textContent: text,
             likes: likes,
             shared: shared,
             comments: comments,
-            author: req.user.id
+            // author: req.user.id
         })
         res.json({post: post})
     } catch (error) {
         res.json({
             error: {
                 code: 500, 
-                message: 'Internal server error'
+                message: error.message
             }
         })
     }

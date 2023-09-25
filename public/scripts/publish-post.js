@@ -24,9 +24,10 @@ publishBtn.addEventListener('click', async() =>{
                     "Content-type": "application/json"
                 }
             })
-            console.log(postData)
-            console.log(response)
-            response.post? window.location.reload() : console.error(response.error)
+            const data = await response.json()
+            console.log(data)
+            response.post ? window.location.reload() 
+                :data.error && console.error(data.error)
 
         } catch (error) {
             console.error('Unexpected error occured: ', error)
