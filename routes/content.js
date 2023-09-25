@@ -5,6 +5,7 @@ const contentRouter = Router()
 
 contentRouter.post('/post', async(req, res, next) =>{
     const {text, likes, shared, comments } = req.body
+    console.log("Post: ", req.body)
 
     try {
         const post = await Post.create({
@@ -14,7 +15,6 @@ contentRouter.post('/post', async(req, res, next) =>{
             comments: comments,
             author: req.user.id
         })
-    
         res.json({post: post})
     } catch (error) {
         res.json({

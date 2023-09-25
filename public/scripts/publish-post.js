@@ -20,6 +20,9 @@ publishBtn.addEventListener('click', async() =>{
                 method: 'POST',
                 body: JSON.stringify(postData),
                 mode: 'cors',
+                headers: {
+                    "Content-type": "application/json"
+                }
             })
             console.log(postData)
             console.log(response)
