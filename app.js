@@ -6,7 +6,8 @@ import { indexRouter } from "./routes/index.js";
 
 config()
 app.use('/', indexRouter)
-app.use('/auth',accountsRouter)
+app.use('/auth', accountsRouter)
+app.use('/content', contentRouter)
 
 //Error handling
 app.use(notFoundError)
