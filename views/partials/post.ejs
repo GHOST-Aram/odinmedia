@@ -2,12 +2,12 @@
     <div class="space-y-2">
         <div class="flex flex-row items-start gap-4">
             <img 
-                src="https://randomuser.me/api/portraits/men/83.jpg" 
-                alt="user" 
                 class="h-10 w-10 rounded-full"
+                src="<%=user&&user.pictureUrl%>"
+                alt= "<%=user&&user.name%>" 
             >
             <div class="flex flex-col">
-                <h1 class="font-md">John Doe</h1>
+                <h1 class="font-md"><%=user&&user.name%></h1>
                 <span class="text-xs font-light text-slate-400">Dec 15 2022</span>
             </div>
         </div>

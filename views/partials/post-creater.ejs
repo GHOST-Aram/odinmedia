@@ -1,8 +1,8 @@
 <div class="new-post container p-2 space-y-2">
     <div class="flex flex-row items-start justify-start gap-4">
         <img 
-            src="https://randomuser.me/api/portraits/men/83.jpg" 
-            alt="user" 
+            src= "<%=user&&user.pictureUrl%>"
+            alt= "<%=user&&user.name%>" 
             class="h-10 w-10 rounded-full"
         >
         <textarea 

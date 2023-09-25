@@ -1,14 +1,15 @@
-// import { Post } from "../models/post.js";
-import { isLoggedIn } from "../zghost/app/auth.js";
 import { Router } from "../zghost/app/init.js";
 
 const indexRouter = Router()
 
 indexRouter.get('/', async (req, res) => {
-    // const posts = await Post.find()
+    const user = {
+        name: 'Jane Doe',
+        pictureUrl: 'https://randomuser.me/api/portraits/men/83.jpg'
+    }
 
     res.render('index', { 
-        user: req.user, title: 'Home', 
+        user: user, title: 'Home', 
     })
 })
 

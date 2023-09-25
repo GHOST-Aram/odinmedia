@@ -838,6 +838,10 @@ video {
   padding-bottom: 2rem;
 }
 
+.pb-12 {
+  padding-bottom: 3rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -872,6 +876,10 @@ video {
 
 .font-light {
   font-weight: 300;
+}
+
+.font-extralight {
+  font-weight: 200;
 }
 
 .text-blue-400 {
@@ -919,8 +927,9 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.opacity-25 {
-  opacity: 0.25;
+.text-red-700 {
+  --tw-text-opacity: 1;
+  color: rgb(185 28 28 / var(--tw-text-opacity));
 }
 
 .opacity-50 {
@@ -1001,14 +1010,6 @@ input{
 
   .md\:flex-row {
     flex-direction: row;
-  }
-
-  .md\:pt-36 {
-    padding-top: 9rem;
-  }
-
-  .md\:pt-3 {
-    padding-top: 0.75rem;
   }
 
   .md\:pt-24 {

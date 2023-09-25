@@ -38,7 +38,7 @@ smallScreenPublishBtn.addEventListener('click', async(event) =>{
     }
 })
 
-//large and extra large screens only
+//Large and extra large screens only
 wideScreenPublishBtn.addEventListener('click', async(event) =>{
     const textArea = document.querySelector('aside .new-post textarea')
     if(textArea.value.trim() !== ''){

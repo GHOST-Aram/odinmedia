@@ -32,12 +32,12 @@
                 <a href="/profile" class="flex flex-row justify-end items-center gap-4">
                     <h2 class=" hidden text-slate-200 font-md 
                         text-lg lg:inline md:inline">
-                        John Doe
+                        <%=user&&user.name%>
                     </h2>
                     <img 
                         class="w-10 h-10 rounded-full"
-                        src="https://randomuser.me/api/portraits/men/83.jpg" 
-                        alt="user-image"
+                        src= "<%=user&&user.pictureUrl%>"
+                        alt="<%=user&&user.name%>"
                     >
                 </a>
             </div>
