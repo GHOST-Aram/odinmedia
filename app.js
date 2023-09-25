@@ -1,4 +1,5 @@
 import { accountsRouter } from './routes/accounts.js';
+import { contentRouter } from './routes/content.js';
 import { app } from './zghost/app/init.js';
 import { config } from './zghost/app/config.js';
 import { internalServerError, notFoundError } from './zghost/utils/errors.js';

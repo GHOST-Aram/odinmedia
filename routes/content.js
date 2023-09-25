@@ -26,3 +26,5 @@ contentRouter.post('/post', async(req, res, next) =>{
     }
 
 })
+
+export {contentRouter}

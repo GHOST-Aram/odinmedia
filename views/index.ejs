@@ -1,25 +1,31 @@
     <%-include('./partials/head.ejs') %>
    <%-include('./partials/header.ejs') %>
-   <main class="lg:flex lg:flex-row lg:gap-4 lg:pt-20 xl:pt-20">
-       <%-include('./partials/side-nav') %>
-        <section 
-            id="posts"
-            aria-live="polite"
+   <main class="lg:flex lg:flex-row lg:gap-4 lg:pt-20 xl:pt-20 md:pt-24">
+        <section class="w-1/5">
+            <%-include('./partials/side-nav') %>
+        </section>
+        <section id="posts" aria-live="polite"
             class="container space-y-4 w-full lg:w-3/5 xl:w-2/5 "
         > 
-        <div class=" .posts my-2 border rounded-md lg:hidden xl:hidden">
-            <%-include('./partials/post-creater.ejs') %>
-        </div>
-        <hr class="lg:hidden xl:hidden">
-        <div class="relative">
-            <%-include('./partials/post.ejs') %>
-            <%-include('./partials/confirm-share.ejs') %>
-        </div>
+            <div class="my-2 border rounded-md lg:hidden xl:hidden">
+               <!-- Create new post accessible to screen readers -->
+               <!-- visible on small and medium screens -->
+               <%-include('./partials/post-creater.ejs') %>
+               <!-- Visible on small and medium screens -->
+               <!-- Create new post accessible to screen readers-->
+            </div>
+            <hr class="lg:hidden xl:hidden">
+            <div class="relative">
+                <%-include('./partials/post.ejs') %>
+                <%-include('./partials/confirm-share.ejs') %>
+            </div>
         </section>
         <section class="w-2/5 hidden xl:block">
             <aside class="p-4 border-l w-2/5 fixed top-20 bottom-0 space-y-2">
-                <div class="border rounded-md">
-                    <%-include('./partials/post-creater.ejs') %>
+                <div aria-hidden="true" class="border rounded-md">
+                   <!-- Create new post 2 visible only on wide screens -->
+                  <%-include('./partials/post-creater.ejs') %>
+                   <!-- Create new post visible only on wide screens-->
                 </div>
                 <hr>
                 <%-include('./partials/footer.ejs') %>
@@ -27,6 +33,6 @@
         </section>
    </main>
 </body>
-<script src="/scripts/post.js" type="module"></script>
-<script src="/scripts/utils/comment-author-container.js" type="module"></script>
+<script src="/scripts/post.js"></script>
+<script src="/scripts/publish-post.js"></script>
 </html>

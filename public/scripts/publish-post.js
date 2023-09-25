@@ -1,10 +1,12 @@
-const publishBtn = document.querySelector('button#publish-post')
-const textArea = document.querySelector('textarea#new-post')
+const publishBtn = document.querySelector('section#posts .new-post button')
+const textArea = document.querySelector('section#posts .new-post textarea')
 
 publishBtn.addEventListener('click', async() =>{
-    if(!textArea.value.trim() === ''){
-        publishBtn.disable()
+    console.log('Elons')
+    console.log('Publising post', textArea.value)
+    if(textArea.value.trim() !== ''){
         publishBtn.textContent = 'Publishing ...'
+        disableButton(publishBtn)
 
         const postData = {
             text: textArea.value,
@@ -31,5 +33,10 @@ publishBtn.addEventListener('click', async() =>{
         
     }
 })
+
+const disableButton = (button) =>{
+    button.setAttribute('disabled', 'true')
+    button.classList.add('opacity-50')
+}
 
 

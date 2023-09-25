@@ -568,6 +568,10 @@ video {
   }
 }
 
+.visible {
+  visibility: visible;
+}
+
 .fixed {
   position: fixed;
 }
@@ -578,6 +582,10 @@ video {
 
 .relative {
   position: relative;
+}
+
+.bottom-0 {
+  bottom: 0px;
 }
 
 .bottom-24 {
@@ -606,14 +614,6 @@ video {
 
 .top-20 {
   top: 5rem;
-}
-
-.bottom-0 {
-  bottom: 0px;
-}
-
-.top-24 {
-  top: 6rem;
 }
 
 .z-10 {
@@ -838,10 +838,6 @@ video {
   padding-bottom: 2rem;
 }
 
-.pt-20 {
-  padding-top: 5rem;
-}
-
 .text-center {
   text-align: center;
 }
@@ -923,6 +919,14 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.opacity-25 {
+  opacity: 0.25;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
 .shadow-md {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
@@ -997,6 +1001,18 @@ input{
 
   .md\:flex-row {
     flex-direction: row;
+  }
+
+  .md\:pt-36 {
+    padding-top: 9rem;
+  }
+
+  .md\:pt-3 {
+    padding-top: 0.75rem;
+  }
+
+  .md\:pt-24 {
+    padding-top: 6rem;
   }
 }
 

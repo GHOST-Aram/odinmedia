@@ -9,7 +9,10 @@ const postSchema = new ModelSchema({
         type: ModelSchema.ObjectId,
         ref: 'User'
     },
-    createAt: Date.now()
+    createAt: {
+        type: Date,
+        default: Date.now()
+    }
 }) 
 
 
