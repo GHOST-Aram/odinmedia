@@ -17,7 +17,12 @@ contentRouter.post('/post', async(req, res, next) =>{
     
         res.json({post: post})
     } catch (error) {
-        next(error)
+        res.json({
+            error: {
+                code: 500, 
+                message: 'Internal server error'
+            }
+        })
     }
 
 })
