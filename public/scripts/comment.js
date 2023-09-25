@@ -4,8 +4,8 @@ const commentBtns = getAllElements('button.comment-btn')
 commentBtns.forEach(btn =>{
     btn.addEventListener('click', async(e) =>{
 
-        fetchComments().then(comments =>{
-            comments.forEach(comment =>{
+        fetchComments().then(result =>{
+            result.comments.forEach(comment =>{
                 renderComment(comment)
             })
         })
@@ -21,8 +21,10 @@ commentBtns.forEach(btn =>{
             
             if(textArea.value.trim() !== ''){
                 const comment = {
-                    authorName: 'James Tipis',
-                    authorImageSrc: 'https://randomuser.me/api/portraits/men/83.jpg',
+                    author: {
+                        name: 'James Tipis',
+                        pictureUrl: 'https://randomuser.me/api/portraits/men/83.jpg',
+                    },
                     text: textArea.value
                 }
                 renderComment(comment)
@@ -81,7 +83,7 @@ const createTextNode = (text) =>{
 const fetchComments = async() =>{
     const response = await fetch('http://localhost:8000/content/comments')
     const comments = await response.json()
-
+    
     return comments
 }
 const getElement = (params) =>{
@@ -104,11 +106,11 @@ const hideCommentForm = () =>{
     commentForm.classList.add('hidden')
 }
 
-const renderComment = ({ authorName, authorImageSrc, text }) =>{
+const renderComment = ({ author, text }) =>{
     const commentText = createTextNode(text)
     const commentAuthorContainer = createCommentAuthorContainer({
-        authorName,
-        authorImageSrc
+        authorName: author.name,
+        authorImageSrc: author.pictureUrl
     })
     
     const commentContainer = createCommentContainer()

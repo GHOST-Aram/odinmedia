@@ -27,4 +27,36 @@ contentRouter.post('/post', async(req, res, next) =>{
 
 })
 
+contentRouter.get('/comments', (req, res) =>{
+    const comments = [
+        {
+            author: {
+                name: 'Jane Larry',
+                pictureUrl:'https://randomuser.me/api/portraits/women/83.jpg'
+            }, text: `
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Cum neque veritatis praesentium eveniet totam 
+                voluptatem assumenda sint quaerat maiores cumque.`
+        },
+        {
+            author: {
+                name: 'Tom Keen',
+                pictureUrl:'https://randomuser.me/api/portraits/men/32.jpg'
+            }, text: `
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Cum neque veritatis praesentium eveniet totam.`
+        },
+        {
+            author: {
+                name: 'Lebron James',
+                pictureUrl:'https://randomuser.me/api/portraits/men/13.jpg'
+            }, text: `
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                voluptatem assumenda sint quaerat maiores cumque.`
+        },
+
+    ]
+    res.json({ comments })
+})
+
 export {contentRouter}
