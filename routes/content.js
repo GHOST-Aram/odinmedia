@@ -4,7 +4,7 @@ import { Post } from "../models/post.js";
 const contentRouter = Router()
 
 contentRouter.post('/post', async(req, res, next) =>{
-    const {text, likes, shared, comments } = request.body
+    const {text, likes, shared, comments } = req.body
 
     try {
         const post = await Post.create({
