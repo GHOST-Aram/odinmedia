@@ -1,7 +1,39 @@
-const publishBtn = document.querySelector('section#posts .new-post button')
-const textArea = document.querySelector('section#posts .new-post textarea')
+const smallScreenPublishBtn = document.querySelector('section#posts .new-post button')
+const wideScreenPublishBtn = document.querySelector('aside .new-post button')
 
-publishBtn.addEventListener('click', async(event) =>{
+//Medium screen, small screens and screen readers
+smallScreenPublishBtn.addEventListener('click', async(event) =>{
+    const textArea = document.querySelector('section#posts .new-post textarea')
+    if(textArea.value.trim() !== ''){
+        changeButtonText(event.target, 'Publishing ...')
+        disableButton(event.target)
+
+        const postData = {
+            text: textArea.value,
+            likes: 0,
+            shared: 0,
+            comments: 0
+        }
+
+        try {
+            const response = await sendNewPOST(
+                'http://localhost:8000/content/post',
+                postData
+            )
+            console.log(await response.json())
+        } catch (error) {
+            console.error('Unexpected error occured: ', error)
+        } finally{
+            changeButtonText(event.target, 'Publish Post')
+            enableButton(event.target)
+        }
+        
+    }
+})
+
+//large and extra large screens only
+wideScreenPublishBtn.addEventListener('click', async(event) =>{
+    const textArea = document.querySelector('aside .new-post textarea')
     if(textArea.value.trim() !== ''){
         changeButtonText(event.target, 'Publishing ...')
         disableButton(event.target)
