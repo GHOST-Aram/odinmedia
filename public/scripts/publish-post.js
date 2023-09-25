@@ -5,7 +5,7 @@ publishBtn.addEventListener('click', async() =>{
     console.log('Elons')
     console.log('Publising post', textArea.value)
     if(textArea.value.trim() !== ''){
-        publishBtn.textContent = 'Publishing ...'
+        changeButtonText('Publishing ...')
         disableButton(publishBtn)
 
         const postData = {
@@ -16,27 +16,35 @@ publishBtn.addEventListener('click', async() =>{
         }
 
         try {
-            const response = await fetch('localhost:8000/content/post', {
+            const response = await fetch('http://localhost:8000/content/post', {
                 method: 'POST',
                 body: JSON.stringify(postData),
                 mode: 'cors',
             })
-
+            console.log(postData)
+            console.log(response)
             response.post? window.location.reload() : console.error(response.error)
 
         } catch (error) {
             console.error('Unexpected error occured: ', error)
         } finally{
-            publishBtn.textContent = 'Publish Post'
-            publishBtn.enable()
+            changeButtonText('Publish Post')
+            enableButton()
         }
         
     }
 })
 
-const disableButton = (button) =>{
-    button.setAttribute('disabled', 'true')
-    button.classList.add('opacity-50')
+const disableButton = () =>{
+    publishBtn.setAttribute('disabled', 'true')
+    publishBtn.classList.add('opacity-50')
 }
 
+const enableButton = () =>{
+    publishBtn.removeAttribute('disabled')
+    publishBtn.classList.remove('opacity-50')
+}
 
+const changeButtonText = (text) =>{
+    publishBtn.textContent = text
+}
