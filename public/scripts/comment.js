@@ -8,6 +8,7 @@ commentBtns.forEach(btn =>{
         const replyBtn = getElement('#current-post .comment-form button')
 
         fetchComments().then(result =>{
+            clearCommentsContainer()
             result.comments.forEach(comment =>{
                 renderComment(comment)
             })
@@ -41,6 +42,10 @@ function alertUser(){
     })
 }
 
+const clearCommentsContainer = () =>{
+    const replies = document.querySelector('#current-post .comments') 
+    replies.innerHTML = ''
+}
 const createCommentAuthorContainer = ({
     authorName, authorImageSrc
 }) =>{
