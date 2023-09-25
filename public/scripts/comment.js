@@ -1,11 +1,8 @@
 // Get interactionn buttons
 const commentBtns = getAllElements('button.comment-btn')
 
-
-
-
 commentBtns.forEach(btn =>{
-    btn.addEventListener('click', (e) =>{
+    btn.addEventListener('click', async(e) =>{
         const post = getParentPost(btn)        
         
         setId(post, 'current-post')                
@@ -16,19 +13,13 @@ commentBtns.forEach(btn =>{
             const textArea = document.querySelector('#current-post textarea')
             
             if(textArea.value.trim() !== ''){
-                const commentText = createTextNode(textArea.value)
-                const commentAuthorContainer = createCommentAuthorContainer({
-                    authorName: 'James Jacobs',
-                    authorImageSrc: 'https://randomuser.me/api/portraits/men/83.jpg'
-                })
-                
-                const commentContainer = createCommentContainer()
-                commentContainer.appendChild(commentAuthorContainer)
-                commentContainer.appendChild(commentText)
-                
-                renderComment(commentContainer)
+                const comment = {
+                    authorName: 'James Tipis',
+                    authorImageSrc: 'https://randomuser.me/api/portraits/men/83.jpg',
+                    text: textArea.value
+                }
+                renderComment(comment)
                 hideCommentForm()
-                
             }
         })
     })
@@ -80,6 +71,7 @@ const createTextNode = (text) =>{
     
     return commentText
 }
+
 const getElement = (params) =>{
     return document.querySelector(params)
 }
@@ -100,7 +92,21 @@ const hideCommentForm = () =>{
     commentForm.classList.add('hidden')
 }
 
-const renderComment = (commentContainer) =>{
+const renderComment = ({ authorName, authorImageSrc, text }) =>{
+    const commentText = createTextNode(text)
+    const commentAuthorContainer = createCommentAuthorContainer({
+        authorName,
+        authorImageSrc
+    })
+    
+    const commentContainer = createCommentContainer()
+    commentContainer.appendChild(commentAuthorContainer)
+    commentContainer.appendChild(commentText)
+    
+    renderCommentContainer(commentContainer)
+}
+
+const renderCommentContainer = (commentContainer) =>{
     const replies = document.querySelector('#current-post .comments') 
     replies.prepend(commentContainer)
 }
