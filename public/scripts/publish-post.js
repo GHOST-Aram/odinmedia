@@ -1,9 +1,15 @@
-const smallScreenPublishBtn = document.querySelector('section#posts .new-post button')
-const wideScreenPublishBtn = document.querySelector('aside .new-post button')
+const smallScreenPublishBtn = document.querySelector(
+    'section#posts .new-post button'
+)
+const wideScreenPublishBtn = document.querySelector(
+    'aside .new-post button'
+)
 
 //Medium screen, small screens and screen readers
 smallScreenPublishBtn.addEventListener('click', async(event) =>{
-    const textArea = document.querySelector('section#posts .new-post textarea')
+    const textArea = document.querySelector(
+        'section#posts .new-post textarea'
+    )
     if(textArea.value.trim() !== ''){
         changeButtonText(event.target, 'Publishing ...')
         disableButton(event.target)
@@ -26,6 +32,7 @@ smallScreenPublishBtn.addEventListener('click', async(event) =>{
         } finally{
             changeButtonText(event.target, 'Publish Post')
             enableButton(event.target)
+            clearTextArea(textArea)
         }
         
     }
@@ -56,11 +63,15 @@ wideScreenPublishBtn.addEventListener('click', async(event) =>{
         } finally{
             changeButtonText(event.target, 'Publish Post')
             enableButton(event.target)
+            clearTextArea(textArea)
         }
         
     }
 })
 
+const clearTextArea = (textArea) =>{
+    textArea.value = ''
+}
 const disableButton = (btn) =>{
     btn.setAttribute('disabled', 'true')
     btn.classList.add('opacity-50')
