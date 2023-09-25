@@ -1,7 +1,5 @@
 // Get interactionn buttons
 const commentBtns = getAllElements('button.comment-btn')
-const likeBtns = getAllElements('button.like-btn')
-const shareBtns = getAllElements('button.share-btn')
 
 
 
@@ -36,18 +34,6 @@ commentBtns.forEach(btn =>{
     })
 })
 
-likeBtns.forEach(btn =>{
-    btn.addEventListener('click', (e) =>{
-        btn.classList.toggle('text-red-500')
-    })
-})
-
-shareBtns.forEach(btn =>{
-    btn.addEventListener('click', alertUser)
-})
-
-
-// Utils
 
 function alertUser(){
     const closeAlertDialogButton = document.querySelector('button#confirm-share')
