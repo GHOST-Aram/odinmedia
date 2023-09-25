@@ -3,6 +3,13 @@ const commentBtns = getAllElements('button.comment-btn')
 
 commentBtns.forEach(btn =>{
     btn.addEventListener('click', async(e) =>{
+
+        fetchComments().then(comments =>{
+            comments.forEach(comment =>{
+                renderComment(comment)
+            })
+        })
+
         const post = getParentPost(btn)        
         
         setId(post, 'current-post')                
@@ -71,7 +78,12 @@ const createTextNode = (text) =>{
     
     return commentText
 }
+const fetchComments = async() =>{
+    const response = await fetch('http://localhost:8000/content/comments')
+    const comments = await response.json()
 
+    return comments
+}
 const getElement = (params) =>{
     return document.querySelector(params)
 }
