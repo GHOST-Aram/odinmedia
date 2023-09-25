@@ -3,7 +3,6 @@ const commentBtns = getAllElements('button.comment-btn')
 
 commentBtns.forEach(btn =>{
     btn.addEventListener('click', async(e) =>{
-
         fetchComments().then(result =>{
             result.comments.forEach(comment =>{
                 renderComment(comment)
