@@ -29,7 +29,7 @@
                 </li>
             </ul>
             <div class="flex flex-row gap-4 justify-end">
-                <a href="/profile" class="flex flex-row justify-end items-center gap-4">
+                <a href="/profile" class="flex flex-row justify-end items-center gap-4 lg:hidden">
                     <h2 class=" hidden text-slate-200 font-md 
                         text-lg lg:inline md:inline">
                         <%=user&&user.name%>
@@ -42,7 +42,8 @@
                 </a>
                 <button 
                     id="menu"
-                    class="text-lg font-bold text-white bg-blue-600 py-2 px-4
+                    class="text-lg font-bold text-white bg-blue-600 
+                    hover:bg-blue-300 transition-all py-2 px-4
                     md:hidden lg:hidden xl:hidden">
                     <i class="fa-solid fa-bars"></i>
                 </button>

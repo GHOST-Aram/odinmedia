@@ -5,7 +5,7 @@ const indexRouter = Router()
 
 indexRouter.get('/', async (req, res) => {
     const user = {
-        name: 'Jane Doe',
+        name: 'Frank Tristan',
         pictureUrl: 'https://randomuser.me/api/portraits/men/83.jpg'
     }
     
