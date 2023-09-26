@@ -1,36 +1,47 @@
 <header class="bg-blue-500 mb-4 fixed top-0 left-0 right-0 z-10">
-        <div class="container py-4 px-2 flex flex-row justify-between">
-            <h1 class="text-white font-bold text-xl">OdinMedia</h1>
+        <div class="container py-2 flex flex-row  items-center justify-between">
+            <button 
+                class="text-white font-bold text-xl hover:bg-blue-600 p-2 
+                    rounded-sm transition-all">
+                OdinMedia
+            </button>
             <ul class="hidden justify-center gap-8 items-center flex-row md:flex lg:hidden" >
                 <li >
                     <a href="/"
-                        class="text-slate-400 font-bold 
-                            text-xl visited:text-white 
-                            visited:p-2"
+                        class="text-slate-600 hover:bg-blue-600 p-4 rounded-sm transition-all
+                             visited:text-white flex flex-col items-center visited:p-2
+                             text-xl font-md"
                     >
-                        <i class="fa-solid fa-house"></i> Home
+                        <i class="fa-solid fa-house "></i>
+                        <span class="">Home</span>
                     </a>
                 </li>
                 <li>
                     <a href="/people"
-                        class="text-slate-400 text-xl 
-                            visited:text-white font-bold"
+                        class="text-slate-600 hover:bg-blue-600 p-4 rounded-sm transition-all 
+                            flex flex-col items-center visited:text-white text-xl font-md"
                     >
-                        <i class="fa-solid fa-users-line"></i> People
+                        <i class="fa-solid fa-users-line "></i>
+                        <span class="">People</span>
                     </a>
                 </li>
                 <li>
                     <a href="/people"
-                        class="text-slate-400 text-xl 
-                            visited:text-white font-bold"
+                        class="text-slate-600 hover:bg-blue-600 p-4 rounded-sm 
+                            transition-all text-xl flex flex-col items-center 
+                            visited:text-white text-xl font-md"
                     >
-                        <i class="fa-solid fa-users-line"></i> Friends
+                        <i class="fa-solid fa-users-line"></i> 
+                        <span>Friends</span>
                     </a>
                 </li>
             </ul>
             <div class="flex flex-row gap-4 justify-end">
-                <a href="/profile" class="flex flex-row justify-end items-center gap-4 lg:hidden">
-                    <h2 class=" hidden text-slate-200 font-md 
+                <a href="/profile" 
+                    class="flex flex-row justify-end items-center gap-4 
+                        lg:hidden hover:bg-blue-600 p-2 transition-all rounded-sm"
+                >
+                    <h2 class=" hidden text-slate-200 font-bold 
                         text-lg lg:inline md:inline">
                         <%=user&&user.name%>
                     </h2>
@@ -42,8 +53,8 @@
                 </a>
                 <button 
                     id="menu"
-                    class="text-lg font-bold text-white bg-blue-600 
-                    hover:bg-blue-300 transition-all py-2 px-4
+                    class="text-lg font-bold text-white hover:bg-blue-600 
+                     transition-all py-2 px-4
                     md:hidden lg:hidden xl:hidden">
                     <i class="fa-solid fa-bars"></i>
                 </button>
