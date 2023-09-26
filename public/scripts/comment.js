@@ -4,8 +4,7 @@ commentBtns.forEach(btn =>{
     
     btn.addEventListener('click', async(e) =>{
         const post = getParentPost(btn)        
-        setId(post, 'current-post')  
-        const replyBtn = getElement('#current-post .comment-form button')
+        setId(post, 'current-post') 
 
         fetchComments().then(result =>{
             clearCommentsContainer()
@@ -13,9 +12,10 @@ commentBtns.forEach(btn =>{
                 renderComment(comment)
             })
         })
-
+        
         toggleCommentForm()
         
+        const replyBtn = getElement('#current-post .comment-form button')
         replyBtn.addEventListener('click', async(e) =>{
             const textArea = document.querySelector('#current-post textarea')
             
@@ -43,8 +43,8 @@ function alertUser(){
 }
 
 const clearCommentsContainer = () =>{
-    const replies = document.querySelector('#current-post .comments') 
-    replies.innerHTML = ''
+    const commentsDiv = document.querySelector('#current-post .comments') 
+    commentsDiv.innerHTML = ''
 }
 const createCommentAuthorContainer = ({
     authorName, authorImageSrc
@@ -120,8 +120,8 @@ const renderComment = ({ author, text }) =>{
 }
 
 const renderCommentContainer = (commentContainer) =>{
-    const replies = document.querySelector('#current-post .comments') 
-    replies.prepend(commentContainer)
+    const commentsDiv = document.querySelector('#current-post .comments') 
+    commentsDiv.prepend(commentContainer)
 }
 const setId = (post, id) =>{
     post.setAttribute('id', id)
@@ -131,6 +131,7 @@ const setId = (post, id) =>{
 const toggleCommentForm = () =>{
     const commentForm = document.querySelector('#current-post .comment-form')
     const textArea = document.querySelector('#current-post textarea')
+    
     commentForm.classList.toggle('hidden')
     if(!commentForm.classList.contains('hidden')){
         textArea.focus()

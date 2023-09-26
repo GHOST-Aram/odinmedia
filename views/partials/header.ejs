@@ -1,7 +1,7 @@
 <header class="bg-blue-500 mb-4 fixed top-0 left-0 right-0 z-10">
         <div class="container py-4 px-2 flex flex-row justify-between">
             <h1 class="text-white font-bold text-xl">OdinMedia</h1>
-            <ul class="flex flex-col justify-center gap-8 items-center md:flex-row lg:hidden" >
+            <ul class="hidden justify-center gap-8 items-center flex-row md:flex lg:hidden" >
                 <li >
                     <a href="/"
                         class="text-slate-400 font-bold 
@@ -28,7 +28,7 @@
                     </a>
                 </li>
             </ul>
-            <div class="flx flex-row justify-end">
+            <div class="flex flex-row gap-4 justify-end">
                 <a href="/profile" class="flex flex-row justify-end items-center gap-4">
                     <h2 class=" hidden text-slate-200 font-md 
                         text-lg lg:inline md:inline">
@@ -40,6 +40,11 @@
                         alt="<%=user&&user.name%>"
                     >
                 </a>
+                <button 
+                    id="menu"
+                    class="text-lg font-bold text-white md:hidden lg:hidden xl:hidden">
+                    <i class="fa-solid fa-menu">OPEN</i>
+                </button>
             </div>
         </div>
    </header>
