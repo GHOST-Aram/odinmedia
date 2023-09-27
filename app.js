@@ -2,16 +2,17 @@ import { accountsRouter } from './routes/accounts.js';
 import { contentRouter } from './routes/content.js';
 import { app } from './zghost/app/init.js';
 import { config } from './zghost/app/config.js';
-import { internalServerError, notFoundError } from './zghost/utils/errors.js';
 import { indexRouter } from "./routes/index.js";
 import createHttpError from 'http-errors';
 import { peopleRouter } from './routes/people.js';
+import { friendsRouter } from './routes/friends.js';
 
 config()
 app.use('/', indexRouter)
 app.use('/auth', accountsRouter)
 app.use('/content', contentRouter)
 app.use('/people', peopleRouter)
+app.use('/friends', friendsRouter)
 
 //Error handling
 app.use(function(req, res, next) {

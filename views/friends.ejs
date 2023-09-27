@@ -1,0 +1,86 @@
+<%-include('./partials/head.ejs') %>
+<%-include('./partials/header.ejs') %>
+<main class="lg:flex lg:flex-row lg:gap-4">
+    <section class="w-1/5">
+        <%-include('./partials/side-nav') %>
+    </section>
+    <section id="posts" aria-live="polite"
+         class="container pb-12 space-y-4 w-full lg:w-3/5 xl:w-2/5
+          pt-20
+         "
+    > 
+        <h1 class="font-bold bg-blue-500 p-2 text-white md:mt-8">
+            All Friends
+        </h1>
+         <hr>
+         <div class="people space-y-2">
+            <%if(people.length) {%>
+                <%people.forEach(person => { %>
+                <div class="flex flex-col items-start gap-2 border rounded-md p-2">
+                    <div class="flex flex-row items-center gap-2">
+                        <img 
+                            src="<%=person.pictureUrl%>" 
+                            alt="<%=person.name%>" 
+                            class="h-10 w-10 rounded-full"
+                        >
+                        <div class="flex flex-col">
+                            <h1 class="text-slate-600"><%=person.name%></h1>
+                            <span class="text-xs text-slate-400 font-light">
+                                <%=person.mutualFriends%> Mutual friends</span>
+                        </div>
+                    </div>
+                    <div  
+                        class="flex flex-col items-center justify-between w-full gap-4
+                            md:flex-row"
+                    >
+                        <button 
+                        class="bg-blue-500 text-white rounded-sm px-4 py-2 w-full
+                            hover:opacity-75 transition-all"
+                        >
+                            <i class="fa-solid fa-message text-lg mr-2"></i>
+                            <span class="font-light">Message</span>
+                        </button>
+                        <button 
+                            class="bg-blue-500 text-white rounded-sm px-4 py-2 w-full
+                            hover:opacity-75 transition-all"
+                        >
+                            <i class="fa-solid fa-user text-lg mr-2"></i>
+                            <span class="font-light">View Profile</span>
+                        </button>
+                        <button 
+                            class="bg-red-500 text-white rounded-sm px-4 py-2 w-full
+                            hover:opacity-75 transition-all"
+                        >
+                            <i class="fa-solid fa-x text-lg mr-2"></i>
+                            <span class="font-light">Unfriend</span>
+                        </button>
+                    </div>
+                </div>
+
+                <%}) %>
+            <%} else {%>
+                <h1 class="text-red-500 font-light text-center">No List to dispaly</h1>
+            <%}%>    
+         </div>
+     </section>
+     <section class="w-2/5 hidden xl:block">
+         <aside class="p-4 border-l w-2/5 pt-4 fixed top-16 bottom-0 space-y-2">
+            <div aria-hidden="true" 
+                class="border rounded-md space-y-2 p-2 w-full"
+            >
+                <h1 class="text-white font-bold p-2 bg-blue-500">
+                    More Actions
+                </h1>
+             </div>
+             <hr>
+             <%-include('./partials/footer.ejs') %>
+         </aside>
+    </section>
+    <%-include('./partials/side-drawer.ejs') %>
+</main>
+</body>
+<script src="/scripts/comment.js"></script>
+<script src="/scripts/likes.js"></script>
+<script src="/scripts/shared.js"></script>
+<script src="/scripts/publish-post.js"></script>
+</html>
