@@ -5,11 +5,13 @@ import { config } from './zghost/app/config.js';
 import { internalServerError, notFoundError } from './zghost/utils/errors.js';
 import { indexRouter } from "./routes/index.js";
 import createHttpError from 'http-errors';
+import { peopleRouter } from './routes/people.js';
 
 config()
 app.use('/', indexRouter)
 app.use('/auth', accountsRouter)
 app.use('/content', contentRouter)
+app.use('/people', peopleRouter)
 
 //Error handling
 app.use(function(req, res, next) {
