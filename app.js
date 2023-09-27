@@ -9,6 +9,15 @@ import { friendsRouter } from './routes/friends.js';
 import { profilesRouter } from './routes/profiles.js';
 
 config()
+app.use((req, res, next) =>{
+  const user = {
+    name: 'Frank Tristan',
+    pictureUrl: 'https://randomuser.me/api/portraits/men/83.jpg'
+}
+  res.locals.user = user
+  next()
+})
+
 app.use('/', postsRouter)
 app.use('/auth', accountsRouter)
 app.use('/content', contentRouter)

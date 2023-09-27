@@ -1,0 +1,110 @@
+<%-include('./partials/head.ejs') %>
+<%-include('./partials/header.ejs') %>
+<main class="lg:flex lg:flex-row lg:gap-4">
+     <section class="w-1/5">
+         <%-include('./partials/side-nav') %>
+     </section>
+     <section id="posts" aria-live="polite"
+         class="container pb-12 space-y-4 w-full lg:w-3/5 xl:w-2/5
+          xl:pt-16
+         "
+     > 
+        <h1 class="p-2 font-bold bg-blue-500 text-white mt-20 md:mt-28 lg:mt-16 xl:mt-0">Post</h1>
+         <div>
+            <!-- Post -->
+            <div class="container post space-y-2 p-2 border rounded-md">
+                <div class="space-y-2">
+                    <div class="flex flex-row items-start gap-4">
+                        <img 
+                            class="h-10 w-10 rounded-full"
+                            src="<%=post.author&&post.author.pictureUrl%>"
+                            alt= "<%=post.author&&post.author.name%>" 
+                        >
+                        <div class="flex flex-col">
+                            <h1 class="font-md"><%=post.author&&post.author.name%></h1>
+                            <span class="text-xs font-light text-slate-400"><%=post.createdAt%></span>
+                        </div>
+                    </div>
+                    <p class="font-light text-md">
+                        <%=post.textContent%>
+                    </p>
+                    <img 
+                        src="https://images.unsplash.com/photo-1683009686716-ac2096a5a73b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60"
+                        alt="post"
+                        class="w-full rounded-md"
+                    >
+                </div>
+                <hr>
+                <div class="interactions flex flex-row justify-between 
+                    items-center">
+                    <button
+                        class="text-blue-400 text-xl  px-4 py-2 
+                            rounded-sm transition-all hover:bg-slate-400 comment-btn"
+                    >
+                        <i class="fa-solid fa-envelope"></i>
+                        <span class="text-slate-500 font-light text-sm"><%=post.comments%> Comments</span>
+                    </button>
+                    <button
+                        class="text-blue-400 text-xl  px-4 py-2 
+                            rounded-sm transition-all hover:bg-slate-400 like-btn focus:outline-none"
+                    >
+                        <i class="fa-solid fa-heart"></i> 
+                        <span class="text-slate-500 font-light text-sm"><%=post.likes%></post.likes> Likes</span>
+                    </button>
+                    <button
+                        class="text-blue-400 text-xl  px-4 py-2 
+                            rounded-sm transition-all hover:bg-slate-400 share-btn"
+                    >
+                        <i class="fa-solid fa-share-nodes"></i>
+                        <span class="text-slate-500 font-light text-sm"><%=post.shared%> Shared</span>
+                    </button>
+                </div>
+                <hr>
+                <div class="comment-section space-y-4 xl:hidden" aria-live="polite">
+                    <%-include('./partials/comment-form.ejs') %>
+                </div>
+                <div class="comments space-y-4" aria-live="polite">
+                </div>
+            </div>
+            <!-- Post -->
+         </div>
+     </section>
+     <section class="w-2/5 hidden xl:block">
+         <aside class="p-4 border-l w-2/5 pt-4 fixed top-16 bottom-0 space-y-2">
+             <div aria-hidden="true" class="border rounded-md">
+                <!-- Write new comment visible only on wide screens -->
+                <div class="new-post container p-2 space-y-2">
+                    <div class="flex flex-row items-start justify-start gap-4">
+                        <img 
+                            src= "<%=user&&user.pictureUrl%>"
+                            alt= "<%=user&&user.name%>" 
+                            class="h-10 w-10 rounded-full"
+                        >
+                        <textarea 
+                            class="w-full font-light p-2 h-32 
+                                border rounded-sm text-sm text-gray-500"
+                            placeholder="What on your mind?"        
+                        ></textarea>
+                    </div>
+                    <button
+                        class="bg-blue-500 text-white font-md px-4 py-2 rounded-sm
+                        w-full hover:bg-blue-600 transition-all"
+                    >
+                        Comment
+                    </button>
+                </div>
+                
+                <!-- Write new comment visible only on wide screens-->
+             </div>
+             <hr>
+             <%-include('./partials/footer.ejs') %>
+         </aside>
+     </section>
+     <%-include('./partials/side-drawer.ejs') %>
+</main>
+</body>
+<script src="/scripts/comment.js"></script>
+<script src="/scripts/likes.js"></script>
+<script src="/scripts/shared.js"></script>
+<script src="/scripts/publish-post.js"></script>
+</html>
