@@ -13,7 +13,18 @@ export const get_all_people = (req, res) =>{
 export const get_sent_requests = (req, res) =>{
     res.render('requests-sent', 
     { 
-        title: 'People', 
+        title: 'People | Requests Sent', 
+        user: {
+            name: 'Irvine Johnson',
+            pictureUrl: 'https://randomuser.me/api/portraits/men/83.jpg'
+        },
+        people
+    })
+}
+export const get_received_requests = (req, res) =>{
+    res.render('requests-received', 
+    { 
+        title: 'People | Requests Received', 
         user: {
             name: 'Irvine Johnson',
             pictureUrl: 'https://randomuser.me/api/portraits/men/83.jpg'
