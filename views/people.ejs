@@ -87,31 +87,34 @@
     </section>
     <%-include('./partials/side-drawer.ejs') %>
     <div aria-hidden="true" 
-        class=" fixed w-full border  p-2 bg-blue-500 
-        flex flex-row items-center justify-between gap-4 bottom-8
+        class=" fixed w-full border  p-2 bg-blue-500 bottom-8
         right-0 xl:hidden lg:w-4/5"
     >
-        <button 
-            class="p-2 text-white bg-slate-500 w-full 
-            hover:opacity-75 transition-all">
-            <a class="text-sm font-light" href="/people">
-                All People
+        <ul class="flex flex-row items-center justify-between gap-4 ">
+            <a class="text-sm font-light w-full" href="/people">
+                <li class="p-2 text-white text-center bg-slate-500 w-full 
+                    hover:opacity-75 transition-all"
+                >
+                    All People
+                </li>
             </a>
-        </button>
-        <button 
-            class="p-2 text-white bg-slate-500 w-full 
-            hover:opacity-75 transition-all">
-            <a class="text-sm font-light" href="/people/requests/sent">
-                Requests Sent
+            <a class="text-sm font-light w-full" 
+                href="/people/requests/sent">
+                <li class="p-2 text-white text-center bg-slate-500 w-full 
+                    hover:opacity-75 transition-all"
+                >
+                    Requests Sent
+                </li>
             </a>
-        </button>
-        <button 
-            class="p-2 text-white bg-slate-500 w-full 
-            hover:opacity-75 transition-all">
-            <a class="text-sm font-light" href="/people/requests/received">
-                Requests Received
+            <a class="text-sm font-light w-full" 
+                href="/people/requests/received">
+                <li class="p-2 text-white text-center bg-slate-500 w-full 
+                    hover:opacity-75 transition-all"
+                >
+                    Requests Received
+                </li>
             </a>
-        </button>
+        </ul>
         </div>
 </main>
 </body>
