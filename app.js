@@ -2,14 +2,14 @@ import { accountsRouter } from './routes/accounts.js';
 import { contentRouter } from './routes/content.js';
 import { app } from './zghost/app/init.js';
 import { config } from './zghost/app/config.js';
-import { indexRouter } from "./routes/index.js";
+import { postsRouter } from "./routes/posts.js";
 import createHttpError from 'http-errors';
 import { peopleRouter } from './routes/people.js';
 import { friendsRouter } from './routes/friends.js';
 import { profilesRouter } from './routes/profiles.js';
 
 config()
-app.use('/', indexRouter)
+app.use('/', postsRouter)
 app.use('/auth', accountsRouter)
 app.use('/content', contentRouter)
 app.use('/people', peopleRouter)
