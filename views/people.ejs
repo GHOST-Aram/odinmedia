@@ -22,16 +22,22 @@
                             class="h-10 w-10 rounded-full"
                         >
                         <div class="flex flex-col">
-                            <h1 class="text-slate-600"><%=person.name%></h1>
+                            <h1 class="text-white"><%=person.name%></h1>
                             <span class="text-xs text-slate-400 font-light">
                                 <%=person.mutualFriends%> Mutual friends</span>
                         </div>
                     </div>
                     <div class="flex flex-row items-center justify-between w-full gap-4">
-                        <button class="bg-blue-500 text-white rounded-sm px-4 py-2 w-full">
+                        <button 
+                        class="bg-blue-500 text-white rounded-sm px-4 py-2 w-full
+                            hover:opacity-75 transition-all"
+                        >
                             Send Request
                         </button>
-                        <button class="bg-blue-500 text-white rounded-sm px-4 py-2 w-full">
+                        <button 
+                        class="bg-blue-500 text-white rounded-sm px-4 py-2 w-full
+                            hover:opacity-75 transition-all"
+                        >
                             Remove
                         </button>
                     </div>
@@ -45,16 +51,67 @@
      </section>
      <section class="w-2/5 hidden xl:block">
          <aside class="p-4 border-l w-2/5 pt-4 fixed top-16 bottom-0 space-y-2">
-             <div aria-hidden="true" class="border rounded-md">
-                <!-- Create new post 2 visible only on wide screens -->
-                <h1 class="text-red-500 text-xl font-light">People Naviagtion</h1>
-                <!-- Create new post visible only on wide screens-->
+            <div aria-hidden="true" 
+                class="border rounded-md space-y-2 p-2 w-full"
+            >
+                <h1 class="text-white font-bold p-2 bg-blue-500">Filter</h1>
+                <ul class="w-full">
+                    <li
+                        class="p-2 text-slate-600 w-full hover:bg-blue-500 
+                        transition-all hover:text-white"
+                    >
+                        <a href="/people" >
+                                All People
+                        </a>
+                    </li>
+                    <li 
+                        class="p-2 text-slate-600 w-full hover:bg-blue-500 
+                        transition-all hover:text-white">
+                        <a href="/people/sent-requests">
+                            Requests Sent
+                        </a>
+                    </li>
+                    <li 
+                        class="p-2 text-slate-600 w-full hover:bg-blue-500 
+                        transition-all hover:text-white">
+                        <a href="/people/received-requests">
+                            Requests received
+                        </a>
+                    </li>
+                </ul>
              </div>
              <hr>
              <%-include('./partials/footer.ejs') %>
          </aside>
-     </section>
-     <%-include('./partials/side-drawer.ejs') %>
+    </section>
+    <%-include('./partials/side-drawer.ejs') %>
+    <div aria-hidden="true" 
+        class=" fixed w-full border  p-2 bg-blue-500 
+        flex flex-row items-center justify-between gap-4 bottom-8
+        right-0 xl:hidden lg:w-4/5"
+    >
+        <button 
+            class="p-2 text-white bg-slate-500 w-full 
+            hover:opacity-75 transition-all">
+            <a class="text-sm font-light" href="/people">
+                All People
+            </a>
+        </button>
+        <button 
+            class="p-2 text-white bg-slate-500 w-full 
+            hover:opacity-75 transition-all">
+            <a class="text-sm font-light" href="/people/sent-requests">
+                Requests Sent
+            </a>
+        </button>
+        <button 
+            class="p-2 text-white bg-slate-500 w-full 
+            hover:opacity-75 transition-all">
+            <a class="text-sm font-light" href="/people/received-requests">
+                Requests Received
+            </a>
+        </button>
+        </div>
 </main>
 </body>
 <script src="/scripts/comment.js"></script>
