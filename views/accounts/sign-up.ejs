@@ -1,9 +1,14 @@
-<%-include('../partials/head.ejs') %> 
-    <main>
-        <h1 
-            class="text-blue-500 font-bold text-center text-xl mb-4">
-                Welcome to OdinMedia
-            </h1>
+<%-include('../partials/head.ejs') %>
+    <header class="bg-blue-500 mb-4 fixed top-0 left-0 right-0">
+        <div class="container py-2">
+            <button 
+                class="text-white font-bold text-xl hover:bg-blue-600 p-2 
+                    rounded-sm transition-all">
+                OdinMedia
+            </button>
+        </div> 
+    </header> 
+    <main class="mt-20">
         <section>
             <div class="container space-y-4 lg:w-3/5">
 
@@ -110,6 +115,8 @@
             </div>
         </section>
     </main>
-    <%-include('../partials/footer.ejs') %>
+    <div class="fixed bottom-0 right-0 left-0">
+        <%-include('../partials/footer.ejs') %>
+    </div>
 </body>
 </html>
