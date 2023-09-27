@@ -21,3 +21,9 @@ input{
 .w-35{
     width: 38%;
 }
+.banner{
+    background-position: center;
+}
+.banner img{
+    bottom: -3rem;
+}

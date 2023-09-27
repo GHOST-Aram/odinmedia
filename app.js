@@ -6,6 +6,7 @@ import { indexRouter } from "./routes/index.js";
 import createHttpError from 'http-errors';
 import { peopleRouter } from './routes/people.js';
 import { friendsRouter } from './routes/friends.js';
+import { profilesRouter } from './routes/profiles.js';
 
 config()
 app.use('/', indexRouter)
@@ -13,6 +14,7 @@ app.use('/auth', accountsRouter)
 app.use('/content', contentRouter)
 app.use('/people', peopleRouter)
 app.use('/friends', friendsRouter)
+app.use('/profiles', profilesRouter)
 
 //Error handling
 app.use(function(req, res, next) {

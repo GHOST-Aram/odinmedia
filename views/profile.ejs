@@ -1,0 +1,79 @@
+<%-include('./partials/head.ejs') %>
+<%-include('./partials/header.ejs') %>
+<main class="lg:flex lg:flex-row lg:gap-4">
+     <section class="w-1/5">
+         <%-include('./partials/side-nav') %>
+     </section>
+     <section id="posts" aria-live="polite"
+         class="container pb-12 space-y-4 w-full lg:w-3/5 xl:w-2/5
+          xl:pt-16
+         "
+     > 
+        <div class="my-2 border rounded-b rounded-md">
+            <div style="background-image: url('https://plus.unsplash.com/premium_photo-1690552679182-dc23afba3c82?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1579&q=80');" 
+                class="banner w-full h-40 relative "
+            >
+            <img src="<%=user.pictureUrl%>" 
+                alt="<%=user&&user.name%>" 
+                class="h-24 w-24 rounded-full absolute left-2"
+            >
+            </div>
+            <div class="flex flex-row items-center gap-4 mt-12">
+                <h1 class="text-slate-600 font-bold text-xl px-2"><%=user&&user.name%></h1>
+                <h2 class="font-light text-slate-400">
+                    <span class="font-bold text-slate-500">799</span> 
+                    Friends
+                </h2>
+                <h2 class="font-light text-slate-400">
+                    <span class="font-bold text-slate-500">200</span> 
+                    Posts
+                </h2>
+            </div>
+            <div class="flex flex-row items-center gap-4 px-2">
+                <h2 class="text-slate-400">
+                    <span class="text-slate-600 text-sm font-md">Joined: </span> 
+                    <span class="font-light text-xs"> 12 Dec 2009</span>
+                </h2>
+                <h2 class="text-slate-400">
+                    <span class="text-slate-600 text-sm font-md">Location: </span> 
+                    <span class="font-light text-xs"> Windhoek, Namibia</span>
+                </h2>
+                
+            </div>
+            <div class="flex justify-between items-center gap-4 m-2">
+                <button class=" bg-blue-500 py-2 text-white 
+                    hover:opacity-75 w-full rounded-sm transition-all">
+                    <i class="fa-solid fa-message"></i>
+                </button>
+                <button class="bg-red-500 py-2 w-full rounded-sm font-bold 
+                    text-white hover:opacity-75 transition-all">
+                    Unfriend
+                </button>
+            </div>
+        </div>
+        <hr class="lg:hidden xl:hidden">
+        <div>
+            <%-include('./partials/post.ejs') %>
+        </div>
+     </section>
+     <section class="w-2/5 hidden xl:block">
+         <aside class="p-4 border-l w-2/5 pt-4 fixed top-16 bottom-0 space-y-2">
+             <div aria-hidden="true" class="border rounded-md">
+                <!-- Create new post 2 visible only on wide screens -->
+                <h1 class="font-bold text-white bg-blue-500 p-2">
+                    More Actions
+                </h1>
+                <!-- Create new post visible only on wide screens-->
+             </div>
+             <hr>
+             <%-include('./partials/footer.ejs') %>
+         </aside>
+     </section>
+     <%-include('./partials/side-drawer.ejs') %>
+</main>
+</body>
+<script src="/scripts/comment.js"></script>
+<script src="/scripts/likes.js"></script>
+<script src="/scripts/shared.js"></script>
+<script src="/scripts/publish-post.js"></script>
+</html>
