@@ -27,20 +27,12 @@
                                 <%=person.mutualFriends%> Mutual friends</span>
                         </div>
                     </div>
-                    <div class="flex flex-row items-center justify-between w-full gap-4">
-                        <button 
+                    <button 
                         class="bg-blue-500 text-white rounded-sm px-4 py-2 w-full
                             hover:opacity-75 transition-all"
-                        >
-                            Send Request
-                        </button>
-                        <button 
-                        class="bg-blue-500 text-white rounded-sm px-4 py-2 w-full
-                            hover:opacity-75 transition-all"
-                        >
-                            Remove
-                        </button>
-                    </div>
+                    >
+                        Recall Friend Request
+                    </button>
                 </div>
 
                 <%}) %>
@@ -56,29 +48,28 @@
             >
                 <h1 class="text-white font-bold p-2 bg-blue-500">Filter</h1>
                 <ul class="w-full">
-                    <a href="/people" >
-                        <li
-                            class="p-2 text-slate-600 w-full hover:bg-blue-500 
-                            transition-all hover:text-white"
-                        >
-                            All People
-                        </li>
-                    </a>
-                    <a href="/people/requests/sent">
-                        <li 
-                            class="p-2 text-slate-600 w-full hover:bg-blue-500 
-                            transition-all hover:text-white"
-                        >
+                    <li
+                        class="p-2 text-slate-600 w-full hover:bg-blue-500 
+                        transition-all hover:text-white"
+                    >
+                        <a href="/people" >
+                                All People
+                        </a>
+                    </li>
+                    <li 
+                        class="p-2 text-slate-600 w-full hover:bg-blue-500 
+                        transition-all hover:text-white">
+                        <a href="/people/requests/sent">
                             Requests Sent
-                        </li>
-                    </a>
-                    <a href="/people/requests/received">
-                        <li 
-                            class="p-2 text-slate-600 w-full hover:bg-blue-500 
-                            transition-all hover:text-white">
+                        </a>
+                    </li>
+                    <li 
+                        class="p-2 text-slate-600 w-full hover:bg-blue-500 
+                        transition-all hover:text-white">
+                        <a href="/people/requests/received">
                             Requests received
-                        </li>
-                    </a>
+                        </a>
+                    </li>
                 </ul>
              </div>
              <hr>
