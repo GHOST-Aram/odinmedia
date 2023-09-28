@@ -1,4 +1,33 @@
 <form action="" method="post" class="w-full space-y-4 border p-2 rounded-md">
+    <div class="mb-16">
+        <%if(profile.banner) {%>
+            <div class="relative w-full h-40">
+                <a href="<%=profile.banner%>">
+                    <div style="background-image: url('<%=profile.banner%>');" 
+                        class="banner w-full h-40 absolute top-0 right-0 "
+                    > 
+                    </div>
+                </a>
+                <a href="<%=profile.pictureUrl%>">
+                    <img src="<%=profile.pictureUrl%>" 
+                        alt="<%=profile&&profile.name%>" 
+                        class="profile h-24 w-24 rounded-full absolute 
+                        left-2 top-28"
+                    >
+                </a>
+            </div>
+            <%} else {%>
+            <div class="banner w-full h-40 bg-blue-500 relative "> 
+                <a href="<%=profile.pictureUrl%>">
+                    <img src="<%=profile.pictureUrl%>" 
+                        alt="<%=profile&&profile.name%>" 
+                        class="profile h-24 w-24 rounded-full absolute 
+                        left-2 top-28"
+                    >
+                </a>
+            </div>
+        <%}%>
+    </div>
     <div class="flex flex-col items-start gap-2">
         <label for="first-name" class="text-slate-600 font-light">
             Name
