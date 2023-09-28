@@ -1,4 +1,4 @@
-import { posts } from "../posts.js"
+import { posts } from "../data.js"
 
 export const get_posts = async (req, res) => {
     res.render('index', { 

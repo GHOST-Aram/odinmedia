@@ -13,13 +13,13 @@
             <div style="background-image: url('https://plus.unsplash.com/premium_photo-1690552679182-dc23afba3c82?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1579&q=80');" 
                 class="banner w-full h-40 relative "
             >
-            <img src="<%=user.pictureUrl%>" 
-                alt="<%=user&&user.name%>" 
+            <img src="<%=profile.pictureUrl%>" 
+                alt="<%=profile&&profile.name%>" 
                 class="h-24 w-24 rounded-full absolute left-2"
             >
             </div>
             <div class="flex flex-row items-center gap-4 mt-12">
-                <h1 class="text-slate-600 font-bold text-xl px-2"><%=user&&user.name%></h1>
+                <h1 class="text-slate-600 font-bold text-xl px-2"><%=profile&&profile.name%></h1>
                 <h2 class="font-light text-slate-400">
                     <span class="font-bold text-slate-500">799</span> 
                     Friends

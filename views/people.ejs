@@ -17,18 +17,20 @@
             <%if(people.length) {%>
                 <%people.forEach(person => { %>
                 <div class="flex flex-col items-start gap-2 border rounded-md p-2">
-                    <div class="flex flex-row items-center gap-2">
-                        <img 
-                            src="<%=person.pictureUrl%>" 
-                            alt="<%=person.name%>" 
-                            class="h-10 w-10 rounded-full"
-                        >
-                        <div class="flex flex-col">
-                            <h1 class="text-slate-600"><%=person.name%></h1>
-                            <span class="text-xs text-slate-400 font-light">
-                                <%=person.mutualFriends%> Mutual friends</span>
+                    <a href="/profiles/<%=person.id %>">
+                        <div class="flex flex-row items-center gap-2">
+                            <img 
+                                src="<%=person.pictureUrl%>" 
+                                alt="<%=person.name%>" 
+                                class="h-10 w-10 rounded-full"
+                            >
+                            <div class="flex flex-col">
+                                <h1 class="text-slate-600"><%=person.name%></h1>
+                                <span class="text-xs text-slate-400 font-light">
+                                    <%=person.mutualFriends%> Mutual friends</span>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                     <div class="flex flex-row items-center justify-between w-full gap-4">
                         <button 
                         class="bg-blue-500 text-white rounded-sm px-4 py-2 w-full

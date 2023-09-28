@@ -1,3 +1,35 @@
+export const people = [
+    {
+        id:'jfkdsjifjks',
+        name: 'John Khan',
+        pictureUrl: 'https://randomuser.me/api/portraits/men/23.jpg',
+        mutuaFriends: 20,
+    },
+    {
+        id:'jfsakflwpewq',
+        name: 'Erickson Denis',
+        pictureUrl: 'https://randomuser.me/api/portraits/men/13.jpg',
+        mutuaFriends: 10,
+    },
+    {
+        id:'mlsakflwqlwq',
+        name: 'Fransk Odoi',
+        pictureUrl: 'https://randomuser.me/api/portraits/men/33.jpg',
+        mutuaFriends: 12,
+    },
+    {
+        id:'kfksdpfpwepew',
+        name: 'Fred Kennedy',
+        pictureUrl: 'https://randomuser.me/api/portraits/men/73.jpg',
+        mutuaFriends: 21,
+    },
+    {
+        id:',mfokdofkpewkfwe',
+        name: 'Erick Bell',
+        pictureUrl: 'https://randomuser.me/api/portraits/men/12.jpg',
+        mutuaFriends: 28,
+    },
+]
 
 export const posts = [
     {
@@ -14,11 +46,7 @@ export const posts = [
                 +'2f6d94c2f768?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8M'
                 + 'HxlZGl0b3JpYWwtZmVlZHwzOHx8fGVufDB8fHx8fA%3D%3D'
                 + '&auto=format&fit=crop&w=500&q=60',
-        author: {
-            id: 'jfidfneskjifewr',
-            name: 'Erick Bently',
-            pictureUrl: 'https://randomuser.me/api/portraits/men/81.jpg'
-        },
+        author: people[0],
         createdAt: 'June 22'
     },
     {
@@ -34,11 +62,7 @@ export const posts = [
                 + 'b277e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYW'
                 + 'wtZmVlZHw0fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500'
                 + '&q=60',
-        author: {
-            id: 'hfisdfnewijwe',
-            name: 'Jansen Kidis',
-            pictureUrl: 'https://randomuser.me/api/portraits/men/80.jpg'
-        },
+        author: people[1],
         createdAt: 'June 23'
     },
     {
@@ -55,11 +79,7 @@ export const posts = [
                 + 'ca54f41d08?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3Jp'
                 + 'YWwtZmVlZHwyfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500'
                 + '&q=60',
-        author: {
-            id: 'hfusdhfjjfwe',
-            name: 'Jack Daniel',
-            pictureUrl: 'https://randomuser.me/api/portraits/men/71.jpg'
-        },
+        author: people[2],
         createdAt: 'June 14'
     },
 ]
