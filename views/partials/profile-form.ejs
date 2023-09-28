@@ -1,0 +1,105 @@
+<form action="" method="post" class="w-full space-y-4 border p-2 rounded-md">
+    <div class="flex flex-col items-start gap-2">
+        <label for="first-name" class="text-slate-600 font-light">
+            Name
+        </label>
+        <input type="text" name="name" id="name" 
+            placeholder="John Doe" value="<%=profile.name%>"
+            class="border-b rounded-sm text-md font-light border 
+            p-2 w-full"
+        >
+    </div>
+    <div class="md:flex flex-row justify-between gap-4 w-full items-center">
+        <div class="flex flex-col items-start gap-2">
+            <label for="city" class="text-slate-600 font-light">
+                City
+            </label>
+            <input type="text" name="city" id="city" 
+                placeholder="Tokyo" value="<%=profile.city%>"
+                class="border-b rounded-sm text-md font-light border 
+                p-2 w-full"
+            >
+        </div>
+        <div class="flex flex-col items-start gap-2">
+            <label for="region" class="text-slate-600 font-light">
+                Region
+            </label>
+            <input type="text" name="region" id="region" 
+                placeholder="Japan" value="<%=profile.region%>"
+                class="border-b rounded-sm text-md font-light border 
+                p-2 w-full"
+            >
+        </div>
+    </div>
+    <div class="flex flex-col justify-between 
+        gap-2 w-full items-start p-2 border rounded-sm"
+    >
+        <div class="flex flex-col items-start gap-2 w-full">
+            <label for="banner" class="text-slate-600 font-light">
+                Banner
+            </label>
+            <input type="file" name="banner" id="banner" 
+                placeholder="Choose file" 
+                class="border-b rounded-sm text-md font-light border 
+                p-2 w-full"
+            >
+        </div>
+        <span class="text-center text-slate-600 font-bold text-lg w-full">
+            OR
+        </span>
+        <div class="flex flex-col items-start gap-2 w-full">
+            <label for="banner-url" class="text-slate-600 font-light">
+                Banner Url
+            </label>
+            <input type="text" name="banner_url" id="banner-url" 
+                placeholder="Image path" value="<%=profile.banner%>"
+                class="border-b rounded-sm border text-md font-light 
+                p-2 w-full"
+            >
+        </div>
+    </div>
+    <div class="flex flex-col justify-between gap-2 w-full 
+        items-start border p-2 rounded-sm">
+        <div class="flex flex-col items-start gap-2 w-full">
+            <label for="picture-url" class="text-slate-600 font-light">
+                Profile Picture
+            </label>
+            <input type="file" name="pictureUrl" id="picture-url" 
+                placeholder="Choose file" 
+                class="border-b rounded-sm text-md font-light border 
+                p-2 w-full"
+            >
+        </div>
+        <span class="text-center text-slate-600 font-bold text-lg w-full">
+            OR
+        </span>
+        <div class="flex flex-col items-start gap-2 w-full">
+            <label for="profile-pic-url" class="text-slate-600 font-light">
+                Profile Picture Url
+            </label>
+            <input type="text" name="pictureUrl" id="profile-pic-url" 
+                placeholder="Image path" value="<%=profile.pictureUrl%>"
+                class="border-b rounded-sm border text-md font-light 
+                p-2 w-full"
+            >
+        </div>
+    </div>
+    <div class="space-y-2 w-full">
+        <div class="flex flex-col items-start gap-2 w-full">
+            <label for="password" class="text-slate-600 font-light">
+                Password
+            </label>
+            <input type="password" name="password" id="password" 
+                placeholder="Current Login Password"
+                class="border-b rounded-sm text-md font-light border 
+                p-2 w-full font-light"
+            >
+        </div>
+        <button type="submit"
+            class="p-4 bg-green-500 rounded-md font-bold 
+            text-white hover-opacity-75 w-full"
+        >
+            Update Changes
+        </button>
+    </div>
+</form>
