@@ -67,7 +67,30 @@
                 <div class="comment-section space-y-4 xl:hidden" aria-live="polite">
                     <%-include('./partials/comment-form.ejs') %>
                 </div>
-                <div class="comments space-y-4" aria-live="polite">
+                <div class="comments space-y-4 bg-slate-400 p-2" aria-live="polite">
+                    <div class="space-y-2 p-2 rounded-md border bg-white">
+                        <div class="flex flex-row items-center justify-between">
+                            <a href="/profiles/<%=post.author.id%>">
+                                <div class="flex flex-row items-center gap-4">
+                                    <img 
+                                        src="<%=post.author.pictureUrl%>" 
+                                        alt="<%=post.author.name%>" 
+                                        class="h-10 w-10 rounded-full"
+                                    >
+                                    <h1 class="text-slate-600">
+                                        <%=post.author.name%>
+                                    </h1>
+                                </div>
+                            </a>
+                            <span class="text-xs text-slate-400 font-light">2 days</span>
+                        </div>
+                        <p class="text-slate-600 text-sm font-light">
+                            Lorem ipsum dolor sit amet consectetur 
+                            adipisicing elit. Et laborum sed, provident 
+                            inventore cum reprehenderit amet placeat 
+                            aliquid nulla quis.
+                        </p>
+                    </div>
                 </div>
             </div>
             <!-- Post -->
@@ -76,7 +99,7 @@
      <section class="w-2/5 hidden xl:block">
          <aside class="p-4 border-l w-2/5 pt-4 fixed top-16 bottom-0 space-y-2">
              <div aria-hidden="true" class="border rounded-md">
-                <!-- Write new comment visible only on wide screens -->
+                <!-- Textarea to write new comments. Visible only on wide screens -->
                 <div class="new-post container p-2 space-y-2">
                     <div class="flex flex-row items-start justify-start gap-4">
                         <a href="/profiles/<%=user.id%>">
@@ -100,7 +123,7 @@
                     </button>
                 </div>
                 
-                <!-- Write new comment visible only on wide screens-->
+                <!-- Textarea to write new comments. Visible only on wide screens-->
              </div>
              <hr>
              <%-include('./partials/footer.ejs') %>
@@ -109,7 +132,7 @@
      <%-include('./partials/side-drawer.ejs') %>
 </main>
 </body>
-<script src="/scripts/comment.js"></script>
+<!-- <script src="/scripts/comment.js"></script> -->
 <script src="/scripts/likes.js"></script>
 <script src="/scripts/shared.js"></script>
 <script src="/scripts/publish-post.js"></script>

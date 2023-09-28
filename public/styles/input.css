@@ -24,6 +24,6 @@ input{
 .banner{
     background-position: center;
 }
-.banner img{
+img.profile{
     bottom: -3rem;
 }
