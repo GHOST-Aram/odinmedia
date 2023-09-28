@@ -2,6 +2,7 @@ export const people = [
     {
         id:'jfkdsjifjks',
         name: 'John Khan',
+        banner: 'https://images.unsplash.com/photo-1695456527397-0b9e1c79fe96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
         pictureUrl: 'https://randomuser.me/api/portraits/men/23.jpg',
         mutuaFriends: 20,
         total_posts: 12,
@@ -13,6 +14,7 @@ export const people = [
     {
         id:'jfsakflwpewq',
         name: 'Erickson Denis',
+        banner: 'https://images.unsplash.com/photo-1695455061112-87e2cee1647c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
         pictureUrl: 'https://randomuser.me/api/portraits/men/13.jpg',
         mutuaFriends: 10,
         total_posts: 12,
@@ -24,6 +26,7 @@ export const people = [
     {
         id:'mlsakflwqlwq',
         name: 'Fransk Odoi',
+        banner: 'https://images.unsplash.com/photo-1695669089599-9461b72d6643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
         pictureUrl: 'https://randomuser.me/api/portraits/men/33.jpg',
         mutuaFriends: 12,
         total_posts: 12,
@@ -35,6 +38,7 @@ export const people = [
     {
         id:'kfksdpfpwepew',
         name: 'Fred Kennedy',
+        banner: 'https://images.unsplash.com/photo-1665658115136-bf3fcb10a3c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80',
         pictureUrl: 'https://randomuser.me/api/portraits/men/73.jpg',
         mutuaFriends: 21,
         total_posts: 12,
@@ -46,6 +50,7 @@ export const people = [
     {
         id:',mfokdofkpewkfwe',
         name: 'Erick Bell',
+        banner: 'https://images.unsplash.com/photo-1695582570771-bca78d2089b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
         pictureUrl: 'https://randomuser.me/api/portraits/men/12.jpg',
         mutuaFriends: 28,
         total_posts: 12,
@@ -57,6 +62,7 @@ export const people = [
     {
         id: 'fdshifhsdifjds',
         name: 'Frank Tristan',
+        banner: 'https://images.unsplash.com/photo-1695339642672-751be0722b1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1473&q=80',
         pictureUrl: 'https://randomuser.me/api/portraits/men/83.jpg',
         total_posts: 12,
         total_friends: 243,
