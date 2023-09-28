@@ -33,10 +33,13 @@
                 items-center">
                 <button
                     class="text-blue-400 text-xl  px-4 py-2 
-                        rounded-sm transition-all hover:bg-slate-400 comment-btn"
+                        rounded-sm transition-all hover:bg-slate-400"
+                    onclick="window.location.assign('/posts/<%=post.id%>')"
                 >
                     <i class="fa-solid fa-envelope"></i>
-                    <span class="text-slate-500 font-light text-sm"><%=post.comments%> Comments</span>
+                    <span class="text-slate-500 font-light text-sm">
+                        <%=post.comments%> Comments
+                    </span>
                 </button>
                 <button
                     class="text-blue-400 text-xl  px-4 py-2 

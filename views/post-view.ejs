@@ -14,17 +14,19 @@
             <!-- Post -->
             <div class="container post space-y-2 p-2 border rounded-md">
                 <div class="space-y-2">
-                    <div class="flex flex-row items-start gap-4">
-                        <img 
-                            class="h-10 w-10 rounded-full"
-                            src="<%=post.author&&post.author.pictureUrl%>"
-                            alt= "<%=post.author&&post.author.name%>" 
-                        >
-                        <div class="flex flex-col">
-                            <h1 class="font-md"><%=post.author&&post.author.name%></h1>
-                            <span class="text-xs font-light text-slate-400"><%=post.createdAt%></span>
+                    <a href="/profiles/<%=post.author.id%>">
+                        <div class="flex flex-row items-start gap-4">
+                            <img 
+                                class="h-10 w-10 rounded-full"
+                                src="<%=post.author&&post.author.pictureUrl%>"
+                                alt= "<%=post.author&&post.author.name%>" 
+                            >
+                            <div class="flex flex-col">
+                                <h1 class="font-md"><%=post.author&&post.author.name%></h1>
+                                <span class="text-xs font-light text-slate-400"><%=post.createdAt%></span>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                     <p class="font-light text-md">
                         <%=post.textContent%>
                     </p>
