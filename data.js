@@ -29,6 +29,11 @@ export const people = [
         pictureUrl: 'https://randomuser.me/api/portraits/men/12.jpg',
         mutuaFriends: 28,
     },
+    {
+        id: 'fdshifhsdifjds',
+        name: 'Frank Tristan',
+        pictureUrl: 'https://randomuser.me/api/portraits/men/83.jpg'    
+    }
 ]
 
 export const posts = [
