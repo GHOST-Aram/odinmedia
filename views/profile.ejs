@@ -19,24 +19,36 @@
             >
             </div>
             <div class="flex flex-row items-center gap-4 mt-12">
-                <h1 class="text-slate-600 font-bold text-xl px-2"><%=profile&&profile.name%></h1>
+                <h1 class="text-slate-600 font-bold text-xl px-2">
+                    <%=profile&&profile.name%>
+                </h1>
                 <h2 class="font-light text-slate-400">
-                    <span class="font-bold text-slate-500">799</span> 
+                    <span class="font-bold text-slate-500">
+                        <%=profile.total_friends%>
+                    </span> 
                     Friends
                 </h2>
                 <h2 class="font-light text-slate-400">
-                    <span class="font-bold text-slate-500">200</span> 
+                    <span class="font-bold text-slate-500">
+                        <%=profile.total_posts%>
+                    </span> 
                     Posts
                 </h2>
             </div>
             <div class="flex flex-row items-center gap-4 px-2">
                 <h2 class="text-slate-400">
-                    <span class="text-slate-600 text-sm font-md">Joined: </span> 
-                    <span class="font-light text-xs"> 12 Dec 2009</span>
+                    <span class="text-slate-600 text-sm font-md">
+                        Joined: 
+                    </span> 
+                    <span class="font-light text-xs">
+                        <%=profile.joined_date%>
+                    </span>
                 </h2>
                 <h2 class="text-slate-400">
                     <i class="fa-solid fa-location-dot"></i> 
-                    <span class="font-light text-xs"> Windhoek, Namibia</span>
+                    <span class="font-light text-xs"> 
+                        <%=profile.city%>, <%=profile.region%>
+                    </span>
                 </h2>
                 
             </div>
