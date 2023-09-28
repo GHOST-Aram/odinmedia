@@ -28,11 +28,13 @@
                     <p class="font-light text-md">
                         <%=post.textContent%>
                     </p>
-                    <img 
-                        src="https://images.unsplash.com/photo-1683009686716-ac2096a5a73b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60"
-                        alt="post"
-                        class="w-full rounded-md"
-                    >
+                    <a href="<%=post.media%>">
+                        <img 
+                            src="<%=post.media%>"
+                            alt="post"
+                            class="w-full rounded-md"
+                        >
+                    </a>
                 </div>
                 <hr>
                 <div class="interactions flex flex-row justify-between 
@@ -75,11 +77,13 @@
                 <!-- Write new comment visible only on wide screens -->
                 <div class="new-post container p-2 space-y-2">
                     <div class="flex flex-row items-start justify-start gap-4">
-                        <img 
-                            src= "<%=user&&user.pictureUrl%>"
-                            alt= "<%=user&&user.name%>" 
-                            class="h-10 w-10 rounded-full"
-                        >
+                        <a href="/profiles/<%=user.id%>">
+                            <img 
+                                src= "<%=user&&user.pictureUrl%>"
+                                alt= "<%=user&&user.name%>" 
+                                class="h-10 w-10 rounded-full"
+                            >
+                        </a>
                         <textarea 
                             class="w-full font-light p-2 h-32 
                                 border rounded-sm text-sm text-gray-500"

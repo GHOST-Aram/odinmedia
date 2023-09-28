@@ -1,6 +1,5 @@
-
     <aside class=" hidden fixed pt-4 top-16 bottom-0 border-r w-1/5 px-0 xl:block lg:block">
-        <a href="/profile" class="flex flex-col items-center mb-4">
+        <a href="/profiles/<%=user.id%>" class="flex flex-col items-center mb-4">
             <img 
                 class="w-40 h-40 rounded-full"
                 src="<%=user&&user.pictureUrl%>" 
@@ -43,7 +42,7 @@
                 </li>
                 <hr>
                 <li class="w-full">
-                    <a href="/profiles/me"
+                    <a href="/profiles/<%=user.id%>"
                         class="text-slate-600 font-md text-xl hover:bg-slate-300
                         w-full space-x-4 p-2  flex text-center"
                     >

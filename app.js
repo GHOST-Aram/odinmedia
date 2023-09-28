@@ -10,9 +10,10 @@ import { profilesRouter } from './routes/profiles.js';
 
 config()
 app.use((req, res, next) =>{
-  const user = {
-    name: 'Frank Tristan',
-    pictureUrl: 'https://randomuser.me/api/portraits/men/83.jpg'
+    const user = {
+        id: 'fdshifhsdifjds',
+        name: 'Frank Tristan',
+        pictureUrl: 'https://randomuser.me/api/portraits/men/83.jpg'    
 }
   res.locals.user = user
   next()

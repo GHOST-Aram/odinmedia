@@ -3,6 +3,6 @@ import { Router } from "../zghost/app/init.js";
 
 const profilesRouter = Router()
 
-profilesRouter.get('/me', get_my_profile)
+profilesRouter.get('/:id', get_my_profile)
 
 export {profilesRouter}
