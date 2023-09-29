@@ -13,38 +13,41 @@
         <nav class="my-2">
             <ul class="space-y-2 text-start w-full" >
                 <li class="w-full">
-                    <a href="/"
-                        class="text-slate-600 font-md text-xl 
-                            visited:text-blue-500 hover:bg-slate-300 w-full
-                            visited:p-2 space-x-4 p-2 w-full flex items-center "
+                    <button 
+                        class="w-full p-2 hover:bg-blue-500 hover:text-white 
+                        font-bold text-slate-600 space-x-4 transition-all"
+                        onclick="window.location.assign('/')"
                     >
-                        <i class="fa-solid fa-house"></i>  
+                        <i class="fa-solid fa-house "></i>  
                         <span>Home</span>
-                    </a>
+                    </button>
                 </li>
                 <li class="w-full">
-                    <a href="/people"
-                        class="text-slate-600 font-md text-xl visited:text-blue-500 hover:bg-slate-300 w-full
-                             space-x-4 p-2 w-full flex items-center"
+                    <button 
+                        class="w-full p-2 hover:bg-blue-500 hover:text-white 
+                        font-bold text-slate-600 space-x-4"
+                        onclick="window.location.assign('/people')"
                     >
                         <i class="fa-solid fa-users-line"></i>  
                         <span>People</span>
-                    </a>
+                    </button>
                 </li>
                 <li class="w-full">
-                    <a href="/friends"
-                        class="text-slate-600 font-md text-xl visited:text-blue-500 hover:bg-slate-300 w-full
-                             space-x-4 px-2 py-2 w-full flex items-center"
+                    <button 
+                        class="w-full p-2 hover:bg-blue-500 hover:text-white 
+                        font-bold text-slate-600 space-x-4"
+                        onclick="window.location.assign('/friends')"
                     >
                         <i class="fa-solid fa-users-line"></i>
                         <span>Friends</span>
-                    </a>
+                    </button>
                 </li>
                 <hr>
                 <li class="w-full">
-                    <a href="/profiles/<%=user.id%>"
-                        class="text-slate-600 font-md text-xl hover:bg-slate-300
-                        w-full space-x-4 p-2  flex text-center"
+                    <button 
+                        class="w-full p-2 hover:bg-blue-500 hover:text-white 
+                        font-bold text-slate-600 space-x-4 flex items-center"
+                        onclick="window.location.assign('/profiles/<%=user.id%>')"
                     >
                     <img 
                         class="w-10 h-10 rounded-full"
@@ -52,7 +55,7 @@
                         alt="<%=user&&user.name%>"
                     >
                      <span>My profile</span>
-                    </a>
+                    </button>
                 </li>
             </ul>
         </nav>

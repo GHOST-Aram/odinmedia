@@ -7,33 +7,36 @@
             </button>
             <ul class="hidden justify-center gap-8 items-center flex-row md:flex lg:hidden" >
                 <li >
-                    <a href="/"
-                        class="text-slate-600 hover:bg-blue-600 p-4 rounded-sm transition-all
-                             visited:text-white flex flex-col items-center visited:p-2
-                             text-xl font-md"
+                    <button 
+                        class="p-2 rounded-sm hover:bg-white transition-all
+                        hover:text-blue-500 text-slate-600
+                        flex flex-col items-center text-lg"
+                        onclick="window.location.assign('/')"
                     >
                         <i class="fa-solid fa-house "></i>
                         <span class="">Home</span>
-                    </a>
+                    </button>
                 </li>
                 <li>
-                    <a href="/people"
-                        class="text-slate-600 hover:bg-blue-600 p-4 rounded-sm transition-all 
-                            flex flex-col items-center visited:text-white text-xl font-md"
+                    <button 
+                        class="p-2 rounded-sm hover:bg-white hover:text-blue-500 
+                        flex flex-col items-center transition-all text-lg"
+                        onclick="window.location.assign('/people')"
                     >
                         <i class="fa-solid fa-users-line "></i>
                         <span class="">People</span>
-                    </a>
+                    </button>
                 </li>
                 <li>
-                    <a href="/people"
-                        class="text-slate-600 hover:bg-blue-600 p-4 rounded-sm 
-                            transition-all text-xl flex flex-col items-center 
-                            visited:text-white text-xl font-md"
+                    <button 
+                        class="p-2 rounded-sm hover:bg-white 
+                        hover:text-blue-500 text-slate-600 text-lg
+                        flex flex-col items-center transition-all"
+                        onclick="window.location.assign('/friends')"
                     >
                         <i class="fa-solid fa-users-line"></i> 
                         <span>Friends</span>
-                    </a>
+                    </button>
                 </li>
             </ul>
             <div class="flex flex-row gap-4 justify-end">
