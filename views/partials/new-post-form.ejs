@@ -1,6 +1,6 @@
-<div class="new-post container p-2 space-y-2">
+<form method="post" action="" class="new-post container p-2 space-y-2">
     <div class="flex flex-row items-start justify-start gap-4">
-        <a href="/profiles/<%=user.id%>">
+        <a href="/profiles/me">
             <img 
                 src= "<%=user&&user.pictureUrl%>"
                 alt= "<%=user&&user.name%>" 
@@ -10,13 +10,15 @@
         <textarea 
             class="w-full font-light p-2 h-32 
                 border rounded-sm text-sm text-gray-500"
-            placeholder="What on your mind?"        
+            placeholder="What on your mind?" 
+            name="post_content"       
         ></textarea>
     </div>
     <button
+        type="submit"
         class="bg-blue-500 text-white font-md px-4 py-2 rounded-sm
         w-full hover:bg-blue-600 transition-all"
     >
         Publish Post
     </button>
-</div>
+</form>
