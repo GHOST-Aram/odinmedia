@@ -12,6 +12,6 @@ export const get_one_post = (req, res) =>{
 
     const post = posts.find(post => post.id === id) 
    
-    res.render('post-view', { title: `Post | ${id}`, post })
+    res.render('post-details', { title: `Post | ${id}`, post })
 }
 
