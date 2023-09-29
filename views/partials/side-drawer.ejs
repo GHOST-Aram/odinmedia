@@ -1,4 +1,4 @@
-<aside class="fixed z-5 top-16 pt-4 right-0 bottom-0 border-l w-3/5 
+<aside class="small-screen fixed z-5 top-16 pt-4 right-0 bottom-0 border-l w-3/5 
         px-0 bg-blue-500 hidden md:hidden lg:hidden xl:hidden"
         id="side-drawer"
     >
@@ -16,53 +16,43 @@
     </a>
     <hr class="py-2">
     <nav class="my-2">
-        <ul class="space-y-2 text-start w-full" >
-            <li class="w-full">
-                <button 
-                    class="w-full p-2 hover:bg-white hover:text-blue-500 
-                    font-bold text-slate-600 space-x-4 transition-all"
-                    onclick="window.location.assign('/')"
-                >
-                    <i class="fa-solid fa-house "></i>  
-                    <span>Home</span>
-                </button>
-            </li>
-            <li class="w-full">
-                <button 
-                    class="w-full p-2 hover:bg-white hover:text-blue-500 
-                    font-bold text-slate-600 space-x-4"
-                    onclick="window.location.assign('/people')"
-                >
-                    <i class="fa-solid fa-users-line"></i>  
-                    <span>People</span>
-                </button>
-            </li>
-            <li class="w-full">
-                <button 
-                    class="w-full p-2 hover:bg-white hover:text-blue-500 
-                    font-bold text-slate-600 space-x-4"
-                    onclick="window.location.assign('/friends')"
-                >
-                    <i class="fa-solid fa-users-line"></i>
-                    <span>Friends</span>
-                </button>
-            </li>
-            <hr>
-            <li class="w-full">
-                <button 
-                    class="w-full p-2 hover:bg-white hover:text-blue-500 
-                    font-bold text-slate-600 space-x-4 flex items-center"
-                    onclick="window.location.assign('/profiles/<%=user.id%>')"
-                >
-                <img 
-                    class="w-10 h-10 rounded-full"
-                    src= "<%=user&&user.pictureUrl%>" 
-                    alt="<%=user&&user.name%>"
-                >
-                 <span>My profile</span>
-                </button>
-            </li>
-        </ul>
+        <button 
+            class="w-full p-4 text-start hover:bg-white hover:text-blue-500 
+            font-bold text-slate-600 space-x-4 transition-all"
+            onclick="window.location.assign('/')"
+        >
+            <i class="fa-solid fa-house "></i>  
+            <span>Posts</span>
+        </button>
+        <button 
+        class="w-full p-4 text-start hover:bg-white hover:text-blue-500 
+            font-bold text-slate-600 space-x-4"
+            onclick="window.location.assign('/people')"
+        >
+            <i class="fa-solid fa-users-line"></i>  
+            <span>People</span>
+        </button>
+        <button 
+            class="w-full p-4 text-start hover:bg-white hover:text-blue-500 
+            font-bold text-slate-600 space-x-4"
+            onclick="window.location.assign('/friends')"
+        >
+            <i class="fa-solid fa-users-line"></i>
+            <span>Friends</span>
+        </button>
     </nav>
+    <hr>
+    <button 
+        class="profile w-full p-4 text-start hover:bg-white hover:text-blue-500 
+        font-bold text-slate-600 space-x-4 flex items-center"
+        onclick="window.location.assign('/profiles/me')"
+    >
+    <img 
+        class="w-10 h-10 rounded-full"
+        src= "<%=user&&user.pictureUrl%>" 
+        alt="<%=user&&user.name%>"
+    >
+        <span>My profile</span>
+    </button>
     <%-include('./footer.ejs') %>
 </aside>
