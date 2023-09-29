@@ -5,53 +5,45 @@
                     rounded-sm transition-all">
                 OdinMedia
             </button>
-            <nav>
-                <ul class="hidden justify-center gap-8 items-center flex-row md:flex lg:hidden" >
-                    <li >
-                        <button 
-                            class="p-2 rounded-sm hover:bg-white transition-all
-                            hover:text-blue-500 text-slate-600
-                            flex flex-col items-center text-lg"
-                            onclick="window.location.assign('/')"
-                        >
-                            <i class="fa-solid fa-house "></i>
-                            <span class="">Home</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button 
-                            class="p-2 rounded-sm hover:bg-white hover:text-blue-500 
-                            flex flex-col items-center transition-all text-lg"
-                            onclick="window.location.assign('/people')"
-                        >
-                            <i class="fa-solid fa-users-line "></i>
-                            <span class="">People</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button 
-                            class="p-2 rounded-sm hover:bg-white 
-                            hover:text-blue-500 text-slate-600 text-lg
-                            flex flex-col items-center transition-all"
-                            onclick="window.location.assign('/friends')"
-                        >
-                            <i class="fa-solid fa-users-line"></i> 
-                            <span>Friends</span>
-                        </button>
-                    </li>
-                </ul>
+            <nav class="hidden justify-center gap-8 items-center flex-row md:flex lg:hidden">
+                <button 
+                    class="p-2 rounded-sm hover:bg-white transition-all
+                    hover:text-blue-500 text-slate-600
+                    flex flex-col items-center text-lg"
+                    onclick="window.location.assign('/')"
+                >
+                    <i class="fa-solid fa-house "></i>
+                    <span class="">Posts</span>
+                </button>
+                <button 
+                    class="p-2 rounded-sm hover:bg-white hover:text-blue-500 
+                    flex flex-col items-center transition-all text-lg"
+                    onclick="window.location.assign('/people')"
+                >
+                    <i class="fa-solid fa-users-line "></i>
+                    <span class="">People</span>
+                </button>
+                <button 
+                    class="p-2 rounded-sm hover:bg-white 
+                    hover:text-blue-500 text-slate-600 text-lg
+                    flex flex-col items-center transition-all"
+                    onclick="window.location.assign('/friends')"
+                >
+                    <i class="fa-solid fa-users-line"></i> 
+                    <span>Friends</span>
+                </button>
             </nav>
             <div class="flex flex-row gap-4 justify-end">
-                <a href="/profiles/<%=user.id%>" 
-                    class="flex flex-row justify-end items-center gap-4 
-                        lg:hidden hover:bg-blue-600 p-2 transition-all rounded-sm"
+                <button class="profile flex flex-row justify-end items-center gap-4 
+                        lg:hidden hover:bg-white p-2 transition-all rounded-sm"
+                    onclick="window.location.assign('/profiles/me')"
                 >
                     <img 
                         class="w-10 h-10 rounded-full"
                         src= "<%=user&&user.pictureUrl%>"
                         alt="<%=user&&user.name%>"
                     >
-                </a>
+                </button>
                 <button 
                     id="menu"
                     class="text-lg font-bold text-white hover:bg-blue-600 
