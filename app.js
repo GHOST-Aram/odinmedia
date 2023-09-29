@@ -19,7 +19,11 @@ app.use((req, res, next) =>{
   next()
 })
 
-app.use('/', postsRouter)
+app.get('/', (req, res) => {
+	res.redirect('/posts')
+})
+
+app.use('/posts', postsRouter)
 app.use('/auth', accountsRouter)
 app.use('/content', contentRouter)
 app.use('/people', peopleRouter)

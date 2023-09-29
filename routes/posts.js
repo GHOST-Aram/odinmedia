@@ -4,6 +4,6 @@ import { Router } from "../zghost/app/init.js";
 const postsRouter = Router()
 
 
-postsRouter.get('/',get_posts)
-postsRouter.get('/posts/:id', get_one_post)
+postsRouter.get('/', get_posts)
+postsRouter.get('/:id', get_one_post)
 export {postsRouter}

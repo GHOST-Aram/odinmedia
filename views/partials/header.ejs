@@ -5,40 +5,42 @@
                     rounded-sm transition-all">
                 OdinMedia
             </button>
-            <ul class="hidden justify-center gap-8 items-center flex-row md:flex lg:hidden" >
-                <li >
-                    <button 
-                        class="p-2 rounded-sm hover:bg-white transition-all
-                        hover:text-blue-500 text-slate-600
-                        flex flex-col items-center text-lg"
-                        onclick="window.location.assign('/')"
-                    >
-                        <i class="fa-solid fa-house "></i>
-                        <span class="">Home</span>
-                    </button>
-                </li>
-                <li>
-                    <button 
-                        class="p-2 rounded-sm hover:bg-white hover:text-blue-500 
-                        flex flex-col items-center transition-all text-lg"
-                        onclick="window.location.assign('/people')"
-                    >
-                        <i class="fa-solid fa-users-line "></i>
-                        <span class="">People</span>
-                    </button>
-                </li>
-                <li>
-                    <button 
-                        class="p-2 rounded-sm hover:bg-white 
-                        hover:text-blue-500 text-slate-600 text-lg
-                        flex flex-col items-center transition-all"
-                        onclick="window.location.assign('/friends')"
-                    >
-                        <i class="fa-solid fa-users-line"></i> 
-                        <span>Friends</span>
-                    </button>
-                </li>
-            </ul>
+            <nav>
+                <ul class="hidden justify-center gap-8 items-center flex-row md:flex lg:hidden" >
+                    <li >
+                        <button 
+                            class="p-2 rounded-sm hover:bg-white transition-all
+                            hover:text-blue-500 text-slate-600
+                            flex flex-col items-center text-lg"
+                            onclick="window.location.assign('/')"
+                        >
+                            <i class="fa-solid fa-house "></i>
+                            <span class="">Home</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button 
+                            class="p-2 rounded-sm hover:bg-white hover:text-blue-500 
+                            flex flex-col items-center transition-all text-lg"
+                            onclick="window.location.assign('/people')"
+                        >
+                            <i class="fa-solid fa-users-line "></i>
+                            <span class="">People</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button 
+                            class="p-2 rounded-sm hover:bg-white 
+                            hover:text-blue-500 text-slate-600 text-lg
+                            flex flex-col items-center transition-all"
+                            onclick="window.location.assign('/friends')"
+                        >
+                            <i class="fa-solid fa-users-line"></i> 
+                            <span>Friends</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
             <div class="flex flex-row gap-4 justify-end">
                 <a href="/profiles/<%=user.id%>" 
                     class="flex flex-row justify-end items-center gap-4 

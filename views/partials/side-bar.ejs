@@ -1,4 +1,5 @@
-    <aside class=" hidden fixed pt-4 top-16 bottom-0 border-r w-1/5 px-0 xl:block lg:block">
+    <aside id="sidebar" 
+        class=" hidden fixed pt-4 top-16 bottom-0 border-r w-1/5 px-0 xl:block lg:block">
         <a href="/profiles/<%=user.id%>" class="flex flex-col items-center mb-4">
             <img 
                 class="w-40 h-40 rounded-full"
@@ -11,20 +12,21 @@
         </a>
         <hr class="py-2">
         <nav class="my-2">
-            <ul class="space-y-2 text-start w-full" >
+            <ul class=" text-start w-full" >
                 <li class="w-full">
                     <button 
-                        class="w-full p-2 hover:bg-blue-500 hover:text-white 
+                        class="w-full py-4 hover:bg-blue-500 hover:text-white 
                         font-bold text-slate-600 space-x-4 transition-all"
-                        onclick="window.location.assign('/')"
+                        onclick="window.location.assign('/posts')"
                     >
                         <i class="fa-solid fa-house "></i>  
-                        <span>Home</span>
+                        <span>Posts</span>
                     </button>
                 </li>
+                <hr>
                 <li class="w-full">
                     <button 
-                        class="w-full p-2 hover:bg-blue-500 hover:text-white 
+                        class="w-full py-4 hover:bg-blue-500 hover:text-white 
                         font-bold text-slate-600 space-x-4"
                         onclick="window.location.assign('/people')"
                     >
@@ -32,9 +34,10 @@
                         <span>People</span>
                     </button>
                 </li>
+                <hr>
                 <li class="w-full">
                     <button 
-                        class="w-full p-2 hover:bg-blue-500 hover:text-white 
+                        class="w-full py-4 hover:bg-blue-500 hover:text-white 
                         font-bold text-slate-600 space-x-4"
                         onclick="window.location.assign('/friends')"
                     >
@@ -42,23 +45,23 @@
                         <span>Friends</span>
                     </button>
                 </li>
-                <hr>
-                <li class="w-full">
-                    <button 
-                        class="w-full p-2 hover:bg-blue-500 hover:text-white 
-                        font-bold text-slate-600 space-x-4 flex items-center"
-                        onclick="window.location.assign('/profiles/<%=user.id%>')"
-                    >
-                    <img 
-                        class="w-10 h-10 rounded-full"
-                        src= "<%=user&&user.pictureUrl%>" 
-                        alt="<%=user&&user.name%>"
-                    >
-                     <span>My profile</span>
-                    </button>
-                </li>
             </ul>
         </nav>
+        <hr>
+        <div class="w-full profile">
+            <button 
+                class="w-full p-2 hover:bg-blue-500 hover:text-white 
+                font-bold text-slate-600 space-x-4 flex items-center"
+                onclick="window.location.assign('/profiles/me')"
+            >
+            <img 
+                class="w-10 h-10 rounded-full"
+                src= "<%=user&&user.pictureUrl%>" 
+                alt="<%=user&&user.name%>"
+            >
+             <span>My profile</span>
+            </button>
+        </div>
         <div class="xl:hidden">
             <%-include('./footer.ejs') %>
         </div>
