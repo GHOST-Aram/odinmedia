@@ -55,51 +55,52 @@
                             rounded-sm transition-all hover:bg-slate-400 like-btn focus:outline-none"
                     >
                         <i class="fa-solid fa-heart"></i> 
-                        <span class="text-slate-500 font-light text-sm"><%=post.likes%></post.likes> Likes</span>
+                        <span class="text-slate-500 font-light text-sm"><%=post.likes%> Likes</span>
                     </button>
                     <button
                         class="text-blue-400 text-xl  px-4 py-2 
                             rounded-sm transition-all hover:bg-slate-400 share-btn"
                     >
                         <i class="fa-solid fa-share-nodes"></i>
-                        <span class="text-slate-500 font-light text-sm"><%=post.shared%> Shared</span>
+                        <span class="text-slate-500 font-light text-sm"><%=post.shared%> Reposts</span>
                     </button>
                 </div>
                 <!-- Buttons end -->
                 <hr>
                 <!-- Comment text area start -->
-                <div class="comment-section space-y-4 xl:hidden" aria-live="polite">
+                <div class="comment-section space-y-4" aria-live="polite">
                     <%-include('./partials/comment-form.ejs') %>
                 </div>
                 <!-- Comment text area end -->
                 <!-- Comments List Start -->
-                <div class="comments space-y-4 bg-slate-400 p-2" aria-live="polite">
-                    <div class="space-y-2 p-2 rounded-md border bg-white">
-                        <div class="flex flex-row items-center justify-between">
-                            <a href="/profiles/<%=post.author.id%>">
-                                <div class="flex flex-row items-center gap-4">
-                                    <img 
-                                        src="<%=post.author.pictureUrl%>" 
-                                        alt="<%=post.author.name%>" 
-                                        class="h-10 w-10 rounded-full"
-                                    >
-                                    <h1 class="text-slate-600">
-                                        <%=post.author.name%>
-                                    </h1>
+                <%if(post.comments && post.comments.length){%>
+                    <div class="comments space-y-4 bg-slate-400 p-2" aria-live="polite">
+                        <%post.comments.forEach(comment => { %>
+                                <div class="space-y-2 p-2 rounded-md border bg-white">
+                                    <div class="flex flex-row items-center justify-between">
+                                        <a href="/profiles/<%=comment.author.id%>">
+                                            <div class="flex flex-row items-center gap-4">
+                                                <img 
+                                                    src="<%=comment.author.pictureUrl%>" 
+                                                    alt="<%=comment.author.name%>" 
+                                                    class="h-10 w-10 rounded-full"
+                                                >
+                                                <h1 class="text-slate-600">
+                                                    <%=comment.author.name%>
+                                                </h1>
+                                            </div>
+                                        </a>
+                                        <span class="text-xs text-slate-400 font-light">2 days</span>
+                                    </div>
+                                    <p class="text-slate-600 text-sm font-light">
+                                        <%=comment.content%>
+                                    </p>
                                 </div>
-                            </a>
-                            <span class="text-xs text-slate-400 font-light">2 days</span>
-                        </div>
-                        <p class="text-slate-600 text-sm font-light">
-                            Lorem ipsum dolor sit amet consectetur 
-                            adipisicing elit. Et laborum sed, provident 
-                            inventore cum reprehenderit amet placeat 
-                            aliquid nulla quis.
-                        </p>
+                            </div>
+                        <%})%>
                     </div>
-                </div>
+                <%}%>
                 <!-- comment List end -->
-            </div>
             <!-- Post -->
          </div>
      </section>
