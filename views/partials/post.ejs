@@ -30,7 +30,8 @@
             </div>
             <hr>
             <div class="interactions flex flex-row justify-between 
-                items-center">
+                items-center"
+            >
                 <button
                     class="text-blue-400 text-xl  px-4 py-2 
                         rounded-sm transition-all hover:bg-slate-400"
@@ -46,7 +47,9 @@
                         rounded-sm transition-all hover:bg-slate-400 like-btn focus:outline-none"
                 >
                     <i class="fa-solid fa-heart"></i> 
-                    <span class="text-slate-500 font-light text-sm"><%=post.likes%></post.likes> Likes</span>
+                    <span class="text-slate-500 font-light text-sm">
+                        <%=post.likes%></post.likes> Likes
+                    </span>
                 </button>
                 <button
                     class="text-blue-400 text-xl  px-4 py-2 
@@ -54,15 +57,10 @@
                 >
                     <i class="fa-solid fa-share-nodes"></i>
                     <span class="text-slate-500 font-light text-sm">
-                        <%=post.shared%> Shared
+                        <%=post.shared%> Repost
                     </span>
                 </button>
             </div>
-            <hr>
-            <div class="comment-section space-y-4" aria-live="polite">
-                <%-include('./comment-form.ejs') %>
-            </div>
-            <div class="comments space-y-4" aria-live="polite"></div>
         </div>
         <hr class="my-2">  
         <%})%>
