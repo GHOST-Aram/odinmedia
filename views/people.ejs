@@ -31,20 +31,15 @@
                             </div>
                         </div>
                     </a>
-                    <div class="flex flex-row items-center justify-between w-full gap-4">
-                        <button 
-                        class="bg-blue-500 text-white rounded-sm px-4 py-2 w-full
-                            hover:opacity-75 transition-all"
-                        >
-                            Send Request
-                        </button>
-                        <button 
-                        class="bg-red-500 text-white rounded-sm px-4 py-2 w-full
-                            hover:opacity-75 transition-all"
-                        >
-                            Remove
-                        </button>
-                    </div>
+                    <button 
+                    class="bg-blue-500 text-white rounded-sm px-4 py-2 w-full
+                        hover:opacity-75 transition-all"
+                        onclick="window.location.assign(
+                            '/people/requests/<%=person.id%>'
+                            )"
+                    >
+                        Send Request
+                    </button>
                 </div>
 
                 <%}) %>

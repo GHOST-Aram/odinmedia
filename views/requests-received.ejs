@@ -33,14 +33,20 @@
                     </a>
                     <div class="flex flex-row items-center justify-between w-full gap-4">
                         <button 
-                        class="bg-green-500 text-white rounded-sm px-4 py-2 w-full
-                            hover:opacity-75 transition-all"
+                            class="bg-green-500 text-white rounded-sm px-4 py-2 w-full
+                                hover:opacity-75 transition-all"
+                            onclick="window.location.assign(
+                                '/people/requests/<%=person.id%>/accept'
+                            )"
                         >
                             Accept
                         </button>
                         <button 
-                        class="bg-red-500 text-white rounded-sm px-4 py-2 w-full
-                            hover:opacity-75 transition-all"
+                            class="bg-red-500 text-white rounded-sm px-4 py-2 w-full
+                                hover:opacity-75 transition-all"
+                            onclick="window.location.assign(
+                                '/people/requests/<%=person.id%>/decline'
+                            )"
                         >
                             Decline
                         </button>
