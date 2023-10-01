@@ -1,9 +1,15 @@
 import { posts } from "../data.js"
 
+export const add_new_comment = (req, res) =>{
+    console.log(req.params.id)
+    
+    res.redirect(`/posts/${req.params.id}`)
+}
 export const create_post = (req, res) => {
     console.log(req.body)
     res.redirect('/')
 }
+
 export const get_posts = async (req, res) => {
     res.render('index', { 
         title: 'Home', posts

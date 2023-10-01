@@ -98,33 +98,40 @@
      </section>
      <section class="w-2/5 hidden xl:block">
          <aside class="p-4 border-l w-2/5 pt-4 fixed top-16 bottom-0 space-y-2">
-             <div aria-hidden="true" class="border rounded-md">
+            <div aria-hidden="true" class="border rounded-md">
                 <!-- Textarea to write new comments. Visible only on wide screens -->
-                <div class="new-post container p-2 space-y-2">
-                    <div class="flex flex-row items-start justify-start gap-4">
-                        <a href="/profiles/<%=user.id%>">
-                            <img 
-                                src= "<%=user&&user.pictureUrl%>"
-                                alt= "<%=user&&user.name%>" 
-                                class="h-10 w-10 rounded-full"
-                            >
-                        </a>
-                        <textarea 
-                            class="w-full font-light p-2 h-32 
-                                border rounded-sm text-sm text-gray-500"
-                            placeholder="What on your mind?"        
-                        ></textarea>
+                <form 
+                    method="post"
+                    action="/posts/<%=post.id%>/comment"
+                >
+                    <div class="new-post container p-2 space-y-2">
+                        <div
+                            class="flex flex-row items-start justify-start gap-4"
+                        >
+                            <a href="/profiles/<%=user.id%>">
+                                <img 
+                                    src= "<%=user&&user.pictureUrl%>"
+                                    alt= "<%=user&&user.name%>" 
+                                    class="h-10 w-10 rounded-full"
+                                >
+                            </a>
+                            <textarea 
+                                class="w-full font-light p-2 h-32 
+                                    border rounded-sm text-sm text-gray-500"
+                                placeholder="What on your mind?"        
+                            ></textarea>
+                        </div>
+                        <button
+                            class="bg-blue-500 text-white font-md px-4 py-2 rounded-sm
+                            w-full hover:bg-blue-600 transition-all"
+                            type="submit"
+                        >
+                            Comment
+                        </button>
                     </div>
-                    <button
-                        class="bg-blue-500 text-white font-md px-4 py-2 rounded-sm
-                        w-full hover:bg-blue-600 transition-all"
-                    >
-                        Comment
-                    </button>
-                </div>
-                
+                </form>
                 <!-- Textarea to write new comments. Visible only on wide screens-->
-             </div>
+            </div>
              <hr>
              <%-include('./partials/footer.ejs') %>
          </aside>
