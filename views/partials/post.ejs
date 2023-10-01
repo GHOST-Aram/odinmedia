@@ -29,38 +29,30 @@
                 </a>
             </div>
             <hr>
-            <div class="interactions flex flex-row justify-between 
-                items-center"
-            >
-                <button
-                    class="text-blue-400 text-xl  px-4 py-2 
-                        rounded-sm transition-all hover:bg-slate-400"
-                    onclick="window.location.assign('/posts/<%=post.id%>')"
+            <a href="/posts/<%=post.id%>">
+                <div class="interactions flex flex-row justify-between 
+                    items-center"
                 >
-                    <i class="fa-solid fa-envelope"></i>
-                    <span class="text-slate-500 font-light text-sm">
-                        <%=post.comments%> Comments
-                    </span>
-                </button>
-                <button
-                    class="text-blue-400 text-xl  px-4 py-2 
-                        rounded-sm transition-all hover:bg-slate-400 like-btn focus:outline-none"
-                >
-                    <i class="fa-solid fa-heart"></i> 
-                    <span class="text-slate-500 font-light text-sm">
-                        <%=post.likes%></post.likes> Likes
-                    </span>
-                </button>
-                <button
-                    class="text-blue-400 text-xl  px-4 py-2 
-                        rounded-sm transition-all hover:bg-slate-400 share-btn"
-                >
-                    <i class="fa-solid fa-share-nodes"></i>
-                    <span class="text-slate-500 font-light text-sm">
-                        <%=post.shared%> Repost
-                    </span>
-                </button>
-            </div>
+                    <div class="text-blue-400 text-xl  px-4 py-2">  
+                        <i class="fa-solid fa-envelope"></i>
+                        <span class="text-slate-500 font-light text-sm">
+                            <%=post.comments%> Comments
+                        </span>
+                    </div>
+                    <div class="text-blue-400 text-xl  px-4 py-2">
+                        <i class="fa-solid fa-heart"></i> 
+                        <span class="text-slate-500 font-light text-sm">
+                            <%=post.likes%></post.likes> Likes
+                        </span>
+                    </div>
+                    <div class="text-blue-400 text-xl  px-4 py-2">
+                        <i class="fa-solid fa-share-nodes"></i>
+                        <span class="text-slate-500 font-light text-sm">
+                            <%=post.shared%> Repost
+                        </span>
+                    </div>
+                </div>
+            </a>
         </div>
         <hr class="my-2">  
         <%})%>
