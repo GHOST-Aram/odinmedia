@@ -1160,6 +1160,10 @@ input{
     margin-top: 6rem;
   }
 
+  .lg\:mt-8 {
+    margin-top: 2rem;
+  }
+
   .lg\:block {
     display: block;
   }
