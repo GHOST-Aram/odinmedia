@@ -48,14 +48,26 @@
                             rounded-sm transition-all hover:bg-slate-400 comment-btn"
                     >
                         <i class="fa-solid fa-envelope"></i>
-                        <span class="text-slate-500 font-light text-sm"><%=post.comments%> Comments</span>
+                        <span class="text-slate-500 font-light text-sm">
+                            <%=post.comments.length%> Comments
+                        </span>
                     </button>
                     <button
                         class="text-blue-400 text-xl  px-4 py-2 
-                            rounded-sm transition-all hover:bg-slate-400 like-btn focus:outline-none"
+                            rounded-sm transition-all hover:bg-slate-400 like-btn 
+                            focus:outline-none"
+                        onclick="window.location.assign(
+                            '/posts/<%=post.id%>/likes'
+                        )"
                     >
-                        <i class="fa-solid fa-heart"></i> 
-                        <span class="text-slate-500 font-light text-sm"><%=post.likes%> Likes</span>
+                        <%if(post.likes.includes(user.id)){ %>
+                            <i class="fa-solid fa-heart text-red-500"></i> 
+                        <%} else {%>
+                            <i class="fa-solid fa-heart text-blue-400"></i> 
+                        <%}%>
+                        <span class="text-slate-500 font-light text-sm">
+                            <%=post.likes.length%> Likes
+                        </span>
                     </button>
                     <button
                         class="text-blue-400 text-xl  px-4 py-2 
@@ -73,9 +85,10 @@
                 </div>
                 <!-- Comment text area end -->
                 <!-- Comments List Start -->
-                <%if(post.comments && post.comments.length){%>
-                    <div class="comments space-y-4 bg-slate-400 p-2" aria-live="polite">
-                        <%post.comments.forEach(comment => { %>
+                <div class="bg-gray-300 p-2">
+                    <%if(post.comments && post.comments.length){%>
+                        <div class="comments space-y-2" aria-live="polite">
+                            <%post.comments.forEach(comment => { %>
                                 <div class="space-y-2 p-2 rounded-md border bg-white">
                                     <div class="flex flex-row items-center justify-between">
                                         <a href="/profiles/<%=comment.author.id%>">
@@ -90,16 +103,18 @@
                                                 </h1>
                                             </div>
                                         </a>
-                                        <span class="text-xs text-slate-400 font-light">2 days</span>
+                                        <span class="text-xs text-slate-400 font-light">
+                                            2 days
+                                        </span>
                                     </div>
                                     <p class="text-slate-600 text-sm font-light">
-                                        <%=comment.content%>
+                                        <%=comment.textContent%>
                                     </p>
                                 </div>
-                            </div>
-                        <%})%>
-                    </div>
-                <%}%>
+                            <%})%>
+                        </div>
+                    <%}%>
+                </div>
                 <!-- comment List end -->
             <!-- Post -->
          </div>

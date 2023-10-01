@@ -87,7 +87,26 @@ export const posts = [
                 'kfksdpfpwepew','mlsakflwqlwq'
             ],
         shared: 2,
-        comments: 15,
+        comments:  [
+            {
+                author: people[0],
+                textContent: `Quaerat vitae, non at aliquid commodi dignissimos
+                    debitis!Lorem ipsum dolor, sit amet consectetur 
+                    adipisicing elit.`
+            },
+            {
+                author: people[2],
+                textContent: `Quaerat vitae, non at aliquid commodi dignissimos
+                    debitis!Lorem ipsum dolor, sit amet consectetur 
+                    adipisicing elit.`
+            },
+            {
+                author: people[3],
+                textContent: `Quaerat vitae, non at aliquid commodi dignissimos
+                    debitis!Lorem ipsum dolor, sit amet consectetur 
+                    adipisicing elit.`
+            }
+        ],
         media: 'https://images.unsplash.com/photo-1694532228681-'
                 +'2f6d94c2f768?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8M'
                 + 'HxlZGl0b3JpYWwtZmVlZHwzOHx8fGVufDB8fHx8fA%3D%3D'
@@ -105,7 +124,7 @@ export const posts = [
             'fdshifhsdifjds', 'mfokdofkpewkfwe','mlsakflwqlwq'
         ],
         shared: 8,
-        comments: 100,
+        comments: [],
         media: 'https://images.unsplash.com/photo-1695556128448-1050e9'
                 + 'b277e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYW'
                 + 'wtZmVlZHw0fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500'
@@ -122,7 +141,26 @@ export const posts = [
             sapiente magnam dolorem? `,
         likes: [],
         shared: 7,
-        comments: 10,
+        comments: [
+            {
+                author: people[2],
+                textContent: `Quaerat vitae, non at aliquid commodi dignissimos
+                    debitis!Lorem ipsum dolor, sit amet consectetur 
+                    adipisicing elit.`
+            },
+            {
+                author: people[1],
+                textContent: `Quaerat vitae, non at aliquid commodi dignissimos
+                    debitis!Lorem ipsum dolor, sit amet consectetur 
+                    adipisicing elit.`
+            },
+            {
+                author: people[0],
+                textContent: `Quaerat vitae, non at aliquid commodi dignissimos
+                    debitis!Lorem ipsum dolor, sit amet consectetur 
+                    adipisicing elit.`
+            }
+        ],
         media: 'https://plus.unsplash.com/premium_photo-1687139217079-61'
                 + 'ca54f41d08?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3Jp'
                 + 'YWwtZmVlZHwyfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500'
