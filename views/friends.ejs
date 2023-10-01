@@ -36,13 +36,6 @@
                             md:flex-row"
                     >
                         <button 
-                        class="bg-blue-500 text-white rounded-sm px-4 py-2 w-full
-                            hover:opacity-75 transition-all"
-                        >
-                            <i class="fa-solid fa-message text-lg mr-2"></i>
-                            <span class="font-light">Message</span>
-                        </button>
-                        <button 
                             class="bg-blue-500 text-white rounded-sm px-4 py-2 w-full
                             hover:opacity-75 transition-all"
                             onclick="window.location.assign('/profiles/<%=person.id%>')"
@@ -53,6 +46,7 @@
                         <button 
                             class="bg-red-500 text-white rounded-sm px-4 py-2 w-full
                             hover:opacity-75 transition-all"
+                            onclick="window.location.assign('/friends/<%=person.id%>/unfriend')"
                         >
                             <i class="fa-solid fa-x text-lg mr-2"></i>
                             <span class="font-light">Unfriend</span>
