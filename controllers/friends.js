@@ -8,6 +8,7 @@ export const get_all_friends = (req, res) =>{
     res.render('friends', 
     { 
         title: 'Friends', 
+        heading: 'Friends',
         people
     })
 }
