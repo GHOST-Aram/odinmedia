@@ -38,4 +38,10 @@ export const get_one_post = (req, res) =>{
     res.render('post-details', { title: `Post | ${id}`, post })
 }
 
+export const repost = (req, res) =>{
+    const id = req.params.id
+
+    res.redirect(`/posts/${id}`)
+}
+
 

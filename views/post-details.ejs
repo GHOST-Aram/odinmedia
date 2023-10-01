@@ -72,9 +72,12 @@
                     <button
                         class="text-blue-400 text-xl  px-4 py-2 
                             rounded-sm transition-all hover:bg-slate-400 share-btn"
+                        onclick="window.location.assign('/posts/<%=post.id%>/reposts')"
                     >
                         <i class="fa-solid fa-share-nodes"></i>
-                        <span class="text-slate-500 font-light text-sm"><%=post.shared%> Reposts</span>
+                        <span class="text-slate-500 font-light text-sm">
+                            <%=post.shared%> Reposts
+                        </span>
                     </button>
                 </div>
                 <!-- Buttons end -->
@@ -85,8 +88,8 @@
                 </div>
                 <!-- Comment text area end -->
                 <!-- Comments List Start -->
-                <div class="bg-gray-300 p-2">
-                    <%if(post.comments && post.comments.length){%>
+                <%if(post.comments && post.comments.length){%>
+                    <div class="bg-gray-300 p-2">
                         <div class="comments space-y-2" aria-live="polite">
                             <%post.comments.forEach(comment => { %>
                                 <div class="space-y-2 p-2 rounded-md border bg-white">
@@ -104,7 +107,7 @@
                                             </div>
                                         </a>
                                         <span class="text-xs text-slate-400 font-light">
-                                            2 days
+                                            <%=comment.timePosted%>
                                         </span>
                                     </div>
                                     <p class="text-slate-600 text-sm font-light">
@@ -113,8 +116,8 @@
                                 </div>
                             <%})%>
                         </div>
-                    <%}%>
-                </div>
+                    </div>
+                <%}%>
                 <!-- comment List end -->
             <!-- Post -->
          </div>

@@ -92,19 +92,24 @@ export const posts = [
                 author: people[0],
                 textContent: `Quaerat vitae, non at aliquid commodi dignissimos
                     debitis!Lorem ipsum dolor, sit amet consectetur 
-                    adipisicing elit.`
+                    adipisicing elit.`,
+                timePosted: '2 days ago',
+                
+
             },
             {
                 author: people[2],
                 textContent: `Quaerat vitae, non at aliquid commodi dignissimos
                     debitis!Lorem ipsum dolor, sit amet consectetur 
-                    adipisicing elit.`
+                    adipisicing elit.`,
+                timePosted: '2 days ago'
             },
             {
                 author: people[3],
                 textContent: `Quaerat vitae, non at aliquid commodi dignissimos
                     debitis!Lorem ipsum dolor, sit amet consectetur 
-                    adipisicing elit.`
+                    adipisicing elit.`,
+                timePosted: '2 days ago'
             }
         ],
         media: 'https://images.unsplash.com/photo-1694532228681-'
@@ -146,19 +151,22 @@ export const posts = [
                 author: people[2],
                 textContent: `Quaerat vitae, non at aliquid commodi dignissimos
                     debitis!Lorem ipsum dolor, sit amet consectetur 
-                    adipisicing elit.`
+                    adipisicing elit.`,
+                timePosted: '2 days ago'
             },
             {
                 author: people[1],
                 textContent: `Quaerat vitae, non at aliquid commodi dignissimos
                     debitis!Lorem ipsum dolor, sit amet consectetur 
-                    adipisicing elit.`
+                    adipisicing elit.`,
+                timePosted: '2 days ago'
             },
             {
                 author: people[0],
                 textContent: `Quaerat vitae, non at aliquid commodi dignissimos
                     debitis!Lorem ipsum dolor, sit amet consectetur 
-                    adipisicing elit.`
+                    adipisicing elit.`,
+                timePosted: '2 days ago'
             }
         ],
         media: 'https://plus.unsplash.com/premium_photo-1687139217079-61'
