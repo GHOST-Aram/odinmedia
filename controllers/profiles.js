@@ -4,8 +4,11 @@ export const get_my_profile = (req, res) => {
 
     const profile = people.find(person => person.id === id)
     res.render('profile', { 
-    title: 'My Profile', posts, profile
-})
+        title: 'My Profile', 
+        heading: 'User Profile',
+        posts, 
+        profile
+    })
 }
 
 export const get_user_profile = (req, res) => {
@@ -13,7 +16,11 @@ export const get_user_profile = (req, res) => {
 
     const profile = people.find(person => person.id === id)
     res.render('profile', { 
-    title: profile.name, posts, profile
+        title: profile.name, 
+        heading: 'User Profile',
+        posts, 
+        profile,
+
 })
 }
 
