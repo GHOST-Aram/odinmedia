@@ -26,7 +26,11 @@ export const get_user_profile = (req, res) => {
 
 export const get_editing_form = (req, res) =>{
     const profile = people.find(prof => prof.id === req.params.id)
-    res.render('edit-profile', { title: 'Edit Profile', profile })
+    res.render('edit-profile', { 
+        title: 'Edit Profile',
+        heading: 'Edit Profile', 
+        profile 
+    })
 }
 
 export const update_profile = (req, res) =>{
