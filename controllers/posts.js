@@ -25,7 +25,9 @@ export const create_post = (req, res) => {
 
 export const get_posts = async (req, res) => {
     res.render('index', { 
-        title: 'Home', posts
+        title: 'Home',
+        heading: 'Posts', 
+        posts
     })
 }
 
