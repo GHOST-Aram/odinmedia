@@ -16,43 +16,40 @@
                     </div>
                 </a>
                 <a href="/posts/<%=post.id%>">
-                    <p class="font-light text-md">
-                        <%=post.textContent%>
-                    </p>
-                </a> 
-                <a href="posts/<%=post.id%>">
-                    <img 
-                        src="<%=post.media%>"
-                        alt="post"
-                        class="w-full rounded-md"
-                    >
+                    <div>
+                        <p class="font-light text-md">
+                            <%=post.textContent%>
+                        </p>
+                        <img 
+                            src="<%=post.media%>"
+                            alt="post"
+                            class="w-full rounded-md"
+                        >
+                        <div class="interactions flex flex-row justify-between 
+                            items-center"
+                        >
+                            <div class="text-blue-400 text-xl  px-4 py-2">  
+                                <i class="fa-solid fa-envelope"></i>
+                                <span class="text-slate-500 font-light text-sm">
+                                    <%=post.comments%> Comments
+                                </span>
+                            </div>
+                            <div class="text-blue-400 text-xl  px-4 py-2">
+                                <i class="fa-solid fa-heart"></i> 
+                                <span class="text-slate-500 font-light text-sm">
+                                    <%=post.likes%></post.likes> Likes
+                                </span>
+                            </div>
+                            <div class="text-blue-400 text-xl  px-4 py-2">
+                                <i class="fa-solid fa-share-nodes"></i>
+                                <span class="text-slate-500 font-light text-sm">
+                                    <%=post.shared%> Repost
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </a>
             </div>
-            <hr>
-            <a href="/posts/<%=post.id%>">
-                <div class="interactions flex flex-row justify-between 
-                    items-center"
-                >
-                    <div class="text-blue-400 text-xl  px-4 py-2">  
-                        <i class="fa-solid fa-envelope"></i>
-                        <span class="text-slate-500 font-light text-sm">
-                            <%=post.comments%> Comments
-                        </span>
-                    </div>
-                    <div class="text-blue-400 text-xl  px-4 py-2">
-                        <i class="fa-solid fa-heart"></i> 
-                        <span class="text-slate-500 font-light text-sm">
-                            <%=post.likes%></post.likes> Likes
-                        </span>
-                    </div>
-                    <div class="text-blue-400 text-xl  px-4 py-2">
-                        <i class="fa-solid fa-share-nodes"></i>
-                        <span class="text-slate-500 font-light text-sm">
-                            <%=post.shared%> Repost
-                        </span>
-                    </div>
-                </div>
-            </a>
         </div>
         <hr class="my-2">  
         <%})%>
