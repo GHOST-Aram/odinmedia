@@ -48,7 +48,7 @@ export const people = [
         region: 'East Africa',
     },
     {
-        id:',mfokdofkpewkfwe',
+        id:'mfokdofkpewkfwe',
         name: 'Erick Bell',
         banner: 'https://images.unsplash.com/photo-1695582570771-bca78d2089b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
         pictureUrl: 'https://randomuser.me/api/portraits/men/12.jpg',
@@ -82,7 +82,10 @@ export const posts = [
             laudantium quos beatae dignissimos! Est porro saepe 
             sapiente magnam dolorem? Quaerat vitae, 
             non at aliquid commodi dignissimos debitis!`,
-        likes: 20,
+        likes: [
+                'fdshifhsdifjds', 'mfokdofkpewkfwe',
+                'kfksdpfpwepew','mlsakflwqlwq'
+            ],
         shared: 2,
         comments: 15,
         media: 'https://images.unsplash.com/photo-1694532228681-'
@@ -98,7 +101,9 @@ export const posts = [
             laudantium quos beatae dignissimos! Est porro saepe 
             sapiente magnam dolorem? Quaerat vitae, 
             non at aliquid commodi dignissimos debitis!`,
-        likes: 180,
+        likes: [
+            'fdshifhsdifjds', 'mfokdofkpewkfwe','mlsakflwqlwq'
+        ],
         shared: 8,
         comments: 100,
         media: 'https://images.unsplash.com/photo-1695556128448-1050e9'
@@ -115,7 +120,7 @@ export const posts = [
             adipisicing elit. Itaque molestiae perspiciatis enim 
             laudantium quos beatae dignissimos! Est porro saepe 
             sapiente magnam dolorem? `,
-        likes: 10,
+        likes: [],
         shared: 7,
         comments: 10,
         media: 'https://plus.unsplash.com/premium_photo-1687139217079-61'
