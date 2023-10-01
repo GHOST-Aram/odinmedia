@@ -1,14 +1,30 @@
-<form method="post" action="" 
-    class="comment-form space-y-2 hidden"
+<form 
+    method="post"
+    action="/posts/<%=post.id%>/comment"
 >
-    <textarea class="w-full font-light p-2 h-32 
-            border rounded-sm text-sm text-gray-500"
-        placeholder="What do you think?"        
-    ></textarea>
-    <button
-        class="bg-blue-500 text-white font-md px-4 py-2 rounded-sm"
-        type="submit"
-    >
-        Reply
-    </button>
+    <div class="new-post container p-2 space-y-2">
+        <div
+            class="flex flex-row items-start justify-start gap-4"
+        >
+            <a href="/profiles/<%=user.id%>">
+                <img 
+                    src= "<%=user&&user.pictureUrl%>"
+                    alt= "<%=user&&user.name%>" 
+                    class="h-10 w-10 rounded-full"
+                >
+            </a>
+            <textarea 
+                class="w-full font-light p-2 h-32 
+                    border rounded-sm text-sm text-gray-500"
+                placeholder="What on your mind?"        
+            ></textarea>
+        </div>
+        <button
+            class="bg-blue-500 text-white font-md px-4 py-2 rounded-sm
+            w-full hover:bg-blue-600 transition-all"
+            type="submit"
+        >
+            Comment
+        </button>
+    </div>
 </form>

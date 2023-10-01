@@ -38,7 +38,9 @@
                         >
                     </a>
                 </div>
+                 <!--Post end  -->
                 <hr>
+                <!-- Buttons start -->
                 <div class="interactions flex flex-row justify-between 
                     items-center">
                     <button
@@ -63,10 +65,14 @@
                         <span class="text-slate-500 font-light text-sm"><%=post.shared%> Shared</span>
                     </button>
                 </div>
+                <!-- Buttons end -->
                 <hr>
+                <!-- Comment text area start -->
                 <div class="comment-section space-y-4 xl:hidden" aria-live="polite">
                     <%-include('./partials/comment-form.ejs') %>
                 </div>
+                <!-- Comment text area end -->
+                <!-- Comments List Start -->
                 <div class="comments space-y-4 bg-slate-400 p-2" aria-live="polite">
                     <div class="space-y-2 p-2 rounded-md border bg-white">
                         <div class="flex flex-row items-center justify-between">
@@ -92,6 +98,7 @@
                         </p>
                     </div>
                 </div>
+                <!-- comment List end -->
             </div>
             <!-- Post -->
          </div>
@@ -100,36 +107,7 @@
          <aside class="p-4 border-l w-2/5 pt-4 fixed top-16 bottom-0 space-y-2">
             <div aria-hidden="true" class="border rounded-md">
                 <!-- Textarea to write new comments. Visible only on wide screens -->
-                <form 
-                    method="post"
-                    action="/posts/<%=post.id%>/comment"
-                >
-                    <div class="new-post container p-2 space-y-2">
-                        <div
-                            class="flex flex-row items-start justify-start gap-4"
-                        >
-                            <a href="/profiles/<%=user.id%>">
-                                <img 
-                                    src= "<%=user&&user.pictureUrl%>"
-                                    alt= "<%=user&&user.name%>" 
-                                    class="h-10 w-10 rounded-full"
-                                >
-                            </a>
-                            <textarea 
-                                class="w-full font-light p-2 h-32 
-                                    border rounded-sm text-sm text-gray-500"
-                                placeholder="What on your mind?"        
-                            ></textarea>
-                        </div>
-                        <button
-                            class="bg-blue-500 text-white font-md px-4 py-2 rounded-sm
-                            w-full hover:bg-blue-600 transition-all"
-                            type="submit"
-                        >
-                            Comment
-                        </button>
-                    </div>
-                </form>
+                <%-include('./partials/comment-form.ejs') %>
                 <!-- Textarea to write new comments. Visible only on wide screens-->
             </div>
              <hr>
