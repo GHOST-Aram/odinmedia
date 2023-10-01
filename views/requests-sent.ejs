@@ -1,18 +1,4 @@
-<%-include('./partials/head.ejs') %>
-<%-include('./partials/header.ejs') %>
-<main class="lg:flex lg:flex-row lg:gap-4">
-    <section class="w-1/5">
-        <%-include('./partials/side-bar') %>
-    </section>
-    <section aria-live="polite"
-         class="container pb-12 space-y-4 w-full lg:w-3/5 xl:w-2/5
-          pt-20
-         "
-    > 
-        <h1 class="font-bold bg-blue-500 p-2 text-white md:mt-8 lg:mt-0">
-            Requests Sent
-        </h1>
-         <hr>
+<%-include('./partials/page-start') %>
          <div class="people space-y-2 ">
             <%if(people.length) {%>
                 <%people.forEach(person => { %>
@@ -47,69 +33,5 @@
                 <h1 class="text-red-500 font-light text-center">No List to dispaly</h1>
             <%}%>    
          </div>
-     </section>
-    <section class="w-2/5 hidden xl:block">
-        <aside class="px-2 border-l w-2/5 pt-2 fixed top-16 bottom-0 space-y-2">
-            <div aria-hidden="true" 
-                class="border rounded-md space-y-2 p-2 w-full"
-            >
-                <h1 class="text-white font-bold p-2 bg-blue-500">Filter</h1>
-                <div class="wide-screen w-full">
-                    <button class="p-2 text-slate-600 text-center w-full hover:bg-blue-500 
-                        hover:text-white transition-all text-sm font-light text-start"
-                        onclick="window.location.assign('/people')"
-                    >
-                        All People
-                    </button>
-                    <button class="p-2 text-slate-600 text-center w-full hover:bg-blue-500 
-                        hover:text-white transition-all text-sm font-light text-start"
-                        onclick="window.location.assign('/people/requests/sent')"
-                    >
-                        Requests Sent
-                    </button>
-                    <button class="p-2 text-slate-600 text-center w-full hover:bg-blue-500 
-                        hover:text-white transition-all text-sm font-light text-start"
-                        onclick="window.location.assign('/people/requests/received')"
-                    >
-                        Requests Received
-                    </button>
-                </div>
-             </div>
-             <hr>
-             <%-include('./partials/footer.ejs') %>
-         </aside>
     </section>
-    <%-include('./partials/side-drawer.ejs') %>
-    <div aria-hidden="true" 
-        class=" fixed w-full border  p-2 bg-blue-500 bottom-8
-        right-0 xl:hidden lg:w-4/5"
-    >
-    <div class="small-screen flex flex-row items-center justify-between gap-4 ">
-        <button class=" p-2 text-white text-center bg-slate-500 w-full 
-            hover:bg-white hover:text-blue-500 transition-all 
-            text-sm font-light"
-            onclick="window.location.assign('/people')"
-        >
-            All People
-        </button>
-        <button class="p-2 text-white text-center bg-slate-500 w-full 
-            hover:bg-white hover:text-blue-500 transition-all 
-            text-sm font-light"
-            onclick="window.location.assign('/people/requests/sent')"
-        >
-            Requests Sent
-        </button>
-        <button class="p-2 text-white text-center bg-slate-500 w-full 
-            hover:bg-white hover:text-blue-500 transition-all 
-            text-sm font-light"
-            onclick="window.location.assign('/people/requests/received')"
-        >
-            Requests Received
-        </button>
-    </div>
-    </div>
-</main>
-</body>
-<script src="/scripts/navlinks.js"></script>
-<script src="/scripts/people-filter-buttons.js"></script>
-</html>
+    <%-include('./partials/people-filters.ejs') %>

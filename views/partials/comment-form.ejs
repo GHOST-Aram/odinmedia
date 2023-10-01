@@ -1,11 +1,6 @@
-<form 
-    method="post"
-    action="/posts/<%=post.id%>/comment"
->
+<form method="post" action="/posts/<%=post.id%>/comment" >
     <div class="new-post container p-2 space-y-2">
-        <div
-            class="flex flex-row items-start justify-start gap-4"
-        >
+        <div class="flex flex-row items-start justify-start gap-4">
             <a href="/profiles/<%=user.id%>">
                 <img 
                     src= "<%=user&&user.pictureUrl%>"

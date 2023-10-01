@@ -5,9 +5,8 @@
          <%-include('./partials/side-bar') %>
      </section>
      <section id="posts" aria-live="polite"
-         class="container pb-12 space-y-4 w-full lg:w-3/5 xl:w-2/5
-          xl:pt-16
-         "
+        class="container pb-12 space-y-4 w-full lg:w-3/5 xl:w-2/5
+          xl:pt-16"
      > 
         <h1 class="font-bold text-white bg-blue-500 p-2 w-full mt-4">
             Edit Profile
@@ -16,15 +15,15 @@
         <%-include('./partials/profile-form.ejs')%>
      </section>
      <section class="w-2/5 hidden xl:block">
-         <aside class="p-4 border-l w-2/5 pt-4 fixed top-16 bottom-0 space-y-2">
-             <div aria-hidden="true" class="border rounded-md">
+        <aside class="p-4 border-l w-2/5 pt-4 fixed top-16 bottom-0 space-y-2">
+            <div aria-hidden="true" class="border rounded-md">
                 <h1 class="font-bold p-2 text-white bg-blue-500 w-full">
                     More Actions
                 </h1>
-             </div>
-             <hr>
-             <%-include('./partials/footer.ejs') %>
-         </aside>
+            </div>
+            <hr>
+            <%-include('./partials/footer.ejs') %>
+        </aside>
      </section>
      <%-include('./partials/side-drawer.ejs') %>
 </main>
