@@ -31,15 +31,25 @@
                             </div>
                         </div>
                     </a>
-                    <button 
-                    class="bg-blue-500 text-white rounded-sm px-4 py-2 w-full
-                        hover:opacity-75 transition-all"
-                        onclick="window.location.assign(
-                            '/people/requests/<%=person.id%>'
-                            )"
-                    >
-                        Send Request
-                    </button>
+                    <div class="flex flex-row justify-between w-full gap-5 items-center">
+                        <button 
+                            class="bg-blue-500 text-white rounded-sm px-4 py-2 w-full
+                            hover:opacity-75 transition-all"
+                            onclick="window.location.assign('/profiles/<%=person.id%>')"
+                        >
+                            <i class="fa-solid fa-user text-lg mr-2"></i>
+                            <span class="font-light">View Profile</span>
+                        </button>
+                        <button 
+                            class="bg-green-500 text-white rounded-sm px-4 py-2 w-full
+                            hover:opacity-75 transition-all font-light"
+                            onclick="window.location.assign(
+                                '/people/requests/<%=person.id%>'
+                                )"
+                        >
+                            Send Request
+                        </button>
+                    </div>
                 </div>
 
                 <%}) %>
