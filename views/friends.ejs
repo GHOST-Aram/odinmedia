@@ -1,19 +1,19 @@
 <%-include('./partials/header') %>
          <div class="people space-y-2">
             <%if(people.length) {%>
-                <%people.forEach(person => { %>
+                <%people.forEach(friend => { %>
                 <div class="flex flex-col items-start gap-2 border rounded-md p-2">
-                    <a href="/profiles/<%=person.id %>">
+                    <a href="/profiles/<%=friend.id %>">
                         <div class="flex flex-row items-center gap-2">
                             <img 
-                                src="<%=person.pictureUrl%>" 
-                                alt="<%=person.name%>" 
+                                src="<%=friend.pictureUrl%>" 
+                                alt="<%=friend.name%>" 
                                 class="h-10 w-10 rounded-full"
                             >
                             <div class="flex flex-col">
-                                <h1 class="text-slate-600"><%=person.name%></h1>
+                                <h1 class="text-slate-600"><%=friend.name%></h1>
                                 <span class="text-xs text-slate-400 font-light">
-                                    <%=person.mutualFriends%> Mutual friends</span>
+                                    <%=friend.mutualFriends%> Mutual friends</span>
                             </div>
                         </div>
                     </a>
@@ -24,7 +24,7 @@
                         <button 
                             class="bg-blue-500 text-white rounded-sm px-4 py-2 w-full
                             hover:opacity-75 transition-all"
-                            onclick="window.location.assign('/profiles/<%=person.id%>')"
+                            onclick="window.location.assign('/profiles/<%=friend.id%>')"
                         >
                             <i class="fa-solid fa-user text-lg mr-2"></i>
                             <span class="font-light">View Profile</span>
@@ -32,7 +32,7 @@
                         <button 
                             class="bg-red-500 text-white rounded-sm px-4 py-2 w-full
                             hover:opacity-75 transition-all"
-                            onclick="window.location.assign('/friends/<%=person.id%>/unfriend')"
+                            onclick="window.location.assign('/friends/<%=friend.id%>/unfriend')"
                         >
                             <i class="fa-solid fa-x text-lg mr-2"></i>
                             <span class="font-light">Unfriend</span>

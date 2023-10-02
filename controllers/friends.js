@@ -1,7 +1,7 @@
 import { people } from "../data.js"
 
-export const unfriend = (req, res) => {
-    res.redirect('/friends')
+export const unfriend = (req, res) => {0
+    res.redirect(`/friends/${res.locals.user.id}/all`)
 }
 
 export const get_all_friends = (req, res) =>{
