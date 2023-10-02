@@ -31,12 +31,16 @@
                 <h1 class="text-slate-600 font-bold text-xl px-2">
                     <%=profile&&profile.name%>
                 </h1>
-                <h2 class="font-light text-slate-400">
+                <button class="font-light text-slate-400"
+                    onclick="window.location.assign(
+                        '/friends/<%=profile.id%>/all'
+                    )"
+                >
                     <span class="font-bold text-slate-500">
                         <%=profile.total_friends%>
                     </span> 
                     Friends
-                </h2>
+                </button>
                 <h2 class="font-light text-slate-400">
                     <span class="font-bold text-slate-500">
                         <%=profile.total_posts%>

@@ -35,7 +35,9 @@
         <button 
             class="w-full p-4 text-start hover:bg-white hover:text-blue-500 
             font-bold text-slate-600 space-x-4"
-            onclick="window.location.assign('/friends')"
+            onclick="window.location.assign(
+                '/friends/<%=user.id%>/all'
+            )"
         >
             <i class="fa-solid fa-users-line"></i>
             <span>Friends</span>

@@ -28,7 +28,9 @@
                     class="p-2 rounded-sm hover:bg-white 
                     hover:text-blue-500 text-slate-600 text-lg
                     flex flex-col items-center transition-all"
-                    onclick="window.location.assign('/friends')"
+                    onclick="window.location.assign(
+                        '/friends/<%=user.id%>/all'
+                    )"
                 >
                     <i class="fa-solid fa-users-line"></i> 
                     <span>Friends</span>
