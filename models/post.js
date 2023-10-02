@@ -1,4 +1,5 @@
 import { Model, ModelSchema } from "../zghost/db/model.js";
+import { Comment } from "./comment.js";
 
 const postSchema = new ModelSchema({
     textContent: String,
@@ -11,7 +12,8 @@ const postSchema = new ModelSchema({
         ref: 'Post'
     },
     comments: {
-        type: [Comment],
+        type: [ModelSchema.Types.ObjectId],
+        ref: 'Comment'
     },
     author: {
         type: ModelSchema.ObjectId,
