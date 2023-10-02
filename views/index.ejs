@@ -1,5 +1,5 @@
 <%-include('./partials/header')%>
-            <div class="my-2 border rounded-md lg:mt-24 md:mt-28 mt-24 xl:hidden">
+            <div class="small-screen my-2 border rounded-md lg:mt-24 md:mt-28 mt-24 xl:hidden">
                <!-- Create new post accessible to screen readers -->
                <!-- visible on small and medium screens -->
                <%-include('./partials/new-post-form.ejs') %>
@@ -14,7 +14,7 @@
         <section class="w-2/5 hidden xl:block">
             <aside class="px-4 border-l w-2/5 fixed top-16 bottom-0 space-y-2">
                 <h1 class="p-2 font-bold text-white bg-blue-500">Create New Post</h1>
-                <div aria-hidden="true" class="border rounded-md">
+                <div aria-hidden="true" class="wide-screen border rounded-md">
                    <!-- Create new post 2 visible only on wide screens -->
                   <%-include('./partials/new-post-form.ejs') %>
                    <!-- Create new post visible only on wide screens-->
@@ -26,8 +26,7 @@
         <%-include('./partials/side-drawer.ejs') %>
    </main>
 </body>
-<script src="/scripts/likes.js"></script>
-<script src="/scripts/shared.js"></script>
+<script src="/scripts/validate-post.js"></script>
 <script src="/scripts/textarea.js"></script>
 <script src="scripts/navlinks.js"></script>
 </html>
