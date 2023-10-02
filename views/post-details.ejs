@@ -1,5 +1,5 @@
-\<%-include('./partials/header') %>
-         <div>
+<%-include('./partials/header') %>
+        <div>
             <!-- Post -->
             <div class="container post space-y-2 p-2 border rounded-md">
                 <div class="space-y-2">
@@ -109,20 +109,23 @@
                 <%}%>
                 <!-- comment List end -->
             <!-- Post -->
-         </div>
-     </section>
-     <section class="w-2/5 hidden xl:block">
-         <aside class="p-4 border-l w-2/5 pt-4 fixed top-16 bottom-0 space-y-2">
-            <div aria-hidden="true" class="border rounded-md">
-                <!-- Textarea to write new comments. Visible only on wide screens -->
-                <%-include('./partials/comment-form.ejs') %>
-                <!-- Textarea to write new comments. Visible only on wide screens-->
-            </div>
-             <hr>
-             <%-include('./partials/footer.ejs') %>
-         </aside>
-     </section>
-     <%-include('./partials/side-drawer.ejs') %>
+        </div>
+    </section>
+    <section class="w-2/5 hidden xl:block">
+        <aside class="p-4 border-l w-2/5 pt-4 fixed top-12 bottom-0 space-y-2">
+        <h1 class="p-2 font-bold text-white bg-blue-500">Post stats</h1>
+        <div class=" p-2 border rounded-md">
+            <!-- Textarea to write new comments. Visible only on wide screens -->
+            <p>Comments: <%=post.comments.length%></p>
+            <p>Likes: <%=post.likes.length%></p>
+            <p>Reposts: <%=post.shared%></p>
+            <!-- Textarea to write new comments. Visible only on wide screens-->
+        </div>
+            <hr>
+            <%-include('./partials/footer.ejs') %>
+        </aside>
+    </section>
+    <%-include('./partials/side-drawer.ejs') %>
 </main>
 </body>
 <!-- <script src="/scripts/comment.js"></script> -->
