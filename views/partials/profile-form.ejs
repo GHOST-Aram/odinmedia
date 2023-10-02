@@ -1,4 +1,9 @@
-<form action="" method="post" class="w-full space-y-4 border p-2 rounded-md">
+<form 
+    action="" 
+    method="post" 
+    class="w-full space-y-4 border p-2 rounded-md" 
+    novalidate
+    >
     <div class="mb-16">
         <%if(profile.banner) {%>
             <div class="relative w-full h-40">
@@ -43,42 +48,49 @@
             </div>
         <%}%>
     </div>
-    <div class="flex flex-col items-start gap-2">
-        <label for="first-name" class="text-slate-600 font-light">
+    <div class="name flex flex-col items-start gap-2">
+        <label for="name" class="text-slate-600 font-light">
             Name
         </label>
         <input type="text" name="name" id="name" 
             placeholder="John Doe" value="<%=profile.name%>"
             class="border-b rounded-sm text-md font-light border 
             p-2 w-full"
+            required minLength="2" maxLength="100"
         >
+        <span class="hidden text-red-500"></span>
     </div>
-    <div class="md:flex flex-row justify-between gap-4 w-full items-center">
-        <div class="flex flex-col items-start gap-2">
-            <label for="city" class="text-slate-600 font-light">
-                City
-            </label>
-            <input type="text" name="city" id="city" 
-                placeholder="Tokyo" value="<%=profile.city%>"
-                class="border-b rounded-sm text-md font-light border 
-                p-2 w-full"
-            >
+    <div class="location flex flex-col items-start gap-4">
+        <div class="md:flex flex-row justify-between gap-4 w-full items-center">
+            <div class="flex flex-col items-start gap-2">
+                <label for="city" class="text-slate-600 font-light">
+                    City
+                </label>
+                <input type="text" name="city" id="city" 
+                    placeholder="Tokyo" value="<%=profile.city%>"
+                    class="border-b rounded-sm text-md font-light border 
+                    p-2 w-full"
+                    minlength="2" maxlength="100"
+                >
+            </div>
+            <div class="flex flex-col items-start gap-2">
+                <label for="region" class="text-slate-600 font-light">
+                    Region
+                </label>
+                <input type="text" name="region" id="region" 
+                    placeholder="Japan" value="<%=profile.region%>"
+                    class="border-b rounded-sm text-md font-light border 
+                    p-2 w-full"
+                    minlength="2" maxlength="100"
+                >
+            </div> 
         </div>
-        <div class="flex flex-col items-start gap-2">
-            <label for="region" class="text-slate-600 font-light">
-                Region
-            </label>
-            <input type="text" name="region" id="region" 
-                placeholder="Japan" value="<%=profile.region%>"
-                class="border-b rounded-sm text-md font-light border 
-                p-2 w-full"
-            >
-        </div>
+        <span class="hidden text-red-500"></span>
     </div>
-    <div class="flex flex-col justify-between 
+    <div class="banner flex flex-col justify-between 
         gap-2 w-full items-start p-2 border rounded-sm"
     >
-        <div class="flex flex-col items-start gap-2 w-full">
+        <div class=" flex flex-col items-start gap-2 w-full">
             <label for="banner" class="text-slate-600 font-light">
                 Banner
             </label>
@@ -95,14 +107,15 @@
             <label for="banner-url" class="text-slate-600 font-light">
                 Banner Url
             </label>
-            <input type="text" name="banner_url" id="banner-url" 
+            <input type="url" name="banner_url" id="banner-url" 
                 placeholder="Image path" value="<%=profile.banner%>"
                 class="border-b rounded-sm border text-md font-light 
                 p-2 w-full"
             >
         </div>
+        <span class="hidden text-red-500"></span>
     </div>
-    <div class="flex flex-col justify-between gap-2 w-full 
+    <div class="picture flex flex-col justify-between gap-2 w-full 
         items-start border p-2 rounded-sm">
         <div class="flex flex-col items-start gap-2 w-full">
             <label for="picture" class="text-slate-600 font-light">
@@ -121,12 +134,13 @@
             <label for="profile-pic-url" class="text-slate-600 font-light">
                 Profile Picture Url
             </label>
-            <input type="text" name="pictureUrl" id="profile-pic-url" 
+            <input type="url" name="pictureUrl" id="profile-pic-url" 
                 placeholder="Image path" value="<%=profile.pictureUrl%>"
                 class="border-b rounded-sm border text-md font-light 
                 p-2 w-full"
             >
         </div>
+        <span class="hidden text-red-500"></span>
     </div>
     <button type="submit"
         class="p-4 bg-green-500 rounded-md font-bold 
