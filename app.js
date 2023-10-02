@@ -1,5 +1,4 @@
 import { accountsRouter } from './routes/accounts.js';
-import { contentRouter } from './routes/content.js';
 import { app } from './zghost/app/init.js';
 import { config } from './zghost/app/config.js';
 import { postsRouter } from "./routes/posts.js";
@@ -25,7 +24,6 @@ app.get('/', (req, res) => {
 
 app.use('/posts', postsRouter)
 app.use('/auth', accountsRouter)
-app.use('/content', contentRouter)
 app.use('/people', peopleRouter)
 app.use('/friends', friendsRouter)
 app.use('/profiles', profilesRouter)
