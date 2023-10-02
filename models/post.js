@@ -2,9 +2,17 @@ import { Model, ModelSchema } from "../zghost/db/model.js";
 
 const postSchema = new ModelSchema({
     textContent: String,
-    likes: Number,
-    shared: Number,
-    comments: Number,
+    likes: {
+        type: [ModelSchema.Types.ObjectId],
+        ref: 'User'
+    },
+    reposts:{
+        type: [ModelSchema.Types.ObjectId],
+        ref: 'Post'
+    },
+    comments: {
+        type: [Comment],
+    },
     author: {
         type: ModelSchema.ObjectId,
         ref: 'User'
