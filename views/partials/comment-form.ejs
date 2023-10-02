@@ -1,4 +1,8 @@
-<form method="post" action="/posts/<%=post.id%>/comment" >
+<form method="post" 
+    action="/posts/<%=post.id%>/comment" 
+    novalidate
+    id="comment-form"
+    >
     <div class="new-post container p-2 space-y-2">
         <div class="flex flex-row items-start justify-start gap-4">
             <a href="/profiles/<%=user.id%>">
