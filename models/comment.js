@@ -4,7 +4,7 @@ const commentSchema = new ModelSchema({
     author: {
         type: ModelSchema.ObjectId,
         ref: 'Author',
-        required
+        required: true
     },    
     text: {
         type: String,
