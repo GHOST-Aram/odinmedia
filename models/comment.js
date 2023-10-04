@@ -1,8 +1,15 @@
 import { Model, ModelSchema } from "../zghost/db/model.js";
 
 const commentSchema = new ModelSchema({
-    author: ModelSchema.ObjectId,    
-    text: String,
+    author: {
+        type: ModelSchema.ObjectId,
+        ref: 'Author',
+        required
+    },    
+    text: {
+        type: String,
+        required: true,
+    },
     createdAt: {
         type: Date,
         default: Date.now()
