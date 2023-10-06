@@ -1,5 +1,4 @@
 import { ObjectId } from "mongodb"
-import { people } from "../data.js"
 import { User } from "../zghost/db/User.js"
 
 export const accept_one_friend_request = async(req, res) =>{
@@ -141,9 +140,24 @@ export const recall_friend_request = async(req, res) =>{
     }
 }
 
-export const send_friend_request = (req, res) =>{
-    console.log("User id: ", req.params.id)
-    res.redirect('/people')
+export const send_friend_request = async(req, res) =>{
+    const friendId = req.params.id
+    const currentUserId = res.locals.user.id
+
+    try {
+        //Add friend id to requests sent of current user
+        await User.findByIdAndUpdate(currentUserId, {
+            $addToSet: { request_sent: new ObjectId(friendId) }
+        })
+        // Add id of current user to requests received of friend
+        await User.findByIdAndUpdate(friendId, {
+            $addToSet: { requests_received: new ObjectId(currentUserId)}
+        })
+
+        res.redirect('/people')
+    } catch (error) {
+        res.status(500).send("Internal server error")
+    }
 }
 
 
