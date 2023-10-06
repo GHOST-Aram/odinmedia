@@ -1,53 +1,33 @@
-import { posts } from "../data.js"
-
-export const add_new_comment = (req, res) =>{
-    console.log(req.params.id)
-    
-    res.redirect(`/posts/${req.params.id}`)
-}
-
-export const change_likes = (req, res) => {
-    const id = req.params.id
-
-    // to be done 
-    /**
-     * Check if likes array contains id of current user
-     * if true, add the id otherwise remove the id
-     */
-
-    res.redirect(`/posts/${id}`)
-}
-
-export const create_post = (req, res) => {
-    console.log(req.body)
-    res.redirect('/')
-}
+import { Post } from "../models/post.js"
+import { formatDate } from "../zghost/utils/date-formatter.js"
+import { formatAuthor } from "../zghost/utils/format-author.js"
 
 export const get_posts = async (req, res) => {
-    res.render('index', { 
-        title: 'Home',
-        heading: 'Posts', 
-        posts
-    })
-}
-
-export const get_one_post = (req, res) =>{
-    const id = req.params.id
-    console.log(id)
-
-    const post = posts.find(post => post.id === id) 
    
-    res.render('post-details', { 
-        title: `Post | ${id}`, 
-        heading: 'Post', 
-        post 
-    })
+    try {
+        const posts = await Post.find().populate({
+                        path: 'author',
+                        select: 'first_name last_name pictureUrl _id'
+                    })
+
+        const formattedPosts = posts.map(post =>({
+            id: post._id.toString(),
+            post_content: post.post_content,
+            author: formatAuthor(post.author),
+            comments: post.comments.length,
+            likes: post.likes.length,
+            reposts: post.reposts.length,
+            createdAt: formatDate(post.createdAt)
+        }))
+
+        res.render('index', { 
+            title: 'Home',
+            heading: 'Posts', 
+            posts: formattedPosts
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send('Internal Server Error')
+    }
 }
-
-export const repost = (req, res) =>{
-    const id = req.params.id
-
-    res.redirect(`/posts/${id}`)
-}
-
 

@@ -11,7 +11,7 @@ const config = () =>{
     const mongoUrl = process.env.MONGODB_URI
     
     //Connect DB
-    // connectDB(mongoUrl)
+    connectDB(mongoUrl)
     
     //Server configs
     app.use(cors())
@@ -22,24 +22,6 @@ const config = () =>{
     app.set('view engine', 'ejs');
     app.use(express.static('public'));
 
-    //Sessions setup
-    // app.use(session({ 
-    //     secret: process.env.SESSION_SECRET,
-    //     resave: true,
-    //     saveUninitialized: true,
-    //     store: MongoStore.create({
-    //         mongoUrl: mongoUrl
-    //     }),
-    //     cookie: {
-    //         maxAge: 24 * 60 * 60 * 1000,
-    //         secure: true
-    //     }
-    // // }))
-    // auth.useFacebookStrategy()
-    // auth.authenticateSession()
-    // auth.initialize()
-    // auth.serializeUser()
-    // auth.deserializeUser()
 
 
 }
