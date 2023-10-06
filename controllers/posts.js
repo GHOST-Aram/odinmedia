@@ -26,6 +26,31 @@ export const add_new_comment = async(req, res) =>{
     res.redirect(`/posts/${req.params.id}`)
 }
 
+export const change_likes = async(req, res) => {
+    if(!req.isAuthenticated()){
+        res.redirect('/auth/login')
+    }
+    const postId = req.params.id
+    const currentUserId = res.locals.user._id
+
+    try {
+        //Check if current user id is in likes array, 
+        //if true remove it otherwise add it
+        await Post.findByIdAndUpdate(postId, {
+            $pull:{
+                likes: currentUserId
+            },
+            $addToSet :{ 
+                likes: currentUserId
+            }, 
+        })
+    } catch (error) {
+        res.status(500).send('Internal server Error')
+    }
+    res.redirect(`/posts/${id}`)
+}
+
+
 export const create_post = async(req, res) => {
     if(!req.isAuthenticated()){
         res.redirect('/auth/login')
