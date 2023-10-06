@@ -1,6 +1,30 @@
+import { Comment } from "../models/comment.js"
 import { Post } from "../models/post.js"
 import { formatDate } from "../zghost/utils/date-formatter.js"
 import { formatAuthor } from "../zghost/utils/format-author.js"
+
+export const add_new_comment = async(req, res) =>{
+
+    const postId = req.params.id
+    const commentText = req.body.comment
+    const authorId = res.locals.user._id
+
+    try {
+        const comment = await Comment.create({
+            author: authorId,
+            text: commentText
+        })
+
+        await Post.findByIdAndUpdate(postId, {
+            $push:{ comments: comment._id}
+        })
+    } catch (error) {
+        res.status(500).send('Internal server error')
+    }
+
+    
+    res.redirect(`/posts/${req.params.id}`)
+}
 
 export const create_post = async(req, res) => {
     if(!req.isAuthenticated()){
