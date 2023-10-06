@@ -48,30 +48,77 @@ export const decline_friend_request = async(req, res) =>{
         res.status(500).send("Internal server error")
     }
 }
-export const get_all_people = (req, res) =>{
-    res.render('people', 
-    { 
-        title: 'People', 
-        heading: 'People You May Know',
-        people
-    })
+export const get_all_people = async(req, res) =>{
+    try {
+        const users = User.find().select(
+            'first_name last_name pictureUrl friends'
+        )
+
+        const formattedUsers = users.map(user =>({
+            name: `${user.first_name} ${user.last_name}`,
+            pictureUrl: user.pictureUrl,
+            friends: user.friends.length
+        }))
+
+        res.render('people', { 
+            title: 'People', 
+            heading: 'People You May Know',
+            people: formattedUsers
+        })
+    } catch (error) {
+        res.status(500).send('Internal server errror')
+    }
 }
 
-export const get_sent_requests = (req, res) =>{
-    res.render('requests-sent', 
-    { 
-        title: 'People | Requests Sent', 
-        heading: 'Requests Sent',
-        people
-    })
+export const get_sent_requests = async(req, res) =>{
+    const currentUsrId = res.locals.user.id
+    try {
+        const requests_received = await User.findById(currentUsrId)
+        .select('requests_received')
+        .populate({
+            path: 'requests_received',
+            select: 'first_name last_name pictureUrl _id'
+        })
+
+        const formattedRequests = requests_received.map(request =>({
+            name: `${request.first_name} ${request.last_name}`,
+            pictureUrl: request.pictureUrl,
+            id: request._id.toString()
+        }))
+        
+        res.render('requests-sent', { 
+            title: 'People | Requests Sent', 
+            heading: 'Requests Sent',
+            sent_requests: formattedRequests
+        })
+    } catch (error) {
+        res.status(500).send('Internal server error')
+    }
 }
-export const get_received_requests = (req, res) =>{
-    res.render('requests-received', 
-    { 
-        title: 'People | Requests Received',
-        heading: 'Requests Received', 
-        people
-    })
+export const get_received_requests = async(req, res) =>{
+    const currentUsrId = res.locals.user.id
+    try {
+        const requests_sent = await User.findById(currentUsrId)
+        .select('requests_sent')
+        .populate({
+            path: 'requests_sent',
+            select: 'first_name last_name pictureUrl _id'
+        })
+
+        const formattedRequests = requests_sent.map(request =>({
+            name: `${request.first_name} ${request.last_name}`,
+            pictureUrl: request.pictureUrl,
+            id: request._id.toString()
+        }))
+        
+        res.render('requests-received', { 
+            title: 'People | Requests Received', 
+            heading: 'Requests Received',
+            sent_requests: formattedRequests
+        })
+    } catch (error) {
+        res.status(500).send('Internal server error')
+    }
 }
 
 export const recall_friend_request = async(req, res) =>{
