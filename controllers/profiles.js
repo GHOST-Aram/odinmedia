@@ -1,5 +1,6 @@
 import { ObjectId } from 'mongodb'
-import { posts, people } from '../data.js'
+import { formatAuthor } from '../zghost/utils/format-author.js'
+import { formatDate } from '../zghost/utils/date-formatter.js'
 import { Post } from '../models/post.js'
 import { User } from '../zghost/db/User.js'
 export const get_my_profile = async(req, res) => {
@@ -31,13 +32,13 @@ export const get_my_profile = async(req, res) => {
             id: id,
             name: `${user.first_name} ${user.last_name}`,
             pictureUrl: user.pictureUrl,
-            friends: user.friends.length
+            friends: user.friends.length,
+            posts: formattedPosts
         }
 
         res.render('profile', { 
             title: 'My Profile', 
             heading: 'User Profile',
-            posts: formattedPosts, 
             profile: profile
         })
     } catch (error) {
@@ -45,17 +46,47 @@ export const get_my_profile = async(req, res) => {
     }
 }
 
-export const get_user_profile = (req, res) => {
+export const get_user_profile = async(req, res) => {
     const id = req.params.id
 
-    const profile = people.find(person => person.id === id)
-    res.render('profile', { 
-        title: profile.name, 
-        heading: 'User Profile',
-        posts, 
-        profile,
+    try {
+        const user = await User.findById(id).select(
+            'first_name last_name pictureUrl friends'
+        )
 
-})
+        const posts = await Post.find({author: new ObjectId(id)}).populate(
+            {
+                path: 'author',
+                select: 'first_name last_name pictureUrl _id'
+            }
+        )
+
+        const formattedPosts = posts.map(post =>({
+            id: post._id.toString(),
+            post_content: post.post_content,
+            author: formatAuthor(post.author),
+            comments: post.comments.length,
+            likes: post.likes.length,
+            reposts: post.reposts.length,
+            createdAt: formatDate(post.createdAt)
+        }))
+
+        const profile = {
+            id: id,
+            name: `${user.first_name} ${user.last_name}`,
+            pictureUrl: user.pictureUrl,
+            friends: user.friends.length,
+            posts: formattedPosts
+        }
+
+        res.render('profile', { 
+            title: `${profile.name}`, 
+            heading: `${profile.name} Profile`,
+            profile: profile
+        })
+    } catch (error) {
+        res.status(500).send('Internal Server Error')  
+    }
 }
 
 export const get_editing_form = (req, res) =>{
