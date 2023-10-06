@@ -2,6 +2,23 @@ import { Post } from "../models/post.js"
 import { formatDate } from "../zghost/utils/date-formatter.js"
 import { formatAuthor } from "../zghost/utils/format-author.js"
 
+export const create_post = async(req, res) => {
+    if(!req.isAuthenticated()){
+        res.redirect('/auth/login')
+    }
+    try {
+        await Post.create({
+            post_content: req.body.post_content,
+            author: res.locals.user._id
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send('Internal Server Error')
+    }
+
+    res.redirect('/')
+}
+
 export const get_posts = async (req, res) => {
    
     try {
