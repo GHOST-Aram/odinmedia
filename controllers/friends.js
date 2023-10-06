@@ -1,19 +1,47 @@
-import { people } from "../data.js"
+import { ObjectId } from "mongodb"
+import { User } from "../zghost/db/User.js"
+export const unfriend = async(req, res) => {
+    const currentUser = res.locals.user
+    const friendId = req.params.id
 
-export const unfriend = (req, res) => {0
-    res.redirect(`/friends/${res.locals.user.id}/all`)
+    try {
+        await User.findByIdAndUpdate(currentUser.id, {
+            $pull: { friends: new ObjectId(friendId) }
+        })
+
+        await User.findByIdAndUpdate(friendId, {
+            $pull: { friends: new ObjectId(currentUser.id) }
+        })
+        
+        res.redirect(`/friends/${res.locals.user.id}/all`)
+    } catch (error) {
+        res.status(500).send('Internal server error')
+    }
+
 }
 
-export const get_all_friends = (req, res) =>{
+export const get_all_friends = async(req, res) =>{
     const id = req.params.id
+    try {
+        const user =  await User.findById(id).populate({
+            path: 'friends',
+            select: '_id first_name last_name pictureUrl'
+        })
 
-    const profile = people.find(person => person.id === id)
-    res.render('friends', 
-    { 
-        title: `Friends of ${profile.name}`, 
-        heading: `Friends of ${profile.name}`,
-        people
-    })
+        const friends = user.friends.map(friend => ({
+            id: friend._id.toString(),
+            name: `${friend.first_name} ${friend.last_name}`,
+            pictureUrl: friend.pictureUrl
+        }))
+
+        res.render('friends', { 
+            title: `Friends of ${user.name}`, 
+            heading: `Friends of ${user.name}`,
+            friends
+        })
+    } catch (error) {
+        res.status(500).send('Internal Server Error')
+    }
 }
 
 
