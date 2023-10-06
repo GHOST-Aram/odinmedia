@@ -64,7 +64,6 @@ export const create_post = async(req, res) => {
 }
 
 export const get_posts = async (req, res) => {
-   
     try {
         const posts = await Post.find().populate({
                         path: 'author',
