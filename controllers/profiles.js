@@ -106,7 +106,7 @@ export const get_editing_form = async(req, res) =>{
             friends: user.friends.length,
             posts: formattedPosts
         }
-        
+
         res.render('edit-profile', { 
             title: 'Edit Profile',
             heading: 'Edit Profile', 
@@ -117,11 +117,24 @@ export const get_editing_form = async(req, res) =>{
     }
 }
 
-export const update_profile = (req, res) =>{
-    const data = req.body
-    console.log(data)
+export const update_profile = async(req, res) =>{
+   
+    const {
+        first_name, 
+        last_name, 
+        pictureUrl, 
+        bannerUrl
+    } = req.body
 
-    res.redirect(`/profiles/${req.params.id}`)
+    try {
+        await User.findByIdAndUpdate(res.locals.user.id, {
+            first_name, last_name, pictureUrl, bannerUrl
+        })
+
+        res.redirect('/profiles/me')
+    } catch (error) {
+        res.status(500).send('Internal server error')
+    }
 }
 
 
