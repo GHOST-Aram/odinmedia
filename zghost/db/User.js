@@ -6,7 +6,7 @@ const userModel = new ModelSchema({
     last_name: String,
     first_name: String,
     middle_name: String,
-    picture_url: String,
+    pictureUrl: String,
     friends: {
         type: [ModelSchema.Types.ObjectId],
         ref: 'User'
