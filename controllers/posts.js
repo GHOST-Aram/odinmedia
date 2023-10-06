@@ -27,15 +27,10 @@ export const add_new_comment = async(req, res) =>{
 }
 
 export const change_likes = async(req, res) => {
-    if(!req.isAuthenticated()){
-        res.redirect('/auth/login')
-    }
     const postId = req.params.id
     const currentUserId = res.locals.user._id
 
     try {
-        //Check if current user id is in likes array, 
-        //if true remove it otherwise add it
         await Post.findByIdAndUpdate(postId, {
             $pull:{
                 likes: currentUserId
@@ -145,3 +140,17 @@ export const get_one_post = async(req, res) =>{
    
 }
 
+export const repost = async(req, res) =>{
+    const id = req.params.id
+    try {
+        await Post.findByIdAndUpdate(id, 
+            {
+                $push: { reposts: res.locals.user._id } 
+            },
+        )
+    } catch (error) {
+        res.status(500).send('Internal server error')
+    }
+
+    res.redirect(`/posts/${id}`)
+}
