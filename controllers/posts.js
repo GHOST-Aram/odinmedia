@@ -1,7 +1,7 @@
 import { Comment } from "../models/comment.js"
 import { Post } from "../models/post.js"
-import { formatDate } from "../zghost/utils/date-formatter.js"
-import { formatAuthor } from "../zghost/utils/format-author.js"
+import { formatDate } from "../utils/date-formatter.js"
+import { formatAuthor } from "../utils/format-author.js"
 
 export const add_new_comment = async(req, res) =>{
 

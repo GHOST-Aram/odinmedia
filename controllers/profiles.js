@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
-import { formatAuthor } from '../zghost/utils/format-author.js'
-import { formatDate } from '../zghost/utils/date-formatter.js'
+import { formatAuthor } from '../utils/format-author.js'
+import { formatDate } from '../utils/date-formatter.js'
 import { Post } from '../models/post.js'
 import { User } from '../zghost/db/User.js'
 
