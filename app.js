@@ -1,4 +1,3 @@
-import { app } from './zghost/app/init.js';
 import { app } from './zghost/app/config.js';
 import { postsRouter } from "./routes/posts.js";
 import createHttpError from 'http-errors';

@@ -8,6 +8,7 @@ const userModel = new ModelSchema({
     middle_name: String,
     pictureUrl: String,
     bannerUrl: String,
+    email: String,
     friends: {
         type: [ModelSchema.Types.ObjectId],
         ref: 'User'

@@ -1,4 +1,23 @@
+import { User } from "../zghost/db/User"
+
 export const creat_user = (req, res) => {
+   const {first_name, last_name, email, password} = req.body
+    
+   try {
+       hash(password, 10, async(err, hashedPasscode) =>{
+        if(err) throw err
+        await User.create({
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            password: hashedPasscode,
+        } )
+    })
+    res.redirect('/auth/login')
+    
+   } catch (error) {
+        res.status(500).send('Internal server error')
+   }
     
 }
 export const get_login_form = (req, res) =>{
