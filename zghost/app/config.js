@@ -4,7 +4,6 @@ import { connectDB } from '../utils/server.js';
 import 'dotenv/config.js'
 import cors from 'cors'
 import { app } from './auth.js';
-const config = () =>{
     const mongoUrl = process.env.MONGODB_URI
     
     //Connect DB
@@ -21,6 +20,5 @@ const config = () =>{
 
 
 
-}
 
-export { config }
+export { app }

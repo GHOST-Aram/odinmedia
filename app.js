@@ -1,21 +1,11 @@
-// import { accountsRouter } from './routes/accounts.js';
 import { app } from './zghost/app/init.js';
-import { config } from './zghost/app/config.js';
+import { app } from './zghost/app/config.js';
 import { postsRouter } from "./routes/posts.js";
 import createHttpError from 'http-errors';
 import { peopleRouter } from './routes/people.js';
 import { friendsRouter } from './routes/friends.js';
 import { profilesRouter } from './routes/profiles.js';
-
-config()
-
-
-
-
-
-
-
-
+import { authRouter } from './routes/auth.js';
 
 
 app.get('/', (req, res) => {
@@ -23,7 +13,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/posts', postsRouter)
-// app.use('/auth', accountsRouter)
+app.use('/auth', authRouter)
 app.use('/people', peopleRouter)
 app.use('/friends', friendsRouter)
 app.use('/profiles', profilesRouter)
