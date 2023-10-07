@@ -2,12 +2,30 @@ import passport from 'passport';
 import FacebookStrategy from 'passport-facebook'
 import { User } from '../db/User.js';
 import { app } from './init.js';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
 
-export const useFacebookStrategy = () => passport.use(new FacebookStrategy(
+app.use(session({ 
+	secret: process.env.SESSION_SECRET,
+	resave: true,
+	saveUninitialized: true,
+	store: MongoStore.create({
+		mongoUrl: process.env.MONGODB_URI,
+		mongoOptions: {
+			useUnifiedTopology: true,
+			useNewUrlParser: true,
+		}
+	}),
+	cookie: {
+		maxAge: 24 * 60 * 60 * 1000
+	}
+}))
+
+passport.use(new FacebookStrategy(
 	{
 		clientID: process.env.FACEBOOK_CLIENT_ID,
 		clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-		callbackURL: `http://localhost:${process.env.PORT}/auth/facebook/callback`,
+		callbackURL: '/auth/facebook/callback',
 		profileFields: [
 			'id', 
 			'displayName', 
@@ -41,17 +59,16 @@ export const useFacebookStrategy = () => passport.use(new FacebookStrategy(
 	}
 ))
 
+app.use(passport.initialize())
+app.use(passport.session())
 
-export const initialize = () => app.use(passport.initialize())
-export const authenticateSession = () => app.use(passport.session())
-
-export const serializeUser = () => passport.serializeUser((user, done) =>{
+passport.serializeUser((user, done) =>{
 	process.nextTick(() =>{
 		return done(null, user.id)
 	})
 })
 
-export const deserializeUser = () => passport.deserializeUser(
+passport.deserializeUser(
     async(id, done) =>{
 
     try {
@@ -62,13 +79,6 @@ export const deserializeUser = () => passport.deserializeUser(
     }       
 })
 
-export const authenticate = (strategy) => passport.authenticate(
-	strategy)
+export {app}
 
-export const isLoggedIn = (req, res, next) => {
-	if(req.isAuthenticated()){
-		next()
-	} else{
-		res.redirect('/login')
-	}
-}
+

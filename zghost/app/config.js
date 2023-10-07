@@ -1,12 +1,9 @@
 import express from 'express'
 import morgan from 'morgan';
-import * as auth from './auth.js'
 import { connectDB } from '../utils/server.js';
-import MongoStore from 'connect-mongo';
-import session from 'express-session';
 import 'dotenv/config.js'
 import cors from 'cors'
-import { app } from './init.js';
+import { app } from './auth.js';
 const config = () =>{
     const mongoUrl = process.env.MONGODB_URI
     
