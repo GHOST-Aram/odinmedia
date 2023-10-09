@@ -1,4 +1,5 @@
 import { User } from "../zghost/db/User.js"
+import { hash } from "bcrypt"
 
 export const creat_user = (req, res) => {
    const {first_name, last_name, email, password} = req.body
@@ -16,6 +17,7 @@ export const creat_user = (req, res) => {
     res.redirect('/auth/login')
 
    } catch (error) {
+       console.log(error)
         res.status(500).send('Internal server error')
    } 
 }

@@ -13,6 +13,7 @@ const userModel = new ModelSchema({
     email: String,
     banner_file: String,
     picture_file: String,
+    password: String,
     friends: {
         type: [ModelSchema.Types.ObjectId],
         ref: 'User'
