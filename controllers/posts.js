@@ -74,6 +74,7 @@ export const get_posts = async (req, res) => {
             author: formatAuthor(post.author),
             comments: post.comments.length,
             likes: post.likes.length,
+            user_liked: post.likes.includes(post.author._id),
             reposts: post.reposts.length,
             createdAt: formatDate(post.createdAt)
         }))

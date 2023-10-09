@@ -8,7 +8,10 @@ import { authRouter } from './routes/auth.js';
 import { isLoggedIn } from './controllers/auth.js';
 
 
-
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  next()
+})
 app.get('/', (req, res) => {
 	res.redirect('/posts')
 })
