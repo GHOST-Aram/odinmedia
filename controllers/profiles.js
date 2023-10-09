@@ -101,12 +101,10 @@ export const get_editing_form = async(req, res) =>{
             'first_name last_name pictureUrl friends bannerUrl'
         )
         const profile = {
-            id: id,
+            id: user._id.toString(),
             name: `${user.first_name} ${user.last_name}`,
             pictureUrl: user.pictureUrl,
             bannerUrl: user.bannerUrl,
-            friends: user.friends.length,
-            posts: formattedPosts
         }
 
         res.render('edit-profile', { 
