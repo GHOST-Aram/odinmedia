@@ -24,6 +24,10 @@ const userModel = new ModelSchema({
     requests_received: {
         type: [ModelSchema.Types.ObjectId],
         ref: 'User'
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now()
     }
 })
 

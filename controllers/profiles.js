@@ -9,7 +9,7 @@ export const get_my_profile = async(req, res) => {
 
     try {
         const user = await User.findById(id).select(
-            'first_name last_name pictureUrl friends bannerUrl'
+            'pictureUrl friends bannerUrl city _id region'
         )
 
         const posts = await Post.find({author: new ObjectId(id)}).populate(
@@ -30,11 +30,14 @@ export const get_my_profile = async(req, res) => {
         }))
 
         const userProfile = {
-            id: id,
-            name: `${user.first_name} ${user.last_name}`,
+            id: user._id.toString(),
+            name: user.name,
             pictureUrl: user.pictureUrl,
             bannerUrl: user.bannerUrl,
+            city: user.city,
+            region: user.region,
             friends: user.friends.length,
+            joined: user.createdAt ? formatDate(user.createdAt): 'Unknown'            
         }
 
 
