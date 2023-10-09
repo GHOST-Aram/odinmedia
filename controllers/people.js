@@ -87,10 +87,10 @@ export const get_received_requests = async(req, res) =>{
             id: request._id.toString()
         }))
         
-        res.render('requests-sent', { 
+        res.render('requests-received', { 
             title: 'People | Requests Received', 
             heading: 'Requests Received',
-            sent_requests: formattedRequests
+            received_requesta: formattedRequests
         })
     } catch (error) {
         res.status(500).send('Internal server error')
@@ -124,7 +124,7 @@ export const get_sent_requests = async(req, res) =>{
 
 export const recall_friend_request = async(req, res) =>{
     const friendId = req.params.id
-    const currentUserId = res.locals.user.id
+    const currentUserId = req.user.id
 
     try {
         //Remove id from requests sent of current user
@@ -144,20 +144,21 @@ export const recall_friend_request = async(req, res) =>{
 
 export const send_friend_request = async(req, res) =>{
     const friendId = req.params.id
-    const currentUserId = res.locals.user.id
+    const currentUserId = req.user.id
 
     try {
         //Add friend id to requests sent of current user
         await User.findByIdAndUpdate(currentUserId, {
-            $addToSet: { request_sent: new ObjectId(friendId) }
+            $push: { request_sent: new ObjectId(friendId) }
         })
         // Add id of current user to requests received of friend
         await User.findByIdAndUpdate(friendId, {
-            $addToSet: { requests_received: new ObjectId(currentUserId)}
+            $push: { requests_received: new ObjectId(currentUserId)}
         })
 
         res.redirect('/people')
     } catch (error) {
+        console.log(error)
         res.status(500).send("Internal server error")
     }
 }

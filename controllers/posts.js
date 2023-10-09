@@ -133,6 +133,7 @@ export const get_one_post = async(req, res) =>{
                 createdAt: formatDate(comment.createdAt)
             })),
             likes: post.likes.length,
+            user_liked: post.likes.includes(post.author._id),
             reposts: post.reposts.length,
             createdAt: formatDate(post.createdAt)
         }
