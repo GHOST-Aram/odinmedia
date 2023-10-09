@@ -90,7 +90,7 @@ export const get_received_requests = async(req, res) =>{
         res.render('requests-received', { 
             title: 'People | Requests Received', 
             heading: 'Requests Received',
-            received_requesta: formattedRequests
+            received_requests: formattedRequests
         })
     } catch (error) {
         res.status(500).send('Internal server error')
