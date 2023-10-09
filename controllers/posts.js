@@ -1,4 +1,5 @@
 import { Comment } from "../models/comment.js"
+import mongoose from "mongoose"
 import { Post } from "../models/post.js"
 import { formatDate } from "../utils/date-formatter.js"
 import { formatAuthor } from "../utils/format-author.js"
@@ -31,19 +32,27 @@ export const change_likes = async(req, res) => {
     const postId = req.params.id
     const currentUserId = res.locals.user._id
 
+    
+    
     try {
-        await Post.findByIdAndUpdate(postId, {
-            $pull:{
-                likes: currentUserId
-            },
-            $addToSet :{ 
-                likes: currentUserId
-            }, 
-        })
+        const post = await Post.findById(postId).select('likes')
+    
+        if(post.likes.includes(new mongoose.Types.ObjectId(currentUserId))){
+            await Post.findByIdAndUpdate(postId, {
+                $pull:{ likes: currentUserId },
+            })
+            
+        } else {
+            await Post.findByIdAndUpdate(postId, {
+                $push :{ likes: currentUserId }, 
+            })
+
+        }
+        res.redirect(`/posts/${postId}`)
     } catch (error) {
+        console.log(error)
         res.status(500).send('Internal server Error')
     }
-    res.redirect(`/posts/${id}`)
 }
 
 
