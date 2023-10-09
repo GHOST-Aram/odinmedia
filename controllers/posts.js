@@ -7,7 +7,7 @@ export const add_new_comment = async(req, res) =>{
 
     const postId = req.params.id
     const commentText = req.body.comment
-    const authorId = res.locals.user._id
+    const authorId = req.user._id
 
     try {
         const comment = await Comment.create({
@@ -19,6 +19,7 @@ export const add_new_comment = async(req, res) =>{
             $push:{ comments: comment._id}
         })
     } catch (error) {
+        console.log(error)
         res.status(500).send('Internal server error')
     }
 

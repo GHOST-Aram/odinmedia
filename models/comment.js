@@ -3,7 +3,7 @@ import { Model, ModelSchema } from "../zghost/db/model.js";
 const commentSchema = new ModelSchema({
     author: {
         type: ModelSchema.ObjectId,
-        ref: 'Author',
+        ref: 'User',
         required: true
     },    
     text: {
