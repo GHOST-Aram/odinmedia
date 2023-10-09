@@ -54,6 +54,7 @@ export const get_all_people = async(req, res) =>{
         )
 
         const formattedUsers = users.map(user =>({
+            id: user._id.toString(),
             name: `${user.first_name} ${user.last_name}`,
             pictureUrl: user.pictureUrl,
             friends: user.friends.length
