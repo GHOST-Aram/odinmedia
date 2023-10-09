@@ -7,7 +7,6 @@ export const formatDate = (date_string) =>{
             year: 'numeric',
             minute: 'numeric',
             second: 'numeric',
-            timeZone:'short'
         }
     ) 
 }
