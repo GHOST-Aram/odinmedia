@@ -30,12 +30,12 @@ export const accept_one_friend_request = async(req, res) =>{
 
 export const decline_friend_request = async(req, res) =>{
     const friendId = req.params.id
-    const currentUserId = res.locals.user.id
+    const currentUserId = req.user.id
 
     try {
         //Remove id from requests recieved of current user
         await User.findByIdAndUpdate(currentUserId, {
-            $pull: { request_received: new ObjectId(friendId) }
+            $pull: { requests_received: new ObjectId(friendId) }
         })
         // Remove id of current user from requests sent of friend
         await User.findByIdAndUpdate(friendId, {
