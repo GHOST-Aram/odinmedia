@@ -19,15 +19,6 @@ export const get_my_profile = async(req, res) => {
             }
         )
 
-        const userProfile = {
-            id: id,
-            name: `${user.first_name} ${user.last_name}`,
-            pictureUrl: user.pictureUrl,
-            bannerUrl: user.bannerUrl,
-            friends: user.friends.length,
-            posts: formattedPosts
-        }
-
         const formattedPosts = posts.map(post =>({
             id: post._id.toString(),
             post_content: post.post_content,
@@ -37,6 +28,16 @@ export const get_my_profile = async(req, res) => {
             reposts: post.reposts.length,
             createdAt: formatDate(post.createdAt)
         }))
+        
+        const userProfile = {
+            id: id,
+            name: `${user.first_name} ${user.last_name}`,
+            pictureUrl: user.pictureUrl,
+            bannerUrl: user.bannerUrl,
+            friends: user.friends.length,
+            posts: formattedPosts
+        }
+
 
 
         res.render('profile', { 
@@ -65,15 +66,15 @@ export const get_user_profile = async(req, res) => {
             }
             )
 
-            const formattedPosts = posts.map(post =>({
-                id: post._id.toString(),
-                content: post.post_content,
-                author: formatAuthor(post.author),
-                comments: post.comments.length,
-                likes: post.likes.length,
-                reposts: post.reposts.length,
-                createdAt: formatDate(post.createdAt)
-            }))
+        const formattedPosts = posts.map(post =>({
+            id: post._id.toString(),
+            content: post.post_content,
+            author: formatAuthor(post.author),
+            comments: post.comments.length,
+            likes: post.likes.length,
+            reposts: post.reposts.length,
+            createdAt: formatDate(post.createdAt)
+        }))
         
         const profile = {
             id: id,
@@ -126,7 +127,7 @@ export const update_profile = async(req, res) =>{
         pictureUrl, 
         bannerUrl
     } = req.body
-
+    console.log(req.body)
     try {
         await User.findByIdAndUpdate(res.locals.user.id, {
             first_name, last_name, pictureUrl, bannerUrl
