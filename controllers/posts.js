@@ -12,7 +12,7 @@ export const add_new_comment = async(req, res) =>{
     try {
         const comment = await Comment.create({
             author: authorId,
-            text: commentText
+            text: commentText,
         })
 
         await Post.findByIdAndUpdate(postId, {
@@ -120,7 +120,8 @@ export const get_one_post = async(req, res) =>{
             },
             comments: post.comments.map(comment => ({
                 author: formatAuthor(comment.author),
-                text: comment.text
+                text: comment.text,
+                createdAt: formatDate(comment.createdAt)
             })),
             likes: post.likes.length,
             reposts: post.reposts.length,
