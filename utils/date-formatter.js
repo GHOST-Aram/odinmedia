@@ -5,6 +5,7 @@ export const formatDate = (date_string) =>{
             day: 'numeric',
             month: 'long',
             year: 'numeric',
+            hour: '2-digit',
             minute: 'numeric',
             second: 'numeric',
         }
