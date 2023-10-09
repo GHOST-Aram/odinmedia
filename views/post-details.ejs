@@ -38,7 +38,7 @@
                     >
                         <i class="fa-solid fa-envelope"></i>
                         <span class="text-slate-500 font-light text-sm">
-                            <%=post.comments.length%> Comments
+                            <%=post.comments%> Comments
                         </span>
                     </button>
                     <button
@@ -49,7 +49,7 @@
                             '/posts/<%=post.id%>/likes'
                         )"
                     >
-                        <%if(post.likes.includes(user.id)){ %>
+                        <%if(post.user_liked){ %>
                             <i class="fa-solid fa-heart text-red-500"></i> 
                         <%} else {%>
                             <i class="fa-solid fa-heart text-blue-400"></i> 
@@ -65,7 +65,7 @@
                     >
                         <i class="fa-solid fa-arrows-rotate"></i>
                         <span class="text-slate-500 font-light text-sm">
-                            <%=post.shared%> Reposts
+                            <%=post.reposts%> Reposts
                         </span>
                     </button>
                 </div>

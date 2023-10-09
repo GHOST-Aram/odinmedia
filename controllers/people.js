@@ -49,7 +49,7 @@ export const decline_friend_request = async(req, res) =>{
 }
 export const get_all_people = async(req, res) =>{
     try {
-        const users = User.find().select(
+        const users = await User.find().select(
             'first_name last_name pictureUrl friends'
         )
 
@@ -65,6 +65,7 @@ export const get_all_people = async(req, res) =>{
             people: formattedUsers
         })
     } catch (error) {
+        console.log(error)
         res.status(500).send('Internal server errror')
     }
 }

@@ -111,7 +111,7 @@ export const get_one_post = async(req, res) =>{
 
         const formattedPost = {
             id: post._id.toString(),
-            post_content: post.post_content,
+            content: post.post_content,
             author: {
                 id: post.author._id.toString(),
                 name: `${post.author.first_name} ${post.author.last_name}`,
