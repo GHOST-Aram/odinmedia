@@ -1,4 +1,4 @@
-import { User } from "../zghost/db/User"
+import { User } from "../zghost/db/User.js"
 
 export const creat_user = (req, res) => {
    const {first_name, last_name, email, password} = req.body
@@ -14,18 +14,17 @@ export const creat_user = (req, res) => {
         } )
     })
     res.redirect('/auth/login')
-    
+
    } catch (error) {
         res.status(500).send('Internal server error')
-   }
-    
+   } 
 }
 export const get_login_form = (req, res) =>{
-    res.render('accounts/login')
+    res.render('accounts/login', {title: 'Login'})
 }
 
 export const get_sign_up_form = (req, res) =>{
-    res.render('accounts/sign-up')
+    res.render('accounts/sign-up', { title: 'Sign Up'})
 }
 
 export const isLoggedIn = (req, res, next) => {

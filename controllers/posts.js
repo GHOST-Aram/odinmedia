@@ -47,9 +47,7 @@ export const change_likes = async(req, res) => {
 
 
 export const create_post = async(req, res) => {
-    if(!req.isAuthenticated()){
-        res.redirect('/auth/login')
-    }
+    
     try {
         await Post.create({
             post_content: req.body.post_content,

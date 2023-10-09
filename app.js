@@ -5,17 +5,18 @@ import { peopleRouter } from './routes/people.js';
 import { friendsRouter } from './routes/friends.js';
 import { profilesRouter } from './routes/profiles.js';
 import { authRouter } from './routes/auth.js';
+import { isLoggedIn } from './controllers/auth.js';
+
 
 
 app.get('/', (req, res) => {
 	res.redirect('/posts')
 })
-
-app.use('/posts', postsRouter)
 app.use('/auth', authRouter)
-app.use('/people', peopleRouter)
-app.use('/friends', friendsRouter)
-app.use('/profiles', profilesRouter)
+app.use('/posts',isLoggedIn, postsRouter)
+app.use('/people',isLoggedIn, peopleRouter)
+app.use('/friends',isLoggedIn, friendsRouter)
+app.use('/profiles',isLoggedIn, profilesRouter)
 
 //Error handling
 app.use(function(req, res, next) {
