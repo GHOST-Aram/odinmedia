@@ -63,7 +63,11 @@
                             rounded-sm transition-all hover:bg-slate-400 share-btn"
                         onclick="window.location.assign('/posts/<%=post.id%>/reposts')"
                     >
-                        <i class="fa-solid fa-arrows-rotate"></i>
+                        <%if(post.user_reposted){%>
+                            <i class="fa-solid fa-arrows-rotate text-green-400"></i>
+                        <%} else {%>
+                            <i class="fa-solid fa-arrows-rotate text-blue-400"></i>
+                        <%}%>
                         <span class="text-slate-500 font-light text-sm">
                             <%=post.reposts%> Reposts
                         </span>

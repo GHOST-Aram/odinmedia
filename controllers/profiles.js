@@ -6,6 +6,7 @@ import { User } from '../zghost/db/User.js'
 
 export const get_my_profile = async(req, res) => {
     const id = req.user.id
+    const currentUserId = req.user._id
 
     try {
         const user = await User.findById(id).select(
@@ -25,8 +26,9 @@ export const get_my_profile = async(req, res) => {
             author: formatAuthor(post.author),
             comments: post.comments.length,
             likes: post.likes.length,
-            user_liked: post.likes.includes(req.user._id),
+            user_liked: post.likes.includes(currentUserId),
             reposts: post.reposts.length,
+            user_reposted: post.reposts.includes(currentUserId),
             createdAt: formatDate(post.createdAt)
         }))
 
@@ -57,6 +59,7 @@ export const get_my_profile = async(req, res) => {
 
 export const get_user_profile = async(req, res) => {
     const id = req.params.id
+    const currentUserId = req.user._id
 
     try {
         const user = await User.findById(id).select(
@@ -76,7 +79,9 @@ export const get_user_profile = async(req, res) => {
             author: formatAuthor(post.author),
             comments: post.comments.length,
             likes: post.likes.length,
+            user_liked: post.likes.includes(currentUserId),
             reposts: post.reposts.length,
+            user_reposted: post.reposts.includes(currentUserId),
             createdAt: formatDate(post.createdAt)
         }))
         

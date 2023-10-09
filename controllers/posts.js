@@ -72,6 +72,7 @@ export const create_post = async(req, res) => {
 }
 
 export const get_posts = async (req, res) => {
+    const currentUserId = req.user._id
     try {
         const posts = await Post.find().populate({
                         path: 'author',
@@ -84,8 +85,9 @@ export const get_posts = async (req, res) => {
             author: formatAuthor(post.author),
             comments: post.comments.length,
             likes: post.likes.length,
-            user_liked: post.likes.includes(post.author._id),
+            user_liked: post.likes.includes(currentUserId),
             reposts: post.reposts.length,
+            user_reposted: post.reposts.includes(currentUserId),
             createdAt: formatDate(post.createdAt)
         })).reverse()
 
@@ -102,6 +104,7 @@ export const get_posts = async (req, res) => {
 
 export const get_one_post = async(req, res) =>{
     const id = req.params.id
+    const currentUserId = req.user.id
 
     try {
         const post = await Post.findById(id)
@@ -133,8 +136,9 @@ export const get_one_post = async(req, res) =>{
                 createdAt: formatDate(comment.createdAt)
             })).reverse(),
             likes: post.likes.length,
-            user_liked: post.likes.includes(post.author._id),
+            user_liked: post.likes.includes(currentUserId),
             reposts: post.reposts.length,
+            user_reposted: post.reposts.includes(currentUserId),
             createdAt: formatDate(post.createdAt)
         }
         
