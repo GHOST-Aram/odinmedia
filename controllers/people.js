@@ -74,22 +74,22 @@ export const get_all_people = async(req, res) =>{
 export const get_received_requests = async(req, res) =>{
     const currentUsrId = res.locals.user.id
     try {
-        const requests_received = await User.findById(currentUsrId)
+        const user = await User.findById(currentUsrId)
         .select('requests_received')
         .populate({
             path: 'requests_received',
             select: 'first_name last_name pictureUrl _id'
         })
 
-        const formattedRequests = requests_received.map(request =>({
+        const formattedRequests = user.requests_received.map(request =>({
             name: `${request.first_name} ${request.last_name}`,
             pictureUrl: request.pictureUrl,
             id: request._id.toString()
         }))
         
         res.render('requests-sent', { 
-            title: 'People | Requests Sent', 
-            heading: 'Requests Sent',
+            title: 'People | Requests Received', 
+            heading: 'Requests Received',
             sent_requests: formattedRequests
         })
     } catch (error) {
