@@ -1,7 +1,8 @@
 import { 
     get_login_form, 
     get_sign_up_form,
-    creat_user 
+    creat_user, 
+    logout
 } from "../controllers/auth.js";
 import { Router } from "../zghost/app/init.js";
 import passport from 'passport'
@@ -14,6 +15,7 @@ authRouter.get('/facebook/callback', passport.authenticate('facebook', {
     failureRedirect: 'auth/login'
 }))
 authRouter.get('/login',get_login_form )
+authRouter.get('/logout', logout)
 authRouter.get('/sign-up', get_sign_up_form)
 authRouter.post('/sign-up', creat_user)
 

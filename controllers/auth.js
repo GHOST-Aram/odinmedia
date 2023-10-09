@@ -31,6 +31,13 @@ export const isLoggedIn = (req, res, next) => {
     if(req.isAuthenticated()){
         next()
     } else{
-        res.redirect('/login')
+        res.redirect('/auth/login')
     }
+}
+
+export const logout = (req, res, next) =>{
+    req.logout(function(error) {
+        if(error){ return next(error)}
+    })
+    res.redirect('/auth/login')
 }

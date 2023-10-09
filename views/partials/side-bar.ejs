@@ -61,6 +61,15 @@
             >
              <span>My profile</span>
             </button>
+            <hr>
+            <button 
+                        class="w-full p-4 hover:bg-red-500 hover:text-white 
+                        font-bold text-red-500 space-x-4 text-start"
+                        onclick="window.location.assign('/auth/logout')"
+                    >
+                        <i class="fa-solid fa-power-off"></i>
+                        <span>Logout</span>
+                    </button>
         </div>
         <div class="xl:hidden">
             <%-include('./footer.ejs') %>
