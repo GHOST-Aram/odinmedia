@@ -5,7 +5,7 @@ import { Post } from '../models/post.js'
 import { User } from '../zghost/db/User.js'
 
 export const get_my_profile = async(req, res) => {
-    const id = res.locals.user.id
+    const id = req.user.id
 
     try {
         const user = await User.findById(id).select(
@@ -25,6 +25,7 @@ export const get_my_profile = async(req, res) => {
             author: formatAuthor(post.author),
             comments: post.comments.length,
             likes: post.likes.length,
+            user_liked: post.likes.includes(req.user._id),
             reposts: post.reposts.length,
             createdAt: formatDate(post.createdAt)
         }))
