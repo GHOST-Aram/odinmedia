@@ -87,7 +87,7 @@ export const get_posts = async (req, res) => {
             user_liked: post.likes.includes(post.author._id),
             reposts: post.reposts.length,
             createdAt: formatDate(post.createdAt)
-        }))
+        })).reverse()
 
         res.render('index', { 
             title: 'Home',
