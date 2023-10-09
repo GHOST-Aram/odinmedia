@@ -110,7 +110,7 @@ export const get_sent_requests = async(req, res) =>{
             pictureUrl: request.pictureUrl,
             id: request._id.toString()
         }))
-        
+        console.log(user)
         res.render('requests-sent', { 
             title: 'People | Requests Sent', 
             heading: 'Requests Sent',
@@ -149,7 +149,7 @@ export const send_friend_request = async(req, res) =>{
     try {
         //Add friend id to requests sent of current user
         await User.findByIdAndUpdate(currentUserId, {
-            $push: { request_sent: new ObjectId(friendId) }
+            $push: { requests_sent: new ObjectId(friendId) }
         })
         // Add id of current user to requests received of friend
         await User.findByIdAndUpdate(friendId, {
