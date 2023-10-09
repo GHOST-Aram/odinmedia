@@ -1,9 +1,9 @@
 <%-include('./partials/header')%>
         <div class="my-2 border rounded-b rounded-md">
-            <%if(profile.banner) {%>
+            <%if(profile.bannerUrl) {%>
             <div class="relative w-full h-40">
-                <a href="<%=profile.banner%>">
-                    <div style="background-image: url('<%=profile.banner%>');" 
+                <a href="<%=profile.bannerUrl%>">
+                    <div style="background-image: url('<%=profile.bannerUrl%>');" 
                         class="banner w-full h-40 absolute top-0 right-0 "
                     > 
                     </div>

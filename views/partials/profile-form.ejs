@@ -5,10 +5,10 @@
     novalidate
     >
     <div class="mb-16">
-        <%if(profile.banner) {%>
+        <%if(profile.bannerUrl) {%>
             <div class="relative w-full h-40">
-                <div id="banner" style="background-image: url('<%=profile.banner%>');" 
-                    class=" w-full h-40 absolute top-0 right-0 "
+                <div id="banner" style="background-image: url('<%=profile.bannerUrl%>');" 
+                    class="banner w-full h-40 absolute top-0 right-0 "
                 > 
                 </div>
                 <div class="absolute left-2 top-28">
@@ -107,7 +107,7 @@
             <label for="banner-url" class="text-slate-600 font-light">
                 Banner Url
             </label>
-            <input type="url" name="banner_url" id="banner-url" 
+            <input type="url" name="bannerUrl" id="banner-url" 
                 placeholder="Image path" value="<%=profile.banner%>"
                 class="border-b rounded-sm border text-md font-light 
                 p-2 w-full"

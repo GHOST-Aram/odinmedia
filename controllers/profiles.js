@@ -99,14 +99,18 @@ export const get_user_profile = async(req, res) => {
 export const get_editing_form = async(req, res) =>{
     try {
         const user = await User.findById(res.locals.user.id).select(
-            'first_name last_name pictureUrl friends bannerUrl'
+            'pictureUrl bannerUrl city region name _id'
         )
+        console.log('User: ', user)
         const profile = {
             id: user._id.toString(),
-            name: `${user.first_name} ${user.last_name}`,
+            name: user.name,
             pictureUrl: user.pictureUrl,
             bannerUrl: user.bannerUrl,
+            city: user.city,
+            region: user.region
         }
+        console.log('Profile: ', profile)
 
         res.render('edit-profile', { 
             title: 'Edit Profile',
@@ -122,15 +126,15 @@ export const get_editing_form = async(req, res) =>{
 export const update_profile = async(req, res) =>{
    
     const {
-        first_name, 
-        last_name, 
-        pictureUrl, 
-        bannerUrl
+        first_name, last_name, 
+        pictureUrl, bannerUrl, city,
+        region, banner_file, picture_file
     } = req.body
     console.log(req.body)
     try {
         await User.findByIdAndUpdate(res.locals.user.id, {
-            first_name, last_name, pictureUrl, bannerUrl
+            first_name, last_name, pictureUrl, bannerUrl, 
+            city, region, banner_file, picture_file
         })
 
         res.redirect('/profiles/me')

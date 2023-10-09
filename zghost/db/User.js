@@ -8,7 +8,11 @@ const userModel = new ModelSchema({
     middle_name: String,
     pictureUrl: String,
     bannerUrl: String,
+    city: String,
+    region: String,
     email: String,
+    banner_file: String,
+    picture_file: String,
     friends: {
         type: [ModelSchema.Types.ObjectId],
         ref: 'User'
