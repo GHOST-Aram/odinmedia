@@ -129,7 +129,7 @@ export const recall_friend_request = async(req, res) =>{
     try {
         //Remove id from requests sent of current user
         await User.findByIdAndUpdate(currentUserId, {
-            $pull: { request_sent: new ObjectId(friendId) }
+            $pull: { requests_sent: new ObjectId(friendId) }
         })
         // Remove id of current user from requests received of friend
         await User.findByIdAndUpdate(friendId, {
