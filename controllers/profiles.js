@@ -21,7 +21,7 @@ export const get_my_profile = async(req, res) => {
 
         const formattedPosts = posts.map(post =>({
             id: post._id.toString(),
-            post_content: post.post_content,
+            content: post.post_content,
             author: formatAuthor(post.author),
             comments: post.comments.length,
             likes: post.likes.length,
