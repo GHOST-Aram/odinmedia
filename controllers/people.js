@@ -3,11 +3,11 @@ import { User } from "../zghost/db/User.js"
 
 export const accept_one_friend_request = async(req, res) =>{
     const friendId = req.params.id
-    const currentUserId = res.locals.user.id
+    const currentUserId = req.user.id
     try {
         //Remove id from requests recieved of current user
         await User.findByIdAndUpdate(currentUserId, {
-            $pull: { request_received: new ObjectId(friendId) }
+            $pull: { requests_received: new ObjectId(friendId) }
         })
         //Add id to friends current user
         await User.findByIdAndUpdate(currentUserId, {
