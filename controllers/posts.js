@@ -151,16 +151,22 @@ export const get_one_post = async(req, res) =>{
 }
 
 export const repost = async(req, res) =>{
-    const id = req.params.id
+    const postId = req.params.id
+    const currentUserId = req.user.id
     try {
-        await Post.findByIdAndUpdate(id, 
-            {
-                $push: { reposts: res.locals.user._id } 
-            },
-        )
+        const post = await Post.findById(postId)
+
+        if(!post.reposts.includes(currentUserId)){
+            await Post.findByIdAndUpdate(postId, 
+                {
+                    $push: { reposts: currentUserId } 
+                },
+            )
+        }
+        res.redirect(`/posts/${postId}`)
+
     } catch (error) {
         res.status(500).send('Internal server error')
     }
 
-    res.redirect(`/posts/${id}`)
 }
