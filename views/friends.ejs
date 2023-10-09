@@ -1,7 +1,7 @@
 <%-include('./partials/header') %>
          <div class="people space-y-2">
-            <%if(people.length) {%>
-                <%people.forEach(friend => { %>
+            <%if(friends.length) {%>
+                <%friends.forEach(friend => { %>
                 <div class="flex flex-col items-start gap-2 border rounded-md p-2">
                     <a href="/profiles/<%=friend.id %>">
                         <div class="flex flex-row items-center gap-2">
