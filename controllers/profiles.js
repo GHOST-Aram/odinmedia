@@ -28,14 +28,13 @@ export const get_my_profile = async(req, res) => {
             reposts: post.reposts.length,
             createdAt: formatDate(post.createdAt)
         }))
-        
+
         const userProfile = {
             id: id,
             name: `${user.first_name} ${user.last_name}`,
             pictureUrl: user.pictureUrl,
             bannerUrl: user.bannerUrl,
             friends: user.friends.length,
-            posts: formattedPosts
         }
 
 
@@ -43,7 +42,8 @@ export const get_my_profile = async(req, res) => {
         res.render('profile', { 
             title: 'My Profile', 
             heading: 'User Profile',
-            profile: userProfile
+            profile: userProfile,
+            posts: formattedPosts
         })
     } catch (error) {
         console.log(error)
