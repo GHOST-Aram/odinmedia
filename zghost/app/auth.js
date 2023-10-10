@@ -61,12 +61,12 @@ passport.use(new FacebookStrategy(
 	}
 ))
 
-passport.use(new LocalStrategy(async(email, password, done) => {
-	console.log('Me')
+passport.use(new LocalStrategy(async(username, password, done) => {
 	try {
-		const user = await User.findOne({ email: email })
-		console.log('Const user: ', user)
+		const user = await User.findOne({ email: username })
+		
 		if(!user){ return done(null, false) }
+		if(!user.password){ return done(null, false)}
 
 		if(compareSync(password, user.password)){
 			return done(null, user)

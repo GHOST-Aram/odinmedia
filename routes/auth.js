@@ -15,10 +15,7 @@ authRouter.get('/facebook/callback', passport.authenticate('facebook', {
     failureRedirect: 'auth/login'
 }))
 authRouter.get('/login',get_login_form )
-authRouter.post('/login',(req, res, next) =>{
-    console.log('Request body: ',req.body)
-    next()
-}, passport.authenticate('local', {
+authRouter.post('/login', passport.authenticate('local', {
         failureRedirect: '/auth/login',
         successRedirect: '/'
 }))
