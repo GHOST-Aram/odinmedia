@@ -1,41 +1,38 @@
 import * as post  from "../utils/posts.js"
 
-export const add_new_comment = async(req, res) =>{
+export const add_new_comment = async(req, res, next) =>{
 
     try {
         await post.addNewComment(req)
         res.redirect(`/posts/${req.params.id}`)
     } catch (error) {
-        console.log(error)
-        res.status(500).send('Internal server error')
+        next(error)
     }
 
 }
 
-export const change_likes = async(req, res) => {
+export const change_likes = async(req, res, next) => {
 
     try {
         await post.updateLikes(req)
         res.redirect(`/posts/${req.params.id}`)
     } catch (error) {
-        console.log(error)
-        res.status(500).send('Internal server Error')
+        next(error)
     }
 }
 
 
-export const create_post = async(req, res) => {
+export const create_post = async(req, res, next) => {
     try {
         await post.createNewPost(req)
         res.redirect('/')
     } catch (error) {
-        console.log(error)
-        res.status(500).send('Internal Server Error')
+        next(error)
     }
 
 }
 
-export const get_posts = async (req, res) => {
+export const get_posts = async (req, res, next) => {
     const currentUser = req.user
     
     try {
@@ -48,12 +45,11 @@ export const get_posts = async (req, res) => {
             posts: formatPosts(filteredPosts, currentUser)
         })
     } catch (error) {
-        console.log(error)
-        res.status(500).send('Internal Server Error')
+        next(error)
     }
 }
 
-export const get_one_post = async(req, res) =>{
+export const get_one_post = async(req, res, next) =>{
 
     try {
         const currentPost = await post.findPostById(req)
@@ -65,17 +61,15 @@ export const get_one_post = async(req, res) =>{
             post:formattedPost
         })
     } catch (error) {
-        console.log(error)
-        res.status(500).send('Internal Server Error')   
+        next(error)
     }
 }
 
-export const repost = async(req, res) =>{
+export const repost = async(req, res, next) =>{
     try {
         await post.updateReposts(req)
         res.redirect(`/posts/${req.params.id}`)
     } catch (error) {
-        console.log(error)
-        res.status(500).send('Internal server error')
+        next(error)
     }
 }
