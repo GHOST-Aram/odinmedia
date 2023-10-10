@@ -4,6 +4,8 @@ import { User } from '../db/User.js';
 import { app } from './init.js';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
+import LocalStrategy from 'passport-local'
+import compareSync from 'bcrypt'
 
 app.use(session({ 
 	secret: process.env.SESSION_SECRET,
@@ -58,6 +60,23 @@ passport.use(new FacebookStrategy(
 		}
 	}
 ))
+
+passport.use(new LocalStrategy(async(email, password, done) => {
+	console.log('Me')
+	try {
+		const user = await User.findOne({ email: email })
+		console.log('Const user: ', user)
+		if(!user){ return done(null, false) }
+
+		if(compareSync(password, user.password)){
+			return done(null, user)
+		} else{
+			return done(null, false)
+		}
+	} catch (error) {
+		return done(error, false)
+	}
+}))
 
 app.use(passport.initialize())
 app.use(passport.session())
