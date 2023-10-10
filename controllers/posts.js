@@ -72,12 +72,21 @@ export const create_post = async(req, res) => {
 }
 
 export const get_posts = async (req, res) => {
-    const currentUserId = req.user._id
+    const currentUser = req.user
+    const currentUsersFriends = currentUser.friends.map(
+        friend => friend.toString()
+    )
     try {
-        const posts = await Post.find().populate({
-                        path: 'author',
-                        select: 'first_name last_name pictureUrl _id'
-                    })
+        let posts = await Post.find().populate({
+            path: 'author',
+            select: 'first_name last_name pictureUrl _id'
+        })
+        
+
+        posts = posts.filter(post => (
+            post.author._id.toString() === currentUser.id || 
+            currentUsersFriends.includes(post.author._id.toString())
+        ))
 
         const formattedPosts = posts.map(post =>({
             id: post._id.toString(),
@@ -85,9 +94,9 @@ export const get_posts = async (req, res) => {
             author: formatAuthor(post.author),
             comments: post.comments.length,
             likes: post.likes.length,
-            user_liked: post.likes.includes(currentUserId),
+            user_liked: post.likes.includes(currentUser._id),
             reposts: post.reposts.length,
-            user_reposted: post.reposts.includes(currentUserId),
+            user_reposted: post.reposts.includes(currentUser._id),
             createdAt: formatDate(post.createdAt)
         })).reverse()
 
