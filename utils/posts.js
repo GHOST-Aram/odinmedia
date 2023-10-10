@@ -21,7 +21,8 @@ export const createNewPost = async(content, currentUserId) => {
     })
 }
 
-export const findPosts = async() =>{
+
+export const findAllPosts = async() =>{
     return await Post.find().populate({
         path: 'author',
         select: 'first_name last_name pictureUrl _id'
@@ -77,7 +78,7 @@ export const formatComments = (comments) => {
     })).reverse()
 }
 
-export const findPost = async(id) =>{
+export const findPostById = async(id) =>{
     return await Post.findById(id).populate({
         path: 'author',
         select: 'first_name last_name pictureUrl _id'
@@ -106,9 +107,13 @@ export const updateLikes = async(postId, currentUserId) =>{
     }
 }
 export const updateReposts = async(postId, currentUserId) =>{
-    await Post.findByIdAndUpdate(postId, 
-        {
-            $push: { reposts: currentUserId } 
-        },
-    )
+    const post = await Post.findById(postId)
+
+    if(!post.reposts.includes(currentUserId)){
+        await Post.findByIdAndUpdate(postId, 
+            {
+                $push: { reposts: currentUserId } 
+            },
+        )
+    }
 }

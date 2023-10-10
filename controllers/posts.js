@@ -1,10 +1,9 @@
-import { Post } from "../models/post.js"
 import { 
     addNewComment,
     createNewPost, 
     filterPosts, 
-    findPost, 
-    findPosts, 
+    findPostById, 
+    findAllPosts, 
     formatPost, 
     formatPosts, 
     updateLikes, 
@@ -54,7 +53,7 @@ export const get_posts = async (req, res) => {
     const currentUser = req.user
     
     try {
-        const posts = await findPosts()
+        const posts = await findAllPosts()
         const filteredPosts = filterPosts(posts, currentUser)
         
         res.render('index', { 
@@ -72,7 +71,7 @@ export const get_one_post = async(req, res) =>{
     const postId = req.params.id
 
     try {
-        const post = await findPost(postId)
+        const post = await findPostById(postId)
         const formattedPost = formatPost(post, req.user.id)
         
         res.render('post-details', { 
@@ -90,13 +89,8 @@ export const repost = async(req, res) =>{
     const postId = req.params.id
     const currentUserId = req.user.id
     try {
-        const post = await Post.findById(postId)
-
-        if(!post.reposts.includes(currentUserId)){
-            await updateReposts(postId, currentUserId)
-        }
+        await updateReposts(postId, currentUserId)
         res.redirect(`/posts/${postId}`)
-
     } catch (error) {
         console.log(error)
         res.status(500).send('Internal server error')
