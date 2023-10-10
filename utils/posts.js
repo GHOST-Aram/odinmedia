@@ -1,7 +1,14 @@
 import { formatAuthor } from "./format-author.js"
 import { formatDate } from "./date-formatter.js"
 import { Post } from "../models/post.js"
+import mongoose from "mongoose"
 
+export const createNewPost = async(content, currentUserId) => {
+    await Post.create({
+        post_content: content,
+        author: currentUserId
+    })
+}
 export const filterPosts = (posts, currentUser)  =>{
     const currentUsersFriends = currentUser.friends.map(
         friend => friend.toString()
@@ -63,4 +70,27 @@ export const findPost = async(id) =>{
             select: 'first_name last_name pictureUrl _id'
         }
     })
+}
+
+export const updateLikes = async(postId, currentUserId) =>{
+    const post = await Post.findById(postId).select('likes')
+    
+    if(post.likes.includes(new mongoose.Types.ObjectId(currentUserId))){
+        await Post.findByIdAndUpdate(postId, {
+            $pull:{ likes: currentUserId },
+        })
+        
+    } else {
+        await Post.findByIdAndUpdate(postId, {
+            $push :{ likes: currentUserId }, 
+        })
+
+    }
+}
+export const updateReposts = async(postId, currentUserId) =>{
+    await Post.findByIdAndUpdate(postId, 
+        {
+            $push: { reposts: currentUserId } 
+        },
+    )
 }

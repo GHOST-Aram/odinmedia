@@ -1,7 +1,7 @@
 import { Comment } from "../models/comment.js"
 import mongoose from "mongoose"
 import { Post } from "../models/post.js"
-import { filterPosts, findPost, formatPost, formatPosts } from "../utils/posts.js"
+import { createNewPost, filterPosts, findPost, formatPost, formatPosts, updateLikes, updateReposts } from "../utils/posts.js"
 
 export const add_new_comment = async(req, res) =>{
 
@@ -28,23 +28,9 @@ export const add_new_comment = async(req, res) =>{
 
 export const change_likes = async(req, res) => {
     const postId = req.params.id
-    const currentUserId = res.locals.user._id
 
     try {
-        const post = await Post.findById(postId).select('likes')
-    
-        if(post.likes.includes(new mongoose.Types.ObjectId(currentUserId))){
-            await Post.findByIdAndUpdate(postId, {
-                $pull:{ likes: currentUserId },
-            })
-            
-        } else {
-            await Post.findByIdAndUpdate(postId, {
-                $push :{ likes: currentUserId }, 
-            })
-
-        }
-
+        await updateLikes(postId, req.user.id)
         res.redirect(`/posts/${postId}`)
     } catch (error) {
         console.log(error)
@@ -54,20 +40,14 @@ export const change_likes = async(req, res) => {
 
 
 export const create_post = async(req, res) => {
-    
     try {
-        await Post.create(
-            {
-                post_content: req.body.post_content,
-                author: res.locals.user._id
-            }
-        )
+        await createNewPost(req.body.post_content, req.user._id)
+        res.redirect('/')
     } catch (error) {
         console.log(error)
         res.status(500).send('Internal Server Error')
     }
 
-    res.redirect('/')
 }
 
 export const get_posts = async (req, res) => {
@@ -107,7 +87,6 @@ export const get_one_post = async(req, res) =>{
         console.log(error)
         res.status(500).send('Internal Server Error')   
     }
-   
 }
 
 export const repost = async(req, res) =>{
@@ -117,16 +96,12 @@ export const repost = async(req, res) =>{
         const post = await Post.findById(postId)
 
         if(!post.reposts.includes(currentUserId)){
-            await Post.findByIdAndUpdate(postId, 
-                {
-                    $push: { reposts: currentUserId } 
-                },
-            )
+            await updateReposts(postId, currentUserId)
         }
         res.redirect(`/posts/${postId}`)
 
     } catch (error) {
+        console.log(error)
         res.status(500).send('Internal server error')
     }
-
 }
