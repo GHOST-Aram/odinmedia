@@ -24,7 +24,6 @@ export const add_new_comment = async(req, res) =>{
         res.status(500).send('Internal server error')
     }
 
-    
     res.redirect(`/posts/${req.params.id}`)
 }
 
@@ -32,8 +31,6 @@ export const change_likes = async(req, res) => {
     const postId = req.params.id
     const currentUserId = res.locals.user._id
 
-    
-    
     try {
         const post = await Post.findById(postId).select('likes')
     
@@ -48,6 +45,7 @@ export const change_likes = async(req, res) => {
             })
 
         }
+
         res.redirect(`/posts/${postId}`)
     } catch (error) {
         console.log(error)
@@ -59,10 +57,12 @@ export const change_likes = async(req, res) => {
 export const create_post = async(req, res) => {
     
     try {
-        await Post.create({
-            post_content: req.body.post_content,
-            author: res.locals.user._id
-        })
+        await Post.create(
+            {
+                post_content: req.body.post_content,
+                author: res.locals.user._id
+            }
+        )
     } catch (error) {
         console.log(error)
         res.status(500).send('Internal Server Error')
@@ -76,16 +76,19 @@ export const get_posts = async (req, res) => {
     const currentUsersFriends = currentUser.friends.map(
         friend => friend.toString()
     )
+    const isFriend = userId => currentUsersFriends.includes(
+        userId.toString()
+    )
     try {
         let posts = await Post.find().populate({
             path: 'author',
             select: 'first_name last_name pictureUrl _id'
         })
         
-
         posts = posts.filter(post => (
             post.author._id.toString() === currentUser.id || 
-            currentUsersFriends.includes(post.author._id.toString())
+            currentUsersFriends.includes(post.author._id.toString()) ||
+            post.reposts.some(userId => isFriend(userId))
         ))
 
         const formattedPosts = posts.map(post =>({
