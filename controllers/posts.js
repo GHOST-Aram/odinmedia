@@ -1,8 +1,7 @@
 import { Comment } from "../models/comment.js"
 import mongoose from "mongoose"
 import { Post } from "../models/post.js"
-import { formatDate } from "../utils/date-formatter.js"
-import { formatAuthor } from "../utils/format-author.js"
+import { filterPosts, findPost, formatPost, formatPosts } from "../utils/posts.js"
 
 export const add_new_comment = async(req, res) =>{
 
@@ -73,40 +72,18 @@ export const create_post = async(req, res) => {
 
 export const get_posts = async (req, res) => {
     const currentUser = req.user
-    const currentUsersFriends = currentUser.friends.map(
-        friend => friend.toString()
-    )
-    const isFriend = userId => currentUsersFriends.includes(
-        userId.toString()
-    )
+    
     try {
         let posts = await Post.find().populate({
             path: 'author',
             select: 'first_name last_name pictureUrl _id'
         })
+        const filteredPosts = filterPosts(posts, currentUser)
         
-        posts = posts.filter(post => (
-            post.author._id.toString() === currentUser.id || 
-            currentUsersFriends.includes(post.author._id.toString()) ||
-            post.reposts.some(userId => isFriend(userId))
-        ))
-
-        const formattedPosts = posts.map(post =>({
-            id: post._id.toString(),
-            content: post.post_content,
-            author: formatAuthor(post.author),
-            comments: post.comments.length,
-            likes: post.likes.length,
-            user_liked: post.likes.includes(currentUser._id),
-            reposts: post.reposts.length,
-            user_reposted: post.reposts.includes(currentUser._id),
-            createdAt: formatDate(post.createdAt)
-        })).reverse()
-
         res.render('index', { 
             title: 'Home',
             heading: 'Posts', 
-            posts: formattedPosts
+            posts: formatPosts(filteredPosts, currentUser)
         })
     } catch (error) {
         console.log(error)
@@ -115,47 +92,14 @@ export const get_posts = async (req, res) => {
 }
 
 export const get_one_post = async(req, res) =>{
-    const id = req.params.id
-    const currentUserId = req.user.id
+    const postId = req.params.id
 
     try {
-        const post = await Post.findById(id)
-        .populate({
-                path: 'author',
-                select: 'first_name last_name pictureUrl _id'
-        })
-        .populate(
-            {
-                path: 'comments',
-                populate: {
-                    path: 'author',
-                    select: 'first_name last_name pictureUrl _id'
-                }
-            }
-        )
-
-        const formattedPost = {
-            id: post._id.toString(),
-            content: post.post_content,
-            author: {
-                id: post.author._id.toString(),
-                name: `${post.author.first_name} ${post.author.last_name}`,
-                pictureUrl: post.author.pictureUrl
-            },
-            comments: post.comments.map(comment => ({
-                author: formatAuthor(comment.author),
-                text: comment.text,
-                createdAt: formatDate(comment.createdAt)
-            })).reverse(),
-            likes: post.likes.length,
-            user_liked: post.likes.includes(currentUserId),
-            reposts: post.reposts.length,
-            user_reposted: post.reposts.includes(currentUserId),
-            createdAt: formatDate(post.createdAt)
-        }
+        const post = await findPost(postId)
+        const formattedPost = formatPost(post, req.user.id)
         
         res.render('post-details', { 
-            title: `Post | ${id}`, 
+            title: `Post | ${postId}`, 
             heading: 'Post', 
             post:formattedPost
         })
