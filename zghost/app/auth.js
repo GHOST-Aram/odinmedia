@@ -5,7 +5,7 @@ import { app } from './init.js';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import LocalStrategy from 'passport-local'
-import compareSync from 'bcrypt'
+import {compareSync} from 'bcrypt'
 
 app.use(session({ 
 	secret: process.env.SESSION_SECRET,
