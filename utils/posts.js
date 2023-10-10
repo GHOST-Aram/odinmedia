@@ -2,6 +2,7 @@ import { formatAuthor } from "./format-author.js"
 import { formatDate } from "./date-formatter.js"
 import { Post } from "../models/post.js"
 import mongoose from "mongoose"
+import { Comment } from "../models/comment.js"
 
 export const addNewComment = async(
     currentUserId, currentPostId, commentText ) =>{
@@ -82,7 +83,8 @@ export const findPostById = async(id) =>{
     return await Post.findById(id).populate({
         path: 'author',
         select: 'first_name last_name pictureUrl _id'
-    }).populate({
+    })
+    .populate({
         path: 'comments',
         populate: {
             path: 'author',
