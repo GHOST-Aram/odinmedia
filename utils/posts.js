@@ -4,18 +4,20 @@ import { Post } from "../models/post.js"
 import mongoose from "mongoose"
 import { Comment } from "../models/comment.js"
 
-export const addNewComment = async(
-    currentUserId, currentPostId, commentText ) =>{
+export const addNewComment = async(request) =>{
     const comment = await Comment.create({
-        author: currentUserId,
-        text: commentText,
+        author: request.user._id,
+        text: request.body.comment,
     })
 
-    await Post.findByIdAndUpdate(currentPostId, {
+    await Post.findByIdAndUpdate(request.params.id, {
         $push:{ comments: comment._id}
     })
 }
-export const createNewPost = async(content, currentUserId) => {
+export const createNewPost = async(request) => {
+    const content = request.body.post_content
+    const currentUserId = request.user._id
+
     await Post.create({
         post_content: content,
         author: currentUserId
@@ -79,21 +81,24 @@ export const formatComments = (comments) => {
     })).reverse()
 }
 
-export const findPostById = async(id) =>{
-    return await Post.findById(id).populate({
+export const findPostById = async(request) =>{
+    return await Post.findById(request.params.id)
+        .populate({
         path: 'author',
         select: 'first_name last_name pictureUrl _id'
-    })
-    .populate({
-        path: 'comments',
-        populate: {
-            path: 'author',
-            select: 'first_name last_name pictureUrl _id'
-        }
-    })
+        })
+        .populate({
+            path: 'comments',
+            populate: {
+                path: 'author',
+                select: 'first_name last_name pictureUrl _id'
+            }
+        })
 }
 
-export const updateLikes = async(postId, currentUserId) =>{
+export const updateLikes = async(request) =>{
+    const postId = request.params.id
+    const currentUserId = request.user.id
     const post = await Post.findById(postId).select('likes')
     
     if(post.likes.includes(new mongoose.Types.ObjectId(currentUserId))){
@@ -108,7 +113,10 @@ export const updateLikes = async(postId, currentUserId) =>{
 
     }
 }
-export const updateReposts = async(postId, currentUserId) =>{
+export const updateReposts = async(request) =>{
+    const postId = request.params.id
+    const currentUserId = request.user.id
+
     const post = await Post.findById(postId)
 
     if(!post.reposts.includes(currentUserId)){
