@@ -48,9 +48,10 @@ export const decline_friend_request = async(req, res) =>{
     }
 }
 export const get_all_people = async(req, res) =>{
+    const currentUserId = req.user.id
     try {
         const users = await User.find().select(
-            'first_name last_name pictureUrl friends'
+            'first_name last_name pictureUrl friends requests_sent request_received'
         )
 
         const formattedUsers = users.map(user =>({
@@ -58,7 +59,8 @@ export const get_all_people = async(req, res) =>{
             name: `${user.first_name} ${user.last_name}`,
             pictureUrl: user.pictureUrl,
             friends: user.friends.length
-        }))
+        })
+        ).filter(user => user.id !== currentUserId)
 
         res.render('people', { 
             title: 'People', 
