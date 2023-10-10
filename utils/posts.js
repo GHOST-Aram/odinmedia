@@ -3,10 +3,28 @@ import { formatDate } from "./date-formatter.js"
 import { Post } from "../models/post.js"
 import mongoose from "mongoose"
 
+export const addNewComment = async(
+    currentUserId, currentPostId, commentText ) =>{
+    const comment = await Comment.create({
+        author: currentUserId,
+        text: commentText,
+    })
+
+    await Post.findByIdAndUpdate(currentPostId, {
+        $push:{ comments: comment._id}
+    })
+}
 export const createNewPost = async(content, currentUserId) => {
     await Post.create({
         post_content: content,
         author: currentUserId
+    })
+}
+
+export const findPosts = async() =>{
+    return await Post.find().populate({
+        path: 'author',
+        select: 'first_name last_name pictureUrl _id'
     })
 }
 export const filterPosts = (posts, currentUser)  =>{

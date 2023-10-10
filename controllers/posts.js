@@ -1,29 +1,29 @@
-import { Comment } from "../models/comment.js"
-import mongoose from "mongoose"
 import { Post } from "../models/post.js"
-import { createNewPost, filterPosts, findPost, formatPost, formatPosts, updateLikes, updateReposts } from "../utils/posts.js"
+import { 
+    addNewComment,
+    createNewPost, 
+    filterPosts, 
+    findPost, 
+    findPosts, 
+    formatPost, 
+    formatPosts, 
+    updateLikes, 
+    updateReposts 
+} from "../utils/posts.js"
 
 export const add_new_comment = async(req, res) =>{
-
     const postId = req.params.id
-    const commentText = req.body.comment
-    const authorId = req.user._id
 
     try {
-        const comment = await Comment.create({
-            author: authorId,
-            text: commentText,
-        })
-
-        await Post.findByIdAndUpdate(postId, {
-            $push:{ comments: comment._id}
-        })
+       await addNewComment(
+            req.user._id, postId, req.body.comment
+        )
+        res.redirect(`/posts/${postId}`)
     } catch (error) {
         console.log(error)
         res.status(500).send('Internal server error')
     }
 
-    res.redirect(`/posts/${req.params.id}`)
 }
 
 export const change_likes = async(req, res) => {
@@ -54,10 +54,7 @@ export const get_posts = async (req, res) => {
     const currentUser = req.user
     
     try {
-        let posts = await Post.find().populate({
-            path: 'author',
-            select: 'first_name last_name pictureUrl _id'
-        })
+        const posts = await findPosts()
         const filteredPosts = filterPosts(posts, currentUser)
         
         res.render('index', { 
