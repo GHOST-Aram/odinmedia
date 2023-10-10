@@ -1,8 +1,7 @@
 import { ModelSchema, Model } from "./model.js";
 
-const userModel = new ModelSchema({
+const userSchema = new ModelSchema({
     profileId: String,
-    name: String,
     last_name: String,
     first_name: String,
     middle_name: String,
@@ -32,4 +31,8 @@ const userModel = new ModelSchema({
     }
 })
 
-export const User = new Model('User', userModel) 
+userSchema.virtual('name').get(function(){
+    return `${this.first_name} ${this.last_name}`
+})
+
+export const User = new Model('User', userSchema) 

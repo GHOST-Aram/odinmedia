@@ -10,7 +10,7 @@ export const get_my_profile = async(req, res) => {
 
     try {
         const user = await User.findById(id).select(
-            'pictureUrl friends bannerUrl city _id region'
+            'pictureUrl friends bannerUrl city _id region first_name last_name'
         )
 
         const posts = await Post.find({author: new ObjectId(id)}).populate(
@@ -108,7 +108,7 @@ export const get_user_profile = async(req, res) => {
 export const get_editing_form = async(req, res) =>{
     try {
         const user = await User.findById(res.locals.user.id).select(
-            'pictureUrl bannerUrl city region name _id'
+            'pictureUrl bannerUrl city region first_name last_name _id'
         )
         console.log('User: ', user)
         const profile = {
