@@ -1,8 +1,7 @@
-import { User } from '../zghost/db/User.js'
 import * as profiles from '../utils/profiles.js'
 import { formatPosts } from '../utils/posts.js'
 
-export const get_my_profile = async(req, res) => {
+export const get_my_profile = async(req, res, next) => {
     const currentUser = req.user
 
     try {
@@ -18,12 +17,11 @@ export const get_my_profile = async(req, res) => {
             posts: formattedPosts
         })
     } catch (error) {
-        console.log(error)
-        res.status(500).send('Internal Server Error')  
+        next(error)
     }
 }
 
-export const get_user_profile = async(req, res) => {
+export const get_user_profile = async(req, res, next) => {
     const userId = req.params.id
     const currentUser = req.user
 
@@ -40,12 +38,11 @@ export const get_user_profile = async(req, res) => {
             posts: formattedPosts
         })
     } catch (error) {
-        console.log(error)
-        res.status(500).send('Internal Server Error')  
+        next(error)
     }
 }
 
-export const get_editing_form = async(req, res) =>{
+export const get_editing_form = async(req, res, next) =>{
     try {
         const user = await profiles.findProfileById(req.user.id)
         const profile = profiles.formatProfile(user)
@@ -56,19 +53,18 @@ export const get_editing_form = async(req, res) =>{
             profile 
         })    
     } catch (error) {
-        console.log(error)
-        res.status(500).send('Internal server error')
+        next(error)
     }
 }
 
-export const update_profile = async(req, res) =>{
+export const update_profile = async(req, res, next) =>{
    
     const {
         first_name, last_name, 
         pictureUrl, bannerUrl, city,
         region, banner_file, picture_file
     } = req.body
-    console.log(req.body)
+    git 
     try {
         await profiles.updateProfileInfo(req.user.id, {
             first_name, 
@@ -80,8 +76,7 @@ export const update_profile = async(req, res) =>{
 
         res.redirect('/profiles/me')
     } catch (error) {
-        console.log(error)
-        res.status(500).send('Internal server error')
+        next(error)
     }
 }
 
