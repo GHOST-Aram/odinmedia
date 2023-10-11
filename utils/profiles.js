@@ -1,6 +1,6 @@
 import { User } from "../zghost/db/User.js"
 import { Post } from "../models/post.js"
-import { formatDate } from "./date-formatter.js"
+import { formatDate } from "./formats.js"
 import { ObjectId } from "../zghost/app/init.js"
 
 export const findProfileById = async(id) =>{

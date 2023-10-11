@@ -1,5 +1,5 @@
 import * as people from "../utils/people.js"
-import { formatUser } from "../utils/format-user.js"
+import { formatUser } from "../utils/formats.js"
 
 export const accept_one_friend_request = async(req, res, next) =>{
     try {

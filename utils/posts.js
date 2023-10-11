@@ -1,5 +1,4 @@
-import { formatAuthor } from "./format-author.js"
-import { formatDate } from "./date-formatter.js"
+import { formatAuthor, formatDate } from "./formats.js"
 import { Post } from "../models/post.js"
 import { ObjectId } from "../zghost/app/init.js"
 import { Comment } from "../models/comment.js"
