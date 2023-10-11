@@ -42,7 +42,7 @@ export const get_posts = async (req, res, next) => {
         res.render('index', { 
             title: 'Home',
             heading: 'Posts', 
-            posts: formatPosts(filteredPosts, currentUser)
+            posts: post.formatPosts(filteredPosts, currentUser)
         })
     } catch (error) {
         next(error)
