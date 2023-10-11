@@ -17,8 +17,8 @@ export const formatFriends = (friends) =>{
     }))
 }
 export const removeFromFriends = async(request) =>{
-    const currentUserId = req.user.id
-    const friendId = req.params.id
+    const currentUserId = request.user.id
+    const friendId = request.params.id
 
     await User.findByIdAndUpdate(currentUserId, {
         $pull: { friends: new ObjectId(friendId) }
