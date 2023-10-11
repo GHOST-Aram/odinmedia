@@ -47,19 +47,8 @@ export const get_user_profile = async(req, res) => {
 
 export const get_editing_form = async(req, res) =>{
     try {
-        const user = await User.findById(res.locals.user.id).select(
-            'pictureUrl bannerUrl city region first_name last_name _id'
-        )
-        console.log('User: ', user)
-        const profile = {
-            id: user._id.toString(),
-            name: user.name,
-            pictureUrl: user.pictureUrl,
-            bannerUrl: user.bannerUrl,
-            city: user.city,
-            region: user.region
-        }
-        console.log('Profile: ', profile)
+        const user = await profiles.findProfileById(req.user.id)
+        const profile = profiles.formatProfile(user)
 
         res.render('edit-profile', { 
             title: 'Edit Profile',
