@@ -19,6 +19,14 @@ export const addFriend = async(request) =>{
     })
 }
 
+export const findAllUsers = async() =>{
+    return await User.find().select(
+        `first_name last_name 
+        pictureUrl 
+        friends requests_sent 
+        request_received`
+    )
+}
 export const rejectFriendRequest = async(request) =>{
     const friendId = request.params.id
     const currentUserId = request.user.id

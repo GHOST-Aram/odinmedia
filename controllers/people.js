@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb"
 import { User } from "../zghost/db/User.js"
 import * as people from "../utils/people.js"
+import { formatUser } from "../utils/format-user.js"
 
 export const accept_one_friend_request = async(req, res) =>{
     try {
@@ -23,14 +24,10 @@ export const decline_friend_request = async(req, res) =>{
 export const get_all_people = async(req, res) =>{
     const currentUserId = req.user.id
     try {
-        const users = await User.find().select(
-            'first_name last_name pictureUrl friends requests_sent request_received'
-        )
+        const users = await people.findAllUsers()
 
         const formattedUsers = users.map(user =>({
-            id: user._id.toString(),
-            name: `${user.first_name} ${user.last_name}`,
-            pictureUrl: user.pictureUrl,
+            ...formatUser(user),
             friends: user.friends.length
         })
         ).filter(user => user.id !== currentUserId)
