@@ -1,5 +1,5 @@
 import * as post  from "../utils/posts.js"
-
+import { formatPosts, formatPost } from "../utils/formats.js"
 export const add_new_comment = async(req, res, next) =>{
 
     try {
@@ -42,7 +42,7 @@ export const get_posts = async (req, res, next) => {
         res.render('index', { 
             title: 'Home',
             heading: 'Posts', 
-            posts: post.formatPosts(filteredPosts, currentUser)
+            posts: formatPosts(filteredPosts, currentUser)
         })
     } catch (error) {
         next(error)
@@ -53,7 +53,7 @@ export const get_one_post = async(req, res, next) =>{
 
     try {
         const currentPost = await post.findPostById(req)
-        const formattedPost = post.formatPost(currentPost, req.user.id)
+        const formattedPost = formatPost(currentPost, req.user.id)
         
         res.render('post-details', { 
             title: `Post | ${req.params.id}`, 

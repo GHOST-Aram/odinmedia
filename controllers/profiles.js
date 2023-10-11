@@ -1,5 +1,5 @@
 import * as profiles from '../utils/profiles.js'
-import { formatPosts } from '../utils/posts.js'
+import { formatPosts } from '../utils/formats.js'
 
 export const get_my_profile = async(req, res, next) => {
     const currentUser = req.user

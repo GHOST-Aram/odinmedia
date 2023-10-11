@@ -1,4 +1,3 @@
-import { formatUser, formatDate } from "./formats.js"
 import { Post } from "../models/post.js"
 import { ObjectId } from "../zghost/app/init.js"
 import { Comment } from "../models/comment.js"
@@ -13,6 +12,7 @@ export const addNewComment = async(request) =>{
         $push:{ comments: comment._id}
     })
 }
+
 export const createNewPost = async(request) => {
     const content = request.body.post_content
     const currentUserId = request.user._id
@@ -23,13 +23,13 @@ export const createNewPost = async(request) => {
     })
 }
 
-
 export const findAllPosts = async() =>{
     return await Post.find().populate({
         path: 'author',
         select: 'first_name last_name pictureUrl _id'
     })
 }
+
 export const filterPosts = (posts, currentUser)  =>{
     const currentUsersFriends = currentUser.friends.map(
         friend => friend.toString()
@@ -43,42 +43,6 @@ export const filterPosts = (posts, currentUser)  =>{
         post.reposts.some(userId => isFriend(userId))
     ))
 } 
-
-export const formatPosts = (posts, currentUser) => {
-    return posts.map(post =>({
-        id: post._id.toString(),
-        content: post.post_content,
-        author: formatUser(post.author),
-        comments: post.comments.length,
-        likes: post.likes.length,
-        user_liked: post.likes.includes(currentUser._id),
-        reposts: post.reposts.length,
-        user_reposted: post.reposts.includes(currentUser._id),
-        createdAt: formatDate(post.createdAt)
-    })).reverse()
-} 
-
-export const formatPost = (post, currentUserId) =>{
-    return ({
-        id: post._id.toString(),
-        content: post.post_content,
-        author: formatUser(post.author),
-        comments: formatComments(post.comments),
-        likes: post.likes.length,
-        user_liked: post.likes.includes(currentUserId),
-        reposts: post.reposts.length,
-        user_reposted: post.reposts.includes(currentUserId),
-        createdAt: formatDate(post.createdAt)
-    })
-} 
-
-export const formatComments = (comments) => {
-    return comments.map(comment => ({
-        author: formatUser(comment.author),
-        text: comment.text,
-        createdAt: formatDate(comment.createdAt)
-    })).reverse()
-}
 
 export const findPostById = async(request) =>{
     return await Post.findById(request.params.id)
