@@ -1,19 +1,8 @@
-import { User } from "../zghost/db/User.js"
-import { hash } from "bcrypt"
+import { createUserWithHashedPassword } from "../utils/auth.js"
 
 export const creat_user = (req, res) => {
-   const {first_name, last_name, email, password} = req.body
-    
    try {
-       hash(password, 10, async(err, hashedPasscode) =>{
-        if(err) throw err
-        await User.create({
-            first_name: first_name,
-            last_name: last_name,
-            email: email,
-            password: hashedPasscode,
-        } )
-    })
+    createUserWithHashedPassword(req)
     res.redirect('/auth/login')
 
    } catch (error) {
