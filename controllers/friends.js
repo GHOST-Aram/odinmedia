@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb"
 import { User } from "../zghost/db/User.js"
 export const unfriend = async(req, res) => {
-    const currentUser = res.locals.user
+    const currentUser = req.user
     const friendId = req.params.id
 
     try {
@@ -13,7 +13,7 @@ export const unfriend = async(req, res) => {
             $pull: { friends: new ObjectId(currentUser.id) }
         })
         
-        res.redirect(`/friends/${res.locals.user.id}/all`)
+        res.redirect(`/friends/${req.user.id}/all`)
     } catch (error) {
         res.status(500).send('Internal server error')
     }
