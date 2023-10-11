@@ -1,18 +1,8 @@
-import { ObjectId } from "mongodb"
-import { User } from "../zghost/db/User.js"
+import * as people from "../utils/friends.js"
 export const unfriend = async(req, res) => {
-    const currentUser = req.user
-    const friendId = req.params.id
-
+    
     try {
-        await User.findByIdAndUpdate(currentUser.id, {
-            $pull: { friends: new ObjectId(friendId) }
-        })
-
-        await User.findByIdAndUpdate(friendId, {
-            $pull: { friends: new ObjectId(currentUser.id) }
-        })
-        
+        people.removeFromFriends(req)
         res.redirect(`/friends/${req.user.id}/all`)
     } catch (error) {
         res.status(500).send('Internal server error')
@@ -21,18 +11,13 @@ export const unfriend = async(req, res) => {
 }
 
 export const get_all_friends = async(req, res) =>{
-    const id = req.params.id
+    let friends = []
     try {
-        const user =  await User.findById(id).populate({
-            path: 'friends',
-            select: '_id first_name last_name pictureUrl'
-        })
-
-        const friends = user.friends.map(friend => ({
-            id: friend._id.toString(),
-            name: `${friend.first_name} ${friend.last_name}`,
-            pictureUrl: friend.pictureUrl
-        }))
+        const user = await people.findUserById(req)
+        
+        if(user.friends && user.friends.length > 0){
+            friends = people.formatFriends(user.friends)
+        }
 
         res.render('friends', { 
             title: `Friends of ${user.name}`, 
