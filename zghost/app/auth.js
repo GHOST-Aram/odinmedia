@@ -1,26 +1,10 @@
 import passport from 'passport';
 import { User } from '../db/User.js';
 import { app } from './init.js';
-import session from 'express-session';
-import MongoStore from 'connect-mongo';
 import * as strategies from '../utils/auth-strategies.js';
+import { authentication_session } from '../utils/session.js';
 
-
-app.use(session({ 
-	secret: process.env.SESSION_SECRET,
-	resave: true,
-	saveUninitialized: true,
-	store: MongoStore.create({
-		mongoUrl: process.env.MONGODB_URI,
-		mongoOptions: {
-			useUnifiedTopology: true,
-			useNewUrlParser: true,
-		}
-	}),
-	cookie: {
-		maxAge: 24 * 60 * 60 * 1000
-	}
-}))
+app.use(authentication_session())
 
 passport.use(strategies.facebookStrategy)
 passport.use(strategies.localStrategy)
@@ -34,9 +18,7 @@ passport.serializeUser((user, done) =>{
 	})
 })
 
-passport.deserializeUser(
-    async(id, done) =>{
-
+passport.deserializeUser( async(id, done) =>{
     try {
 		const user = await User.findById(id)
 		return done (null, user)
