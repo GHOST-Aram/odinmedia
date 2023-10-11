@@ -70,9 +70,12 @@ export const update_profile = async(req, res) =>{
     } = req.body
     console.log(req.body)
     try {
-        await User.findByIdAndUpdate(res.locals.user.id, {
-            first_name, last_name, pictureUrl, bannerUrl, 
-            city, region, banner_file, picture_file
+        await profiles.updateProfileInfo(req.user.id, {
+            first_name, 
+            last_name, 
+            pictureUrl, 
+            bannerUrl,
+            city, region
         })
 
         res.redirect('/profiles/me')
