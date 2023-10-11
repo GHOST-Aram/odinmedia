@@ -1,10 +1,10 @@
 import { ObjectId } from "mongodb"
 import { User } from "../zghost/db/User.js"
-import { addFriend } from "../utils/people.js"
+import * as people from "../utils/people.js"
 
 export const accept_one_friend_request = async(req, res) =>{
     try {
-        addFriend(req)
+        people.addFriend(req)
         res.redirect('/people/requests/received')
     } catch (error) {
         res.status(500).send("Internal server error")
@@ -12,19 +12,9 @@ export const accept_one_friend_request = async(req, res) =>{
 }
 
 export const decline_friend_request = async(req, res) =>{
-    const friendId = req.params.id
-    const currentUserId = req.user.id
-
+    
     try {
-        //Remove id from requests recieved of current user
-        await User.findByIdAndUpdate(currentUserId, {
-            $pull: { requests_received: new ObjectId(friendId) }
-        })
-        // Remove id of current user from requests sent of friend
-        await User.findByIdAndUpdate(friendId, {
-            $pull: { requests_sent: new ObjectId(currentUserId)}
-        })
-
+        people.rejectFriendRequest(req)
         res.redirect('/people/requests/received')
     } catch (error) {
         res.status(500).send("Internal server error")

@@ -18,3 +18,15 @@ export const addFriend = async(request) =>{
         $addToSet: {friends: new ObjectId(currentUserId)}
     })
 }
+
+export const rejectFriendRequest = async(request) =>{
+    const friendId = request.params.id
+    const currentUserId = request.user.id
+
+    await User.findByIdAndUpdate(currentUserId, {
+        $pull: { requests_received: new ObjectId(friendId) }
+    })
+    await User.findByIdAndUpdate(friendId, {
+        $pull: { requests_sent: new ObjectId(currentUserId)}
+    })
+} 
