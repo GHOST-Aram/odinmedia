@@ -1,10 +1,3 @@
-export const formatAuthor = (author) =>{
-    return {
-        id: author._id.toString(),
-        name: `${author.first_name} ${author.last_name}`,
-        pictureUrl: author.pictureUrl
-    }
-}
 export const formatDate = (date_string) =>{
     return new Date(date_string).toLocaleString(
         'en-US', {

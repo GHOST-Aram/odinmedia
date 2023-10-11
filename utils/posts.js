@@ -1,4 +1,4 @@
-import { formatAuthor, formatDate } from "./formats.js"
+import { formatUser, formatDate } from "./formats.js"
 import { Post } from "../models/post.js"
 import { ObjectId } from "../zghost/app/init.js"
 import { Comment } from "../models/comment.js"
@@ -48,7 +48,7 @@ export const formatPosts = (posts, currentUser) => {
     return posts.map(post =>({
         id: post._id.toString(),
         content: post.post_content,
-        author: formatAuthor(post.author),
+        author: formatUser(post.author),
         comments: post.comments.length,
         likes: post.likes.length,
         user_liked: post.likes.includes(currentUser._id),
@@ -62,7 +62,7 @@ export const formatPost = (post, currentUserId) =>{
     return ({
         id: post._id.toString(),
         content: post.post_content,
-        author: formatAuthor(post.author),
+        author: formatUser(post.author),
         comments: formatComments(post.comments),
         likes: post.likes.length,
         user_liked: post.likes.includes(currentUserId),
@@ -74,7 +74,7 @@ export const formatPost = (post, currentUserId) =>{
 
 export const formatComments = (comments) => {
     return comments.map(comment => ({
-        author: formatAuthor(comment.author),
+        author: formatUser(comment.author),
         text: comment.text,
         createdAt: formatDate(comment.createdAt)
     })).reverse()
