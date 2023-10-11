@@ -1,16 +1,15 @@
 import * as people from "../utils/friends.js"
-export const unfriend = async(req, res) => {
+export const unfriend = async(req, res, next) => {
     
     try {
         people.removeFromFriends(req)
         res.redirect(`/friends/${req.user.id}/all`)
     } catch (error) {
-        res.status(500).send('Internal server error')
+        next(error)
     }
-
 }
 
-export const get_all_friends = async(req, res) =>{
+export const get_all_friends = async(req, res, next) =>{
     let friends = []
     try {
         const user = await people.findUserById(req)
@@ -25,7 +24,7 @@ export const get_all_friends = async(req, res) =>{
             friends
         })
     } catch (error) {
-        res.status(500).send('Internal Server Error')
+        next(error)
     }
 }
 
