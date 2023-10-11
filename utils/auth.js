@@ -1,4 +1,4 @@
-import { hash } from "bcrypt"
+import { hash } from '../zghost/app/init.js'
 import { User } from "../zghost/db/User.js"
 
 export const createUserWithHashedPassword = (request) =>{

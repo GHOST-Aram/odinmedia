@@ -1,7 +1,7 @@
 import { formatAuthor } from "./format-author.js"
 import { formatDate } from "./date-formatter.js"
 import { Post } from "../models/post.js"
-import mongoose from "mongoose"
+import { ObjectId } from "../zghost/app/init.js"
 import { Comment } from "../models/comment.js"
 
 export const addNewComment = async(request) =>{
@@ -101,7 +101,7 @@ export const updateLikes = async(request) =>{
     const currentUserId = request.user.id
     const post = await Post.findById(postId).select('likes')
     
-    if(post.likes.includes(new mongoose.Types.ObjectId(currentUserId))){
+    if(post.likes.includes(new ObjectId(currentUserId))){
         await Post.findByIdAndUpdate(postId, {
             $pull:{ likes: currentUserId },
         })

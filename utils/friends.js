@@ -1,4 +1,4 @@
-import { ObjectId } from "mongodb"
+import { ObjectId } from "../zghost/app/init.js"
 import { User } from "../zghost/db/User.js"
 
 export const findUserById = async(req) =>{

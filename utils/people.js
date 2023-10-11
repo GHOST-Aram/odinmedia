@@ -1,5 +1,5 @@
 import { User } from "../zghost/db/User.js"
-import { ObjectId } from "mongodb"
+import { ObjectId } from "../zghost/app/init.js"
 
 export const addFriend = async(request) =>{
     const currentUserId = request.user.id

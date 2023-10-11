@@ -1,7 +1,9 @@
-import LocalStrategy from 'passport-local'
-import {compareSync} from 'bcrypt'
+import { 
+    LocalStrategy, 
+    comparePasswords, 
+    FacebookStrategy 
+} from '../app/init.js'
 import { User } from '../db/User.js'
-import FacebookStrategy from 'passport-facebook'
 
 export const facebookStrategy = new FacebookStrategy(
 	{
@@ -48,7 +50,7 @@ export const localStrategy = new LocalStrategy(async(username, password, done) =
 		if(!user){ return done(null, false) }
 		if(!user.password){ return done(null, false)}
 
-		if(compareSync(password, user.password)){
+		if(comparePasswords(password, user.password)){
 			return done(null, user)
 		} else{
 			return done(null, false)
