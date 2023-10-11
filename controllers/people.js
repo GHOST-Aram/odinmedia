@@ -5,7 +5,7 @@ import { formatUser } from "../utils/format-user.js"
 
 export const accept_one_friend_request = async(req, res) =>{
     try {
-        people.addFriend(req)
+        await people.addFriend(req)
         res.redirect('/people/requests/received')
     } catch (error) {
         res.status(500).send("Internal server error")
@@ -15,7 +15,7 @@ export const accept_one_friend_request = async(req, res) =>{
 export const decline_friend_request = async(req, res) =>{
     
     try {
-        people.rejectFriendRequest(req)
+        await people.rejectFriendRequest(req)
         res.redirect('/people/requests/received')
     } catch (error) {
         res.status(500).send("Internal server error")
@@ -44,20 +44,11 @@ export const get_all_people = async(req, res) =>{
 }
 
 export const get_received_requests = async(req, res) =>{
-    const currentUsrId = res.locals.user.id
     try {
-        const user = await User.findById(currentUsrId)
-        .select('requests_received')
-        .populate({
-            path: 'requests_received',
-            select: 'first_name last_name pictureUrl _id'
-        })
-
-        const formattedRequests = user.requests_received.map(request =>({
-            name: `${request.first_name} ${request.last_name}`,
-            pictureUrl: request.pictureUrl,
-            id: request._id.toString()
-        }))
+        const requests_received = await people.findReceivedRequests(req)
+        const formattedRequests = requests_received.map(
+            request => formatUser(request)
+        )
         
         res.render('requests-received', { 
             title: 'People | Requests Received', 
@@ -65,24 +56,17 @@ export const get_received_requests = async(req, res) =>{
             received_requests: formattedRequests
         })
     } catch (error) {
+        console.log(error)
         res.status(500).send('Internal server error')
     }
 }
 export const get_sent_requests = async(req, res) =>{
-    const currentUsrId = res.locals.user.id
     try {
-        const user = await User.findById(currentUsrId)
-        .select('requests_sent')
-        .populate({
-            path: 'requests_sent',
-            select: 'first_name last_name pictureUrl _id'
-        })
-        const formattedRequests = user.requests_sent.map(request =>({
-            name: `${request.first_name} ${request.last_name}`,
-            pictureUrl: request.pictureUrl,
-            id: request._id.toString()
-        }))
-        console.log(user)
+        const requests_sent = await people.findSentRequests(req)
+        const formattedRequests = requests_sent.map(
+            request => formatUser(request)
+        )
+
         res.render('requests-sent', { 
             title: 'People | Requests Sent', 
             heading: 'Requests Sent',
@@ -95,18 +79,9 @@ export const get_sent_requests = async(req, res) =>{
 }
 
 export const recall_friend_request = async(req, res) =>{
-    const friendId = req.params.id
-    const currentUserId = req.user.id
-
+    
     try {
-        //Remove id from requests sent of current user
-        await User.findByIdAndUpdate(currentUserId, {
-            $pull: { requests_sent: new ObjectId(friendId) }
-        })
-        // Remove id of current user from requests received of friend
-        await User.findByIdAndUpdate(friendId, {
-            $pull: { requests_received: new ObjectId(currentUserId)}
-        })
+       await people.recallSentRequests(req)
 
         res.redirect('/people/requests/sent')
     } catch (error) {
@@ -115,19 +90,9 @@ export const recall_friend_request = async(req, res) =>{
 }
 
 export const send_friend_request = async(req, res) =>{
-    const friendId = req.params.id
-    const currentUserId = req.user.id
-
+    
     try {
-        //Add friend id to requests sent of current user
-        await User.findByIdAndUpdate(currentUserId, {
-            $push: { requests_sent: new ObjectId(friendId) }
-        })
-        // Add id of current user to requests received of friend
-        await User.findByIdAndUpdate(friendId, {
-            $push: { requests_received: new ObjectId(currentUserId)}
-        })
-
+        await people.sendFriendRequest(req)
         res.redirect('/people')
     } catch (error) {
         console.log(error)
