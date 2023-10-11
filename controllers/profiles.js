@@ -1,49 +1,15 @@
-import { ObjectId } from 'mongodb'
-import { formatAuthor } from '../utils/format-author.js'
-import { formatDate } from '../utils/date-formatter.js'
-import { Post } from '../models/post.js'
 import { User } from '../zghost/db/User.js'
+import * as profiles from '../utils/profiles.js'
+import { formatPosts } from '../utils/posts.js'
 
 export const get_my_profile = async(req, res) => {
-    const id = req.user.id
-    const currentUserId = req.user._id
+    const currentUser = req.user
 
     try {
-        const user = await User.findById(id).select(
-            'pictureUrl friends bannerUrl city _id region first_name last_name'
-        )
-
-        const posts = await Post.find({author: new ObjectId(id)}).populate(
-            {
-                path: 'author',
-                select: 'first_name last_name pictureUrl _id'
-            }
-        )
-
-        const formattedPosts = posts.map(post =>({
-            id: post._id.toString(),
-            content: post.post_content,
-            author: formatAuthor(post.author),
-            comments: post.comments.length,
-            likes: post.likes.length,
-            user_liked: post.likes.includes(currentUserId),
-            reposts: post.reposts.length,
-            user_reposted: post.reposts.includes(currentUserId),
-            createdAt: formatDate(post.createdAt)
-        }))
-
-        const userProfile = {
-            id: user._id.toString(),
-            name: user.name,
-            pictureUrl: user.pictureUrl,
-            bannerUrl: user.bannerUrl,
-            city: user.city,
-            region: user.region,
-            friends: user.friends.length,
-            joined: user.createdAt ? formatDate(user.createdAt): 'Unknown'            
-        }
-
-
+        const user = await profiles.findProfileById(currentUser.id)
+        const posts = await profiles.findPostsByAuthorId(currentUser.id)
+        const formattedPosts = formatPosts(posts, currentUser)
+        const userProfile = profiles.formatProfile(user)
 
         res.render('profile', { 
             title: 'My Profile', 
@@ -58,40 +24,14 @@ export const get_my_profile = async(req, res) => {
 }
 
 export const get_user_profile = async(req, res) => {
-    const id = req.params.id
-    const currentUserId = req.user._id
+    const userId = req.params.id
+    const currentUser = req.user
 
     try {
-        const user = await User.findById(id).select(
-            'first_name last_name pictureUrl friends bannerUrl'
-        )
-        
-        const posts = await Post.find({author: new ObjectId(id)}).populate(
-            {
-                path: 'author',
-                select: 'first_name last_name pictureUrl _id'
-            }
-            )
-
-        const formattedPosts = posts.map(post =>({
-            id: post._id.toString(),
-            content: post.post_content,
-            author: formatAuthor(post.author),
-            comments: post.comments.length,
-            likes: post.likes.length,
-            user_liked: post.likes.includes(currentUserId),
-            reposts: post.reposts.length,
-            user_reposted: post.reposts.includes(currentUserId),
-            createdAt: formatDate(post.createdAt)
-        }))
-        
-        const profile = {
-            id: id,
-            name: `${user.first_name} ${user.last_name}`,
-            pictureUrl: user.pictureUrl,
-            bannerUrl: user.bannerUrl,
-            friends: user.friends.length,
-        }
+        const user = await profiles.findProfileById(userId)
+        const posts = await profiles.findPostsByAuthorId(userId)
+        const formattedPosts = formatPosts(posts, currentUser)
+        const profile = profiles.formatProfile(user)
         
         res.render('profile', { 
             title: `${profile.name}`, 
