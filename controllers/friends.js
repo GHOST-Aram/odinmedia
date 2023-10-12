@@ -1,4 +1,5 @@
 import * as people from "../utils/friends.js"
+import { formatFriends } from "../utils/formats.js"
 export const unfriend = async(req, res, next) => {
     
     try {
@@ -15,7 +16,7 @@ export const get_all_friends = async(req, res, next) =>{
         const user = await people.findUserById(req)
         
         if(user.friends && user.friends.length > 0){
-            friends = people.formatFriends(user.friends)
+            friends = formatFriends(user.friends)
         }
 
         res.render('friends', { 

@@ -12,6 +12,14 @@ export const formatDate = (date_string) =>{
     ) 
 }
 
+export const formatFriends = (friends) =>{
+    return friends.map(friend => ({
+        id: friend._id.toString(),
+        name: `${friend.first_name} ${friend.last_name}`,
+        pictureUrl: friend.pictureUrl
+    }))
+}
+
 export const formatUser = (user) =>{
     return {
         id: user._id.toString(),

@@ -9,13 +9,7 @@ export const findUserById = async(req) =>{
  
 }
 
-export const formatFriends = (friends) =>{
-    return friends.map(friend => ({
-        id: friend._id.toString(),
-        name: `${friend.first_name} ${friend.last_name}`,
-        pictureUrl: friend.pictureUrl
-    }))
-}
+
 export const removeFromFriends = async(request) =>{
     const currentUserId = request.user.id
     const friendId = request.params.id
