@@ -1,6 +1,8 @@
 import express from 'express'
 import passport from 'passport'
 import LocalStrategy from 'passport-local'
+import GoogleStrategy from 'passport-google-oauth20'
+import GithubStrategy from 'passport-github2'
 import { compareSync as comparePasswords, hash } from 'bcrypt'
 import FacebookStrategy from 'passport-facebook'
 import morgan from 'morgan';
@@ -22,6 +24,8 @@ export {
     comparePasswords,
     cors,
     FacebookStrategy,
+    GoogleStrategy,
+    GithubStrategy,
     hash,
     json, 
     LocalStrategy, 

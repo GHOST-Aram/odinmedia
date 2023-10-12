@@ -4,8 +4,12 @@ import { authentication_session } from '../utils/session.js';
 import * as cookies from '../utils/cookies.js';
 
 app.use(authentication_session())
+
 Authenticator.use(strategies.facebookStrategy)
 Authenticator.use(strategies.localStrategy)
+Authenticator.use(strategies.googleStrategy)
+Authenticator.use(strategies.githubStrategy)
+
 app.use(Authenticator.initialize())
 app.use(Authenticator.session())
 
