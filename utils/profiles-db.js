@@ -1,6 +1,5 @@
 import { User } from "../zghost/db/User.js"
 import { Post } from "../models/post.js"
-import { formatDate } from "./formats.js"
 import { ObjectId } from "../zghost/app/init.js"
 
 export const findProfileById = async(id) =>{
@@ -19,15 +18,3 @@ export const findPostsByAuthorId = async(authorId) =>{
     )
 }
 
-export const formatProfile = (user) =>{
-    return ({
-        id: user._id.toString(),
-        name: user.name,
-        pictureUrl: user.pictureUrl,
-        bannerUrl: user.bannerUrl,
-        city: user.city,
-        region: user.region,
-        friends: user.friends.length,
-        joined: user.createdAt ? formatDate(user.createdAt): 'Unknown'            
-    })
-}

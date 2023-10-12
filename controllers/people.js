@@ -1,9 +1,9 @@
-import * as people from "../utils/people.js"
+import * as database from "../utils/people-db.js"
 import { formatUser } from "../utils/formats.js"
 
 export const accept_one_friend_request = async(req, res, next) =>{
     try {
-        await people.addFriend(req)
+        await database.addFriend(req)
         res.redirect('/people/requests/received')
     } catch (error) {
         next(error)
@@ -13,7 +13,7 @@ export const accept_one_friend_request = async(req, res, next) =>{
 export const decline_friend_request = async(req, res, next) =>{
     
     try {
-        await people.rejectFriendRequest(req)
+        await database.rejectFriendRequest(req)
         res.redirect('/people/requests/received')
     } catch (error) {
         next(error)
@@ -22,7 +22,7 @@ export const decline_friend_request = async(req, res, next) =>{
 export const get_all_people = async(req, res, next) =>{
     const currentUserId = req.user.id
     try {
-        const users = await people.findAllUsers()
+        const users = await database.findAllUsers()
 
         const formattedUsers = users.map(user =>({
             ...formatUser(user),
@@ -42,7 +42,7 @@ export const get_all_people = async(req, res, next) =>{
 
 export const get_received_requests = async(req, res, next) =>{
     try {
-        const requests_received = await people.findReceivedRequests(req)
+        const requests_received = await database.findReceivedRequests(req)
         const formattedRequests = requests_received.map(
             request => formatUser(request)
         )
@@ -58,7 +58,7 @@ export const get_received_requests = async(req, res, next) =>{
 }
 export const get_sent_requests = async(req, res, next) =>{
     try {
-        const requests_sent = await people.findSentRequests(req)
+        const requests_sent = await database.findSentRequests(req)
         const formattedRequests = requests_sent.map(
             request => formatUser(request)
         )
@@ -75,7 +75,7 @@ export const get_sent_requests = async(req, res, next) =>{
 
 export const recall_friend_request = async(req, res, next) =>{
     try {
-       await people.recallSentRequests(req)
+       await database.recallSentRequests(req)
 
         res.redirect('/people/requests/sent')
     } catch (error) {
@@ -85,7 +85,7 @@ export const recall_friend_request = async(req, res, next) =>{
 
 export const send_friend_request = async(req, res, next) =>{
     try {
-        await people.sendFriendRequest(req)
+        await database.sendFriendRequest(req)
         res.redirect('/people')
     } catch (error) {
         console.log(error)

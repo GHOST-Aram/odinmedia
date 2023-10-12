@@ -20,6 +20,19 @@ export const formatFriends = (friends) =>{
     }))
 }
 
+export const formatProfile = (user) =>{
+    return ({
+        id: user._id.toString(),
+        name: user.name,
+        pictureUrl: user.pictureUrl,
+        bannerUrl: user.bannerUrl,
+        city: user.city,
+        region: user.region,
+        friends: user.friends.length,
+        joined: user.createdAt ? formatDate(user.createdAt): 'Unknown'            
+    })
+}
+
 export const formatUser = (user) =>{
     return {
         id: user._id.toString(),

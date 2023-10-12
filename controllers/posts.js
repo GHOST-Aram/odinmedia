@@ -1,9 +1,9 @@
-import * as post  from "../utils/posts.js"
+import * as database  from "../utils/posts-db.js"
 import { formatPosts, formatPost } from "../utils/formats.js"
 export const add_new_comment = async(req, res, next) =>{
 
     try {
-        await post.addNewComment(req)
+        await database.addNewComment(req)
         res.redirect(`/posts/${req.params.id}`)
     } catch (error) {
         next(error)
@@ -14,7 +14,7 @@ export const add_new_comment = async(req, res, next) =>{
 export const change_likes = async(req, res, next) => {
 
     try {
-        await post.updateLikes(req)
+        await database.updateLikes(req)
         res.redirect(`/posts/${req.params.id}`)
     } catch (error) {
         next(error)
@@ -24,7 +24,7 @@ export const change_likes = async(req, res, next) => {
 
 export const create_post = async(req, res, next) => {
     try {
-        await post.createNewPost(req)
+        await database.createNewPost(req)
         res.redirect('/')
     } catch (error) {
         next(error)
@@ -36,8 +36,8 @@ export const get_posts = async (req, res, next) => {
     const currentUser = req.user
     
     try {
-        const posts = await post.findAllPosts()
-        const filteredPosts = post.filterPosts(posts, currentUser)
+        const posts = await database.findAllPosts()
+        const filteredPosts = database.filterPosts(posts, currentUser)
         
         res.render('index', { 
             title: 'Home',
@@ -52,7 +52,7 @@ export const get_posts = async (req, res, next) => {
 export const get_one_post = async(req, res, next) =>{
 
     try {
-        const currentPost = await post.findPostById(req)
+        const currentPost = await database.findPostById(req)
         const formattedPost = formatPost(currentPost, req.user.id)
         
         res.render('post-details', { 
@@ -67,7 +67,7 @@ export const get_one_post = async(req, res, next) =>{
 
 export const repost = async(req, res, next) =>{
     try {
-        await post.updateReposts(req)
+        await database.updateReposts(req)
         res.redirect(`/posts/${req.params.id}`)
     } catch (error) {
         next(error)
