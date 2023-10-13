@@ -10,6 +10,7 @@ export const creat_user = (req, res) => {
         res.status(500).send('Internal server error')
    } 
 }
+
 export const get_login_form = (req, res) =>{
     res.render('accounts/login', {title: 'Login'})
 }

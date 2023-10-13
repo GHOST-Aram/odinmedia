@@ -52,7 +52,8 @@
             <button 
                 class="w-full p-2 hover:bg-blue-500 hover:text-white 
                 font-bold text-slate-600 space-x-4 flex items-center"
-                onclick="window.location.assign('/profiles/me')"
+                onclick="window.location.assign('/profiles/<%=user.id%>')"
+                data-set="<%=user.id%>"
             >
             <img 
                 class="w-10 h-10 rounded-full"

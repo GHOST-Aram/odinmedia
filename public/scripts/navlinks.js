@@ -6,6 +6,7 @@ window.addEventListener('load', () => {
     try {
         const sidebarNavLinkTextSpans = document.querySelectorAll('aside#sidebar nav button span')
         const currentUserProfileButton = document.querySelector('aside#sidebar .profile button')
+        const currentUserId = currentUserProfileButton.getAttribute('data-set')
         
         sidebarNavLinkTextSpans.forEach(span =>{ 
             if(new RegExp(span.textContent.toLocaleLowerCase())
@@ -14,7 +15,7 @@ window.addEventListener('load', () => {
             }
         })
     
-        if(locationHref.includes('/profiles/me')){
+        if(locationHref.includes(`/profiles/${currentUserId}`)){
             currentUserProfileButton.classList.add('bg-blue-500', 'text-white')
         }
     } catch (error) {}
@@ -23,6 +24,7 @@ window.addEventListener('load', () => {
     try {
         const mediumScreenNavbarSpans = document.querySelectorAll('header nav button span')
         const profilePicBtn = document.querySelector('button.profile')
+        const currentUserId = profilePicBtn.getAttribute('data-set')
 
         mediumScreenNavbarSpans.forEach(span =>{ 
             if(new RegExp(span.textContent.toLocaleLowerCase())
@@ -32,7 +34,7 @@ window.addEventListener('load', () => {
             }
         })
 
-        if(locationHref.includes('/profiles/me')){
+        if(locationHref.includes(`/profiles/${currentUserId}`)){
             profilePicBtn.classList.add('bg-white')
         }
         
@@ -42,6 +44,7 @@ window.addEventListener('load', () => {
     try {
         const smallScreenNavLinkSpans = document.querySelectorAll('aside.small-screen nav button span') 
         const profilePicBtn = document.querySelector('aside.small-screen button.profile')
+        const currentUserId = profilePicBtn.getAttribute('data-set')
 
         smallScreenNavLinkSpans.forEach(span =>{ 
             if(new RegExp(span.textContent.toLocaleLowerCase())
@@ -50,7 +53,7 @@ window.addEventListener('load', () => {
                 span.parentElement.classList.add('text-blue-500', 'bg-white')
             }
         })
-        if(locationHref.includes('/profiles/me')){
+        if(locationHref.includes(`/profiles/${currentUserId}`)){
             profilePicBtn.classList.add('bg-white')
         }
 

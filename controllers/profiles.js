@@ -1,26 +1,6 @@
 import * as database from '../utils/profiles-db.js'
 import { formatPosts, formatProfile } from '../utils/formats.js'
 
-export const get_my_profile = async(req, res, next) => {
-    const currentUser = req.user
-
-    try {
-        const user = await database.findProfileById(currentUser.id)
-        const posts = await database.findPostsByAuthorId(currentUser.id)
-        const formattedPosts = formatPosts(posts, currentUser)
-        const userProfile = formatProfile(user)
-
-        res.render('profile', { 
-            title: 'My Profile', 
-            heading: 'User Profile',
-            profile: userProfile,
-            posts: formattedPosts
-        })
-    } catch (error) {
-        next(error)
-    }
-}
-
 export const get_user_profile = async(req, res, next) => {
     const userId = req.params.id
     const currentUser = req.user
