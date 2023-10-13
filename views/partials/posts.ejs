@@ -1,6 +1,18 @@
 <%if(posts.length ){%>
     <%posts.forEach(post => { %>
         <div class="container post space-y-2 p-2 border rounded-md">
+            <%if(post.friend_reposters.length){%>
+                <span class="text-green-500 text-xs font-light">
+                    <i class="fa-solid fa-arrows-rotate text-xs"></i>
+                    <%if(post.friend_reposters.length > 1){%>
+                        <%=`${post.friend_reposters[0].first_name} ${post.friend_reposters[0].last_name}`%>
+                         & other friends reposted
+                    <%}else{%>
+                        <%=`${post.friend_reposters[0].first_name} ${post.friend_reposters[0].last_name}`%>
+                         reposted
+                    <%}%>
+                </span>
+            <%}%>
             <div class="space-y-2">
                 <a href="/profiles/<%=post.author.id%>">
                     <div class="flex flex-row items-start gap-4">
