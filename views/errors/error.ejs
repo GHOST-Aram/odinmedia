@@ -9,9 +9,9 @@
         </div> 
     </header> 
     <main class="my-60">
-        <h1 class="text-center font-bold text-xl">
-            <%=message%>
-        </h1>
+        <h1><%=message%></h1>
+        <h2><%=error.status%></h2>
+        <pre><%=error.stack%></pre>
     </main>
     <div class="fixed bottom-0 left-0 right-0">
         <%-include('../partials/footer.ejs') %>

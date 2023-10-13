@@ -6,19 +6,24 @@ export const get_404_error_page = (req, res, next) => {
 }
 
 export const get_500_error_page = (err, req, res, next) => {
-    res.status(err.status || 500);
-	console.log(err)
-    res.render('errors/error_auth_500', {
-		title: 'Internal server error.',
-		heading: 'Internal server error.'
-	});
+    if(req.isAuthenticated()){
+        res.status(err.status || 500);
+        console.log(err)
+        res.render('errors/error_auth_500', {
+            title: 'Internal server error.',
+            heading: 'Internal server error.'
+        });
+
+    } else {
+        next()
+    }
 }
 
 export const get_unauthenticated_500_page = (err, req, res, next) => {
-    res.status(err.status || 500);
-	console.log(err)
-    res.render('errors/error', {
-		title: 'Internal server error.',
-		Message: 'Sorry! Something went wrong on our side. Try again.',
-	});
+     // set locals, only providing error in development
+     res.locals.message = err.message;
+     res.locals.error = req.app.get('env') === 'development' ? err : {};
+   
+    res.status(res, err.status || 500);
+    res.render('errors/error', {title: `Error | ${err.message}`});
 }

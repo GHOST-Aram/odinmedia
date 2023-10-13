@@ -28,7 +28,7 @@ app.use('/profiles',isLoggedIn, profilesRouter)
 
 //Error handling
 app.use(get_404_error_page);
-app.use( isLoggedIn, get_500_error_page);
+app.use( get_500_error_page);
 app.use(get_unauthenticated_500_page)
 
 export {app};
