@@ -1,14 +1,14 @@
 export const filterPosts = (posts, currentUser)  =>{
     const currentUsersFriends = currentUser.friends.map(
-        friend => friend.toString()
+        friendId => friendId.toString()
     )
-    const isFriend = userId => currentUsersFriends.includes(
+    const isFriendId = userId => currentUsersFriends.includes(
         userId.toString()
     )
     return posts.filter(post => (
         post.author._id.toString() === currentUser.id || 
         currentUsersFriends.includes(post.author._id.toString()) ||
-        post.reposts.some(userId => isFriend(userId))
+        post.reposts.some(userId => isFriendId(userId))
     ))
 } 
 

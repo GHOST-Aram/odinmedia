@@ -9,7 +9,6 @@ export const findUserById = async(req) =>{
  
 }
 
-
 export const removeFromFriends = async(request) =>{
     const currentUserId = request.user.id
     const friendId = request.params.id
