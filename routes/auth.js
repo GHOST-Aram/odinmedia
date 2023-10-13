@@ -10,13 +10,17 @@ authRouter.get('/facebook/callback', Authenticator.authenticate('facebook', {
     failureRedirect: '/auth/login'
 }))
 
-authRouter.get('/google', Authenticator.authenticate('google', {scope: 'email'}))
+authRouter.get('/google', Authenticator.authenticate('google', 
+    {scope: ['profile']}
+))
 authRouter.get('/google/callback', Authenticator.authenticate('google', {
     failureRedirect: '/auth/login',
     successRedirect: '/'
 }))
 
-authRouter.get('/github', Authenticator.authenticate('github'))
+authRouter.get('/github', Authenticator.authenticate('github',
+    { scoper: ['user:email'] }
+))
 authRouter.get('/github/fallback', Authenticator.authenticate('github', {
     failureRedirect: '/auth/login',
     successRedirect: '/'
