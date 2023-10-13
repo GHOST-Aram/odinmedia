@@ -24,9 +24,14 @@ export const createNewPost = async(request) => {
 }
 
 export const findAllPosts = async() =>{
-    return await Post.find().populate({
+    return await Post.find()
+    .populate({
         path: 'author',
         select: 'first_name last_name pictureUrl _id'
+    })
+    .populate({
+        path: 'reposts',
+        select: '_id first_name last_name'
     })
 }
 
