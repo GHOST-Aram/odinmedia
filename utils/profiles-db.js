@@ -5,7 +5,7 @@ import { ObjectId } from "../zghost/app/init.js"
 export const findProfileById = async(id) =>{
     return await User.findById(id).select(
         `pictureUrl friends bannerUrl city _id 
-        region first_name last_name`
+        region first_name last_name createdAt`
     )
 }
 
