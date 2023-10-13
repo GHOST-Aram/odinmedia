@@ -1,5 +1,9 @@
 import * as database  from "../utils/posts-db.js"
-import { formatPosts, formatPost } from "../utils/formats.js"
+import { 
+    formatPosts, 
+    formatPost, 
+    filterPosts 
+} from "../utils/formats.js"
 export const add_new_comment = async(req, res, next) =>{
 
     try {
@@ -37,7 +41,7 @@ export const get_posts = async (req, res, next) => {
     
     try {
         const posts = await database.findAllPosts()
-        const filteredPosts = database.filterPosts(posts, currentUser)
+        const filteredPosts = filterPosts(posts, currentUser)
         
         res.render('index', { 
             title: 'Home',

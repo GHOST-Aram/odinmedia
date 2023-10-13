@@ -30,19 +30,6 @@ export const findAllPosts = async() =>{
     })
 }
 
-export const filterPosts = (posts, currentUser)  =>{
-    const currentUsersFriends = currentUser.friends.map(
-        friend => friend.toString()
-    )
-    const isFriend = userId => currentUsersFriends.includes(
-        userId.toString()
-    )
-    return posts.filter(post => (
-        post.author._id.toString() === currentUser.id || 
-        currentUsersFriends.includes(post.author._id.toString()) ||
-        post.reposts.some(userId => isFriend(userId))
-    ))
-} 
 
 export const findPostById = async(request) =>{
     return await Post.findById(request.params.id)

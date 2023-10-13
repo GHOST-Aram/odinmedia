@@ -1,3 +1,17 @@
+export const filterPosts = (posts, currentUser)  =>{
+    const currentUsersFriends = currentUser.friends.map(
+        friend => friend.toString()
+    )
+    const isFriend = userId => currentUsersFriends.includes(
+        userId.toString()
+    )
+    return posts.filter(post => (
+        post.author._id.toString() === currentUser.id || 
+        currentUsersFriends.includes(post.author._id.toString()) ||
+        post.reposts.some(userId => isFriend(userId))
+    ))
+} 
+
 export const formatDate = (date_string) =>{
     return new Date(date_string).toLocaleString(
         'en-US', {
