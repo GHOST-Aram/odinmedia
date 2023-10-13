@@ -64,8 +64,10 @@ export const formatPosts = (posts, currentUser) => {
         likes: post.likes.length,
         user_liked: post.likes.includes(currentUser._id),
         reposts: post.reposts.length,
-        friend_reposters: getFriendReposters(currentUser.friends, post.reposts),
-        user_reposted: post.reposts.includes(currentUser._id),
+        friend_reposters: getFriendReposters(
+            currentUser.friends, post.reposts
+        ),
+        user_reposted: userIsReposter(post.reposts, currentUser),
         createdAt: formatDate(post.createdAt)
     })).reverse()
 } 
@@ -75,6 +77,12 @@ const getFriendReposters = (allfriendsObjectIds, reposters) =>{
         reposter => allfriendsObjectIds.includes(reposter._id) 
         ).map(reposter => `${reposter.first_name} ${reposter.last_name}`)
 } 
+
+const userIsReposter = (reposts, currentUser) =>{
+    return  reposts.some(
+        repost => repost._id.toString() === currentUser._id.toString()
+    )
+}
 
 export const formatPost = (post, currentUserId) =>{
     return ({
