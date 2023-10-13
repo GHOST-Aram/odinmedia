@@ -1,5 +1,5 @@
 import * as database from "../utils/friends-db.js"
-import { formatFriends } from "../utils/formats.js"
+import { formatUser } from "../utils/formats.js"
 export const unfriend = async(req, res, next) => {
     
     try {
@@ -16,7 +16,7 @@ export const get_all_friends = async(req, res, next) =>{
         const user = await database.findUserById(req)
         
         if(user.friends && user.friends.length > 0){
-            friends = formatFriends(user.friends)
+            friends = user.friends.map(friend => formatUser(friend))
         }
 
         res.render('friends', { 
