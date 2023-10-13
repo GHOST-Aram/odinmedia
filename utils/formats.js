@@ -49,25 +49,19 @@ export const formatUser = (user) =>{
 
 export const formatPosts = (posts, currentUser) => {
     return posts.map(post =>({
-        id: post._id.toString(),
-        content: post.post_content,
-        author: formatUser(post.author),
+        ...formatPartialPostProperties(post, currentUser._id),
         comments: post.comments.length,
-        likes: post.likes.length,
-        user_liked: post.likes.includes(currentUser._id),
-        reposts: post.reposts.length,
         friend_reposters: getFriendReposters(
             currentUser.friends, post.reposts
         ),
         user_reposted: isUserReposter(post.reposts, currentUser),
-        createdAt: formatDate(post.createdAt)
     })).reverse()
 } 
 
 const getFriendReposters = (allfriendsObjectIds, reposters) =>{
     return reposters.filter(
         reposter => allfriendsObjectIds.includes(reposter._id) 
-        ).map(reposter => `${reposter.first_name} ${reposter.last_name}`)
+    ).map(reposter => `${reposter.first_name} ${reposter.last_name}`)
 } 
 
 const isUserReposter = (reposts, currentUser) =>{
@@ -78,17 +72,22 @@ const isUserReposter = (reposts, currentUser) =>{
 
 export const formatPost = (post, currentUserId) =>{
     return ({
-        id: post._id.toString(),
-        content: post.post_content,
-        author: formatUser(post.author),
+        ...formatPartialPostProperties(post, currentUserId),
         comments: formatComments(post.comments),
-        likes: post.likes.length,
-        user_liked: post.likes.includes(currentUserId),
-        reposts: post.reposts.length,
-        user_reposted: post.reposts.includes(currentUserId),
-        createdAt: formatDate(post.createdAt)
     })
 } 
+
+const formatPartialPostProperties = (post, currentUserId) =>({
+    id: post._id.toString(),
+    content: post.post_content,
+    author: formatUser(post.author),
+    likes: post.likes.length,
+    user_liked: post.likes.includes(currentUserId),
+    reposts: post.reposts.length,
+    user_reposted: post.reposts.includes(currentUserId),
+    createdAt: formatDate(post.createdAt)
+
+})
 
 export const formatComments = (comments) => {
     return comments.map(comment => ({
