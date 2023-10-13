@@ -73,7 +73,7 @@ export const formatPosts = (posts, currentUser) => {
 const getFriendReposters = (allfriendsObjectIds, reposters) =>{
     return reposters.filter(
         reposter => allfriendsObjectIds.includes(reposter._id) 
-    )
+        ).map(reposter => `${reposter.first_name} ${reposter.last_name}`)
 } 
 
 export const formatPost = (post, currentUserId) =>{
