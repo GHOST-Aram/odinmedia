@@ -67,7 +67,7 @@ export const formatPosts = (posts, currentUser) => {
         friend_reposters: getFriendReposters(
             currentUser.friends, post.reposts
         ),
-        user_reposted: userIsReposter(post.reposts, currentUser),
+        user_reposted: isUserReposter(post.reposts, currentUser),
         createdAt: formatDate(post.createdAt)
     })).reverse()
 } 
@@ -78,7 +78,7 @@ const getFriendReposters = (allfriendsObjectIds, reposters) =>{
         ).map(reposter => `${reposter.first_name} ${reposter.last_name}`)
 } 
 
-const userIsReposter = (reposts, currentUser) =>{
+const isUserReposter = (reposts, currentUser) =>{
     return  reposts.some(
         repost => repost._id.toString() === currentUser._id.toString()
     )
