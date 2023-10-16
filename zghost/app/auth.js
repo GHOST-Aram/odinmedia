@@ -5,10 +5,14 @@ import * as cookies from '../utils/cookies.js';
 
 app.use(authentication_session())
 
-Authenticator.use(strategies.oAuth('facebook'))
+try {
+    Authenticator.use(strategies.oAuth('facebook'))
+    Authenticator.use(strategies.oAuth('google'))
+    Authenticator.use(strategies.oAuth('github'))
+} catch (error) {
+    console.log(error)
+}
 Authenticator.use(strategies.localStrategy)
-Authenticator.use(strategies.oAuth('google'))
-Authenticator.use(strategies.oAuth('github'))
 
 app.use(Authenticator.initialize())
 app.use(Authenticator.session())
