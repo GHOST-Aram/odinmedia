@@ -98,13 +98,13 @@ export const formatComments = (comments) => {
     })).reverse()
 }
 
-export const removeFriendsOfCurrentUser = (users, currentUserFriends) => {
+export const removeFriends = (users, currentUserFriends) => {
     return users.filter(user => !currentUserFriends.includes(user._id))
 }
 
-export const removeSentRequestsOfCurrentUser = (users, sentRequests) =>{
+export const removeSentRequests = (users, sentRequests) =>{
     return users.filter(user => !sentRequests.includes(user._id))
 }
-export const removeReceivedRequestsOfCurrentUser = (users, receivedRequests) =>{
+export const removeReceivedRequests = (users, receivedRequests) =>{
     return users.filter(user => !receivedRequests.includes(user._id))
 }

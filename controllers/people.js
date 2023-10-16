@@ -24,13 +24,13 @@ export const get_all_people = async(req, res, next) =>{
     try {
         let users = await database.findAllUsers()
 
-        users = formats.removeFriendsOfCurrentUser(
+        users = formats.removeFriends(
             users, currentUser.friends
         )
-        users = formats.removeSentRequestsOfCurrentUser(
+        users = formats.removeSentRequests(
             users, currentUser.requests_sent
         )
-        users = formats.removeReceivedRequestsOfCurrentUser(
+        users = formats.removeReceivedRequests(
             users, currentUser.requests_received
         )
 
