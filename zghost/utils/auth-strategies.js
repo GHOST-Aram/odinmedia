@@ -9,14 +9,15 @@ import { User } from '../db/User.js'
 import 'dotenv/config.js'
 
 export const oAuth = (name) =>{
-	const Strategy = getStrategy(name.toLowerCase())
+	name = name.toLowerCase().trim()
+	const Strategy = getStrategy(name)
 	const { clientID, clientSecret } = getClientCredentials(name)
 
 	return new Strategy(
 		{
 			clientID,
 			clientSecret,
-			callbackURL: `/auth/${name.toLowerCase()}/callback`,
+			callbackURL: `/auth/${name}/callback`,
 			profileFields: [
 				'id', 
 				'displayName', 
