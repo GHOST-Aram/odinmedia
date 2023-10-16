@@ -18,3 +18,20 @@ export const findPostsByAuthorId = async(authorId) =>{
     )
 }
 
+export const updateProfileInfo = async(request) =>{
+    const {
+        first_name, last_name, 
+        pictureUrl, bannerUrl, city,
+        region, banner_file, picture_file
+    } = request.body
+
+    await User.findByIdAndUpdate(request.user.id, {
+        first_name,
+        last_name,
+        bannerUrl,
+        city,
+        region,
+        pictureUrl
+    })
+}
+

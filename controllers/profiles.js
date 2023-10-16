@@ -38,23 +38,10 @@ export const get_editing_form = async(req, res, next) =>{
 }
 
 export const update_profile = async(req, res, next) =>{
-   
-    const {
-        first_name, last_name, 
-        pictureUrl, bannerUrl, city,
-        region, banner_file, picture_file
-    } = req.body
-    git 
     try {
-        await database.updateProfileInfo(req.user.id, {
-            first_name, 
-            last_name, 
-            pictureUrl, 
-            bannerUrl,
-            city, region
-        })
+        await database.updateProfileInfo(req)
 
-        res.redirect('/profiles/me')
+        res.redirect(`/profiles/${req.user.id}`)
     } catch (error) {
         next(error)
     }
