@@ -36,7 +36,9 @@ export const get_all_people = async(req, res, next) =>{
 
         const formattedUsers = users.map(user =>({
             ...formats.formatUser(user),
-            friends: user.friends.length
+            friends: user.friends.length,
+            mutualFriends: formats.calculateMutualFriends(
+                user.friends, currentUser.friends),
         })
         ).filter(user => user.id !== currentUser.id)
 
@@ -54,7 +56,12 @@ export const get_received_requests = async(req, res, next) =>{
     try {
         const requests_received = await database.findReceivedRequests(req)
         const formattedRequests = requests_received.map(
-            request => formatUser(request)
+            user => ({
+                ...formats.formatUser(user),
+                mutualFriends: formats.calculateMutualFriends(
+                    user.friends, req.user.friends
+                )
+            })
         )
         
         res.render('requests-received', { 
@@ -70,7 +77,12 @@ export const get_sent_requests = async(req, res, next) =>{
     try {
         const requests_sent = await database.findSentRequests(req)
         const formattedRequests = requests_sent.map(
-            request => formatUser(request)
+            user => ({
+                ...formats.formatUser(user),
+                mutualFriends: formats.calculateMutualFriends(
+                    user.friends, req.user.friends
+                )
+            })
         )
 
         res.render('requests-sent', { 

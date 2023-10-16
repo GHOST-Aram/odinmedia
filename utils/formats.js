@@ -98,6 +98,17 @@ export const formatComments = (comments) => {
     })).reverse()
 }
 
+export const calculateMutualFriends = (
+    usersFriends, currentUsersFriends) =>{
+        const allFriends = [...usersFriends, ...currentUsersFriends]
+        const mergedList = removeRedundancies(allFriends)
+
+        return allFriends.length - mergedList.length
+}
+
+const removeRedundancies = (mergedList) =>{
+    return [new Set(mergedList)]
+}
 export const removeFriends = (users, currentUserFriends) => {
     return users.filter(user => !currentUserFriends.includes(user._id))
 }

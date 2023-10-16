@@ -33,7 +33,7 @@ export const findReceivedRequests = async(request ) =>{
     .select('requests_received')
     .populate({
         path: 'requests_received',
-        select: 'first_name last_name pictureUrl _id'
+        select: 'first_name last_name pictureUrl _id friends'
     })
 
     return user.requests_received
@@ -44,7 +44,7 @@ export const findSentRequests = async(request) =>{
     .select('requests_sent')
     .populate({
         path: 'requests_sent',
-        select: 'first_name last_name pictureUrl _id'
+        select: 'first_name last_name pictureUrl _id friends'
     })
 
     return user.requests_sent
