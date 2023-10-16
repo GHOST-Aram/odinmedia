@@ -21,6 +21,10 @@ const postSchema = new ModelSchema({
         }
     ],
     media_url: String,
+    media_file: {
+        data: Buffer,
+        contentType: String
+    },
     author: {
         type: ModelSchema.ObjectId,
         ref: 'User'

@@ -1,6 +1,7 @@
 import { Post } from "../models/post.js"
 import { ObjectId } from "../zghost/app/init.js"
 import { Comment } from "../models/comment.js"
+import fs from 'node:fs'
 
 export const addNewComment = async(request) =>{
     const comment = await Comment.create({
@@ -19,6 +20,10 @@ export const createNewPost = async(request) => {
     await Post.create({
         post_content,
         media_url,
+        media_file:{ 
+            data: fs.readFileSync(request.file.path),
+            contentType: request.file.mimetype
+        },
         author: currentUserId
     })
 }
