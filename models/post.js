@@ -20,6 +20,7 @@ const postSchema = new ModelSchema({
             ref: 'Comment'
         }
     ],
+    media_url: String,
     author: {
         type: ModelSchema.ObjectId,
         ref: 'User'

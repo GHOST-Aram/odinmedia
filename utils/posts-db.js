@@ -14,11 +14,11 @@ export const addNewComment = async(request) =>{
 }
 
 export const createNewPost = async(request) => {
-    const content = request.body.post_content
+    const {post_content, media_url} = request.body
     const currentUserId = request.user._id
-
     await Post.create({
-        post_content: content,
+        post_content,
+        media_url,
         author: currentUserId
     })
 }

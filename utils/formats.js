@@ -80,6 +80,7 @@ export const formatPost = (post, currentUserId) =>{
 const formatPartialPostProperties = (post, currentUserId) =>({
     id: post._id.toString(),
     content: post.post_content,
+    media_url: post.media_url || null,
     author: formatUser(post.author),
     likes: post.likes.length,
     user_liked: post.likes.includes(currentUserId),
