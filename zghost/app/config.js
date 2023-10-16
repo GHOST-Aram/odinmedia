@@ -1,4 +1,10 @@
-import { logger, json, urlencoded,cors, static_dir } from './init.js';
+import { 
+    logger, 
+    json, 
+    urlencoded,
+    cors, 
+    static_dir 
+} from './init.js';
 import { connectDB } from '../utils/server.js';
 import 'dotenv/config.js'
 import { app } from './auth.js';
