@@ -22,6 +22,7 @@ const postSchema = new ModelSchema({
     ],
     media_url:{
         type : String,
+        trim: true
     },
     media_file: {
         data: Buffer,

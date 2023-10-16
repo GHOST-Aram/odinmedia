@@ -1,17 +1,53 @@
 import { ModelSchema, Model } from "./model.js";
 
 const userSchema = new ModelSchema({
-    profileId: String,
-    last_name: String,
-    first_name: String,
-    middle_name: String,
-    pictureUrl: String,
-    bannerUrl: String,
-    city: String,
-    region: String,
-    email: String,
-    banner_file: String,
-    picture_file: String,
+    profileId: {
+        type: String,
+        trim: true,
+    },
+    last_name: {
+        type: String,
+        trim: true,
+    },
+    first_name: {
+        type: String,
+        trim: true,
+    },
+    middle_name: {
+        type: String,
+        trim: true,
+    },
+    pictureUrl: {
+        type: String,
+        trim: true,
+    },
+    bannerUrl:{
+        type: String,
+        trim: true,
+    },
+    city: {
+        type: String,
+        trim: true,
+        default: undefined
+    },
+    region:  {
+        type: String,
+        trim: true,
+        default: undefined
+    },
+    email:  {
+        type: String,
+        trim: true,
+        default: undefined
+    },
+    banner_file: {
+        data: Buffer,
+        contentType: String,
+    },
+    picture_file: {
+        data: Buffer,
+        contentType: String,
+    },
     password: String,
     friends: {
         type: [ModelSchema.Types.ObjectId],
