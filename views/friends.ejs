@@ -13,7 +13,12 @@
                             <div class="flex flex-col">
                                 <h1 class="text-slate-600"><%=friend.name%></h1>
                                 <span class="text-xs text-slate-400 font-light">
-                                    <%=friend.mutualFriends%> Mutual friends</span>
+                                    <%if(friend.mutualFriends < 2){%>
+                                        <%=friend.mutualFriends%> Mutual friend
+                                    <%} else {%>
+                                        <%=friend.mutualFriends%> Mutual friends
+                                    <%}%>
+                                </span>
                             </div>
                         </div>
                     </a>

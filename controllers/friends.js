@@ -1,5 +1,5 @@
 import * as database from "../utils/friends-db.js"
-import { formatUser } from "../utils/formats.js"
+import * as formats from "../utils/formats.js"
 export const unfriend = async(req, res, next) => {
     
     try {
@@ -11,12 +11,19 @@ export const unfriend = async(req, res, next) => {
 }
 
 export const get_all_friends = async(req, res, next) =>{
-    let friends = []
     try {
+        let friends = []
         const user = await database.findUserById(req)
         
         if(user.friends && user.friends.length > 0){
-            friends = user.friends.map(friend => formatUser(friend))
+            friends = user.friends.map(
+                user => ({
+                    ...formats.formatUser(user),
+                    mutualFriends: formats.calculateMutualFriends(
+                        user.friends, req.user.friends
+                    )
+                })
+            )
         }
 
         res.render('friends', { 
