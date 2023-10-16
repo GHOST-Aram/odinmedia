@@ -97,3 +97,14 @@ export const formatComments = (comments) => {
         createdAt: formatDate(comment.createdAt)
     })).reverse()
 }
+
+export const removeFriendsOfCurrentUser = (users, currentUserFriends) => {
+    return users.filter(user => !currentUserFriends.includes(user._id))
+}
+
+export const removeSentRequestsOfCurrentUser = (users, sentRequests) =>{
+    return users.filter(user => !sentRequests.includes(user._id))
+}
+export const removeReceivedRequestsOfCurrentUser = (users, receivedRequests) =>{
+    return users.filter(user => !receivedRequests.includes(user._id))
+}

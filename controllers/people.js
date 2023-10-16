@@ -1,5 +1,5 @@
 import * as database from "../utils/people-db.js"
-import { formatUser } from "../utils/formats.js"
+import * as formats from "../utils/formats.js"
 
 export const accept_one_friend_request = async(req, res, next) =>{
     try {
@@ -20,15 +20,25 @@ export const decline_friend_request = async(req, res, next) =>{
     }
 }
 export const get_all_people = async(req, res, next) =>{
-    const currentUserId = req.user.id
+    const currentUser = req.user
     try {
-        const users = await database.findAllUsers()
+        let users = await database.findAllUsers()
+
+        users = formats.removeFriendsOfCurrentUser(
+            users, currentUser.friends
+        )
+        users = formats.removeSentRequestsOfCurrentUser(
+            users, currentUser.requests_sent
+        )
+        users = formats.removeReceivedRequestsOfCurrentUser(
+            users, currentUser.requests_received
+        )
 
         const formattedUsers = users.map(user =>({
-            ...formatUser(user),
+            ...formats.formatUser(user),
             friends: user.friends.length
         })
-        ).filter(user => user.id !== currentUserId)
+        ).filter(user => user.id !== currentUser.id)
 
         res.render('people', { 
             title: 'People', 
