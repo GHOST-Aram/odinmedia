@@ -11,7 +11,6 @@ import 'dotenv/config.js'
 export const oAuth = (name) =>{
 	const Strategy = getStrategy(name.toLowerCase())
 	const { clientID, clientSecret } = getClientCredentials(name)
-	const envName = name.toUpperCase()
 
 	return new Strategy(
 		{
