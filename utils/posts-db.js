@@ -19,8 +19,8 @@ export const createNewPost = async(request) => {
     const currentUserId = request.user._id
     await Post.create({
         post_content,
-        media_url,
-        media_file:{ 
+        media_url: media_url.length > 0 ? media_url : undefined,
+        media_file: request.file && { 
             data: fs.readFileSync(request.file.path),
             contentType: request.file.mimetype
         },

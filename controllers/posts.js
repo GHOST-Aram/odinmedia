@@ -29,7 +29,6 @@ export const change_likes = async(req, res, next) => {
 export const create_post = async(req, res, next) => {
     try {
         await database.createNewPost(req)
-        console.log(req.file, req.body)
         res.redirect('/')
     } catch (error) {
         next(error)

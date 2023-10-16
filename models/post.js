@@ -20,10 +20,12 @@ const postSchema = new ModelSchema({
             ref: 'Comment'
         }
     ],
-    media_url: String,
+    media_url:{
+        type : String,
+    },
     media_file: {
         data: Buffer,
-        contentType: String
+        contentType: String,
     },
     author: {
         type: ModelSchema.ObjectId,
