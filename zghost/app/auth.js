@@ -5,10 +5,10 @@ import * as cookies from '../utils/cookies.js';
 
 app.use(authentication_session())
 
-Authenticator.use(strategies.facebookStrategy)
+Authenticator.use(strategies.oAuth('facebook'))
 Authenticator.use(strategies.localStrategy)
-Authenticator.use(strategies.googleStrategy)
-Authenticator.use(strategies.githubStrategy)
+Authenticator.use(strategies.oAuth('google'))
+Authenticator.use(strategies.oAuth('github'))
 
 app.use(Authenticator.initialize())
 app.use(Authenticator.session())

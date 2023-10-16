@@ -8,119 +8,91 @@ import {
 import { User } from '../db/User.js'
 import 'dotenv/config.js'
 
-export const githubStrategy = new GithubStrategy(
-	{
-		clientID: process.env.GITHUB_CLIENT_ID,
-		clientSecret: process.env.GITHUB_CLIENT_SECRET,
-		callbackURL: '/auth/github/callback',
-		profileFields: [
-			'id', 
-			'displayName', 
-			'name', 
-			'gender',
-			'picture.type(large)',
-			'email'
-		]
-	},
-	async (token, refreshToken, profile, done) => {
-		try {
-			const user = await User.findOne({profileId: profile.id})
-			if(user){
-				return done(null, user)
-			}
-			else{
-				const newUser = await User.create({
-					profileId: profile.id,
-					name: profile.displayName,
-					first_name: profile.name.givenName,
-					last_name: profile.name.familyName,
-					middle_name: profile.name.middleName,
-					pictureUrl: profile._json.picture.data.url
-				})
+export const oAuth = (name) =>{
+	try {
+		const Strategy = getStrategy(name.toLowerCase())
+		const { clientID, clientSecret } = getClientCredentials(name)
+		const envName = name.toUpperCase()
 
-				return done(null, newUser)
+		return new Strategy(
+			{
+				clientID,
+				clientSecret,
+				callbackURL: `/auth/${name.toLowerCase()}/callback`,
+				profileFields: [
+					'id', 
+					'displayName', 
+					'name', 
+					'gender',
+					'picture.type(large)',
+					'email'
+				]
+			},
+			async (token, refreshToken, profile, done) => {
+				try {
+					const user = await User.findOne({profileId: profile.id})
+					if(user){
+						return done(null, user)
+					}
+					else{
+						const newUser = await User.create({
+							profileId: profile.id,
+							name: profile.displayName,
+							first_name: profile.name.givenName,
+							last_name: profile.name.familyName,
+							middle_name: profile.name.middleName,
+							pictureUrl: profile._json.picture.data.url
+						})
+		
+						return done(null, newUser)
+					}
+				} catch (error) {
+					return done(error, false)
+				}
 			}
-		} catch (error) {
-			return done(error, false)
-		}
+		)
+		
+		
+	} catch (error) {
+		console.log(error)
 	}
-)
 
-export const googleStrategy = new GoogleStrategy(
-	{
-		clientID: process.env.GOOGLE_CLIENT_ID,
-		clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-		callbackURL: '/auth/google/callback',
-		profileFields: [
-			'id', 
-			'displayName', 
-			'name', 
-			'gender',
-			'picture.type(large)',
-			'email'
-		]
-	},
-	async (token, refreshToken, profile, done) => {
-		try {
-			const user = await User.findOne({profileId: profile.id})
-			if(user){
-				return done(null, user)
-			}
-			else{
-				const newUser = await User.create({
-					profileId: profile.id,
-					name: profile.displayName,
-					first_name: profile.name.givenName,
-					last_name: profile.name.familyName,
-					middle_name: profile.name.middleName,
-					pictureUrl: profile._json.picture.data.url
-				})
+}
 
-				return done(null, newUser)
-			}
-		} catch (error) {
-			return done(error, false)
-		}
+const getStrategy = (name) =>{
+	switch(name){
+		case 'google':
+			return GoogleStrategy
+		case 'facebook':
+			return FacebookStrategy
+		case 'github':
+			return GithubStrategy
+		default:
+			throw new Error('Strategy Unavailable')
 	}
-)
+}
 
-export const facebookStrategy = new FacebookStrategy(
-	{
-		clientID: process.env.FACEBOOK_CLIENT_ID,
-		clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-		callbackURL: '/auth/facebook/callback',
-		profileFields: [
-			'id', 
-			'displayName', 
-			'name', 
-			'gender',
-			'picture.type(large)',
-			'email'
-		]
-	},
-	async (token, refreshToken, profile, done) => {
-		try {
-			const user = await User.findOne({profileId: profile.id})
-			if(user){
-				return done(null, user)
+const getClientCredentials = (name) =>{
+	switch(name){
+		case 'facebook':
+			return {
+				clientID: process.env.FACEBOOK_CLIENT_ID,
+				clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
 			}
-			else{
-				const newUser = await User.create({
-					profileId: profile.id,
-					name: profile.displayName,
-					first_name: profile.name.givenName,
-					last_name: profile.name.familyName,
-					middle_name: profile.name.middleName,
-					pictureUrl: profile._json.picture.data.url
-				})
-
-				return done(null, newUser)
+		case 'google':
+			return {
+				clientID: process.env.GOOGLE_CLIENT_ID,
+				clientSecret: process.env.GOOGLE_CLIENT_SECRET,
 			}
-		} catch (error) {
-			return done(error, false)
-		}
+		case 'github':
+			return {
+				clientID: process.env.GITHUB_CLIENT_ID,
+				clientSecret: process.env.GITHUB_CLIENT_SECRET,
+			}
+		default:
+			throw new Error('Unavailable client credentials')
 	}
-)
+}
 
 export const localStrategy = new LocalStrategy(async(username, password, done) => {
 	try {
