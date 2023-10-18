@@ -5,16 +5,23 @@ import {
     formatPost, 
     filterPosts 
 } from "../utils/formats.js"
-export const add_new_comment = async(req, res, next) =>{
+export const add_new_comment = [
+    validator.validatePlainText('comment', { identifier: 'Comment'}),
 
-    try {
-        await database.addNewComment(req)
-        res.redirect(`/posts/${req.params.id}`)
-    } catch (error) {
-        next(error)
+    async(req, res, next) =>{
+        const errors = validationResult(req)
+        try {
+            if(errors.isEmpty()){
+                await database.addNewComment(req)
+            }
+            res.redirect(`/posts/${req.params.id}`)
+        } catch (error) {
+            next(error)
+        }
+    
     }
 
-}
+]
 
 export const change_likes = async(req, res, next) => {
 
