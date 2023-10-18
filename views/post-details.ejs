@@ -19,13 +19,20 @@
                     <p class="font-light text-md">
                         <%=post.content%>
                     </p>
-                    <a href="<%=post.media%>">
+                    <%if(post.media_url ){%>
                         <img 
-                            src="<%=post.media%>"
+                            src="<%=post.media_url%>"
                             alt="post"
                             class="w-full rounded-md"
                         >
-                    </a>
+                    <%}%>
+                    <%if(post.media_file && post.media_file.data){%>
+                        <img 
+                            src="data:<%= post.media_file.contentType %>;base64,<%= post.media_file.data.toString('base64') %>"
+                            alt="post"
+                            class="w-full rounded-md"
+                        >
+                    <%}%>
                 </div>
                  <!--Post end  -->
                 <hr>
