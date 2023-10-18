@@ -1,4 +1,5 @@
 import * as database  from "../utils/posts-db.js"
+import { validator, validationResult } from "../zghost/utils/validator.js"
 import { 
     formatPosts, 
     formatPost, 
@@ -26,15 +27,23 @@ export const change_likes = async(req, res, next) => {
 }
 
 
-export const create_post = async(req, res, next) => {
-    try {
-        await database.createNewPost(req)
-        res.redirect('/')
-    } catch (error) {
-        next(error)
-    }
+export const create_post = [
+    validator.validatePlainText('post_content', {identifier: 'Post content'}),
 
-}
+    async(req, res, next) => {
+        const errors = validationResult(req)
+
+        try {
+            if(errors.isEmpty()){
+                await database.createNewPost(req)
+            }
+            res.redirect('/')
+        } catch (error) {
+            next(error)
+        }
+    }
+    
+]
 
 export const get_posts = async (req, res, next) => {
     const currentUser = req.user
