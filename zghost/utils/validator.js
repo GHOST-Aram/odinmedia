@@ -54,6 +54,15 @@ class Validitor{
             )
             .escape()
     }
+
+    validateUrl = (field, { identifier }) => {
+        return body(field)
+            .trim()
+            .optional()
+            .isURL()
+            .withMessage(`Invalid Url for field ${identifier}`)
+            .escape()
+    }
 }
 
 export { validationResult }

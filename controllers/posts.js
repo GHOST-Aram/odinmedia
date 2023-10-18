@@ -7,6 +7,7 @@ import {
 } from "../utils/formats.js"
 export const add_new_comment = [
     validator.validatePlainText('comment', { identifier: 'Comment'}),
+    validator.validateUrl('media_url', { identifier: 'Post Media Url' }),
 
     async(req, res, next) =>{
         const errors = validationResult(req)
