@@ -104,7 +104,8 @@ export const calculateMutualFriends = (
         const allFriends = [...usersFriends, ...currentUsersFriends]
         const mergedList = removeRedundancies(allFriends)
 
-        return allFriends.length - mergedList.length
+        const lenghtDiff = allFriends.length - mergedList.length
+        return lenghtDiff >= 0 ? lenghtDiff : 0
 }
 
 const removeRedundancies = (mergedList) =>{
