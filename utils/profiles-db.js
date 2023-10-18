@@ -40,7 +40,6 @@ export const updateProfileInfo = async(request) =>{
         picture_file: picture_file ? {
             data: fs.readFileSync(picture_file.path),
             contentType: picture_file.mimetype
-
         } : null,
         city,
         region,

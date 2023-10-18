@@ -81,6 +81,7 @@ const formatPartialPostProperties = (post, currentUserId) =>({
     id: post._id.toString(),
     content: post.post_content,
     media_url: post.media_url || null,
+    media_file: post.media_file,
     author: formatUser(post.author),
     likes: post.likes.length,
     user_liked: post.likes.includes(currentUserId),

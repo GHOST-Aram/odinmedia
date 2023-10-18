@@ -43,7 +43,7 @@ export const get_posts = async (req, res, next) => {
         const posts = await database.findAllPosts()
         const filteredPosts = filterPosts(posts, currentUser)
         const formattedPosts = formatPosts(filteredPosts, currentUser)
-        
+                
         res.render('index', { 
             title: 'Home',
             heading: 'Posts', 
