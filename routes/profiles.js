@@ -1,7 +1,6 @@
 import * as profiles from "../controllers/profiles.js";
 import { Router, uploadMultipleFiles } from "../zghost/app/init.js";
 
-const upload = multer({ dest: '/uploads'})
 const profilesRouter = Router()
 
 profilesRouter.get('/:id', profiles.get_user_profile)

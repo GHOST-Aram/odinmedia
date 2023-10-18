@@ -61,5 +61,5 @@ class Validitor{
     }
 }
 
-export const getValidationResult = validationResult 
+export const getValidationResult =(req) => validationResult(req) 
 export const validator = new Validitor()

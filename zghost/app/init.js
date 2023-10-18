@@ -14,15 +14,15 @@ import multer from "multer";
 
 const app = express()
 const Authenticator = passport
-const json = express.json
-const logger = morgan
-const Router = express.Router
-const static_dir = express.static
+const json = () => express.json()
+const logger = (mode) => morgan(mode)
+const Router = () => express.Router()
+const static_dir =(dirname) => express.static(dirname)
 const upload = multer({ dest: '/uploads'})
-const urlencoded = express.urlencoded
+const urlencoded = (options) => express.urlencoded(options)
 
-const uploadSingleFile = upload.single
-const uploadMultipleFiles = upload.fields
+const uploadSingleFile = (field) => upload.single(field)
+const uploadMultipleFiles =(fields) => upload.fields(fields)
 
 export {
     app, 
