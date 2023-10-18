@@ -1,35 +1,50 @@
 const emailField = document.querySelector('input[type=email]')
 const passwordField = document.querySelector('input[type=password]')
 const form = document.querySelector('form')
-
 const passwordError = document.querySelector('span#password-error')
 
-form.addEventListener('submit' ,(event) =>{
-    event.preventDefault()
-    validatePasswordField()
-    validateEmailField()
 
+validatePasswordField()
+validateEmailField()
+
+form.addEventListener('submit' ,(event) =>{
+    
     if(form.checkValidity()){
         form.submit()
+    } else{
+        event.preventDefault()
     }
 })
 
-const validateEmailField = () =>{
+function validateEmailField(){
     const emailError = document.querySelector('span#email-error')
-    
-    if(emailField.validity.valueMissing){
-        emailError.textContent = 'Email Field is required'
-        emailError.classList.remove('hidden')
-    }
-    if(emailField.validity.typeMistmatch){
-        emailError.textContent = 'Invalid Email'
-        emailError.classList.remove('hidden')
-    }
+    emailField.addEventListener('blur', () =>{
+        if(emailField.validity.valueMissing){
+            emailError.textContent = 'Email Field is required'
+            emailError.classList.remove('hidden')
+        }
+        if(emailField.validity.typeMistmatch){
+            emailError.textContent = 'Invalid Email'
+            emailError.classList.remove('hidden')
+        }
+
+        if(emailField.validity.valid){
+            emailError.textContent = ''
+            emailError.classList.add('hidden')
+        }
+    })
 }
 
-const validatePasswordField = () =>{
-    if(passwordField.validity.valueMissing){
-        passwordError.textContent = 'Password Field is required'
-        passwordError.classList.remove('hidden')
-    } 
+function validatePasswordField(){
+    passwordField.addEventListener('blur', () =>{
+        if(passwordField.validity.valueMissing){
+            passwordError.textContent = 'Password Field is required'
+            passwordError.classList.remove('hidden')
+        } 
+
+        if(passwordField.validity.valid){
+            passwordError.textContent = ''
+            passwordError.classList.add('hidden')
+        }
+    })
 }
