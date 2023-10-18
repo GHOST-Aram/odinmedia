@@ -11,10 +11,7 @@ authRouter.get('/facebook/callback', Authenticator.authenticate('facebook', {
 }))
 
 authRouter.get('/login', auth.get_login_form )
-authRouter.post('/login', Authenticator.authenticate('local', {
-        failureRedirect: '/auth/login',
-        successRedirect: '/'
-}))
+authRouter.post('/login', auth.login)
 authRouter.get('/logout', auth.logout)
 authRouter.get('/sign-up', auth.get_sign_up_form)
 authRouter.post('/sign-up', auth.creat_user)

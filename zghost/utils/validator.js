@@ -19,17 +19,17 @@ class Validitor{
             .escape()
             .isEmail()
             .withMessage('Please enter a valid email')
-            .custom(async(email) =>{
-                //Check if email has been reistered.
-                const user = await User.findOne({ email })
-                if(user){
-                    throw new Error(
-                        `The Email ${ email } has already been registered.`
-                    )
-                }
-            })
             
-    }
+        }
+        // .custom(async(email) =>{
+        //     //Check if email has been reistered.
+        //     const user = await User.findOne({ email })
+        //     if(user){
+        //         throw new Error(
+        //             `The Email ${ email } has already been registered.`
+        //         )
+        //     }
+        // })
 
     validatePassword = (field) =>{
         return body(field)
