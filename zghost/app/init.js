@@ -9,6 +9,7 @@ import morgan from 'morgan';
 import { matchedData } from "express-validator"
 import cors from 'cors'
 import { ObjectId } from "mongodb"
+import multer from "multer";
 
 
 const app = express()
@@ -17,7 +18,11 @@ const json = express.json
 const logger = morgan
 const Router = express.Router
 const static_dir = express.static
+const upload = multer({ dest: '/uploads'})
 const urlencoded = express.urlencoded
+
+const uploadSingleFile = upload.single
+const uploadMultipleFiles = upload.fields
 
 export {
     app, 
@@ -35,5 +40,7 @@ export {
     ObjectId, 
     Router, 
     static_dir,
+    uploadMultipleFiles,
+    uploadSingleFile,
     urlencoded, 
 }
