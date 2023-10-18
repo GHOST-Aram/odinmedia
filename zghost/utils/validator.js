@@ -61,7 +61,6 @@ class Validitor{
             .optional()
             .isURL()
             .withMessage(`Invalid Url for field ${identifier}`)
-            .escape()
     }
 }
 

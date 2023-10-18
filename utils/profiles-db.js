@@ -25,8 +25,11 @@ export const updateProfileInfo = async(request) =>{
         pictureUrl, bannerUrl, city,
         region
     } = request.body
-    const banner_file = request.files.banner_file[0]
-    const picture_file = request.files.avatar[0]
+
+    const banner_file = request.files.banner_file ? 
+                        request.files.banner_file[0] : null
+    const picture_file = request.files.avatar ? 
+                        request.files.avatar[0] : undefined
 
     await User.findByIdAndUpdate(request.user.id, {
         first_name,
