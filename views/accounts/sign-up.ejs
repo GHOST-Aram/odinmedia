@@ -8,11 +8,12 @@
             </button>
         </div> 
     </header> 
-    <main class="mt-20">
+    <main class="my-20">
         <section>
             <div class="container space-y-4 lg:w-3/5">
 
                 <form 
+                    novalidate
                     action="" 
                     method="post"
                     class="space-y-4 p-4 rounded-lg shadow-md shadow-slate-400"
@@ -85,7 +86,7 @@
                         <input 
                             class="py-2 px-2 border-b-2 border-slate-400"
                             type="password" 
-                            name="password2" 
+                            name="confirm_password" 
                             id="password2"
                             placeholder="Repeat Password"
                         >
@@ -99,6 +100,13 @@
                             SIGN UP
                         </button>
                     </div>
+                    <%if(errors){%>
+                        <%errors.forEach( error => {%>
+                            <p class="text-red-500 font-light text-start">
+                                <%=error.msg%>
+                            </p>
+                        <%})%>
+                    <%}%>
                 </form>
                 <div
                     class="p-4 rounded-lg shadow-md shadow-slate-400"
