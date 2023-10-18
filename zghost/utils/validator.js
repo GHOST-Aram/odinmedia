@@ -58,8 +58,6 @@ class Validitor{
         return body(field)
             .trim()
             .optional()
-            .isURL()
-            .withMessage(`Invalid Url for field ${identifier}`)
     }
 }
 
