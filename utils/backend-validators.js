@@ -1,5 +1,5 @@
 import { User } from "../zghost/db/User.js"
-import { matchedData } from "express-validator"
+import { matchedData } from "../zghost/app/init.js"
 import { validator } from "../zghost/utils/validator.js"
 
 export const comment_validators = [

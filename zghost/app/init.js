@@ -6,6 +6,7 @@ import GithubStrategy from 'passport-github2'
 import { compareSync as comparePasswords, hash } from 'bcrypt'
 import FacebookStrategy from 'passport-facebook'
 import morgan from 'morgan';
+import { matchedData } from "express-validator"
 import cors from 'cors'
 import { ObjectId } from "mongodb"
 
@@ -30,6 +31,7 @@ export {
     json, 
     LocalStrategy, 
     logger,
+    matchedData,
     ObjectId, 
     Router, 
     static_dir,
