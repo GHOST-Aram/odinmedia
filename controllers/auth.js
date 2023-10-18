@@ -1,36 +1,19 @@
 import { Authenticator } from "../zghost/app/init.js"
 import { createUserWithHashedPassword } from "../utils/auth.js"
-import { validationResult, validator } from "../zghost/utils/validator.js"
-import { User } from "../zghost/db/User.js"
-import { matchedData } from "express-validator"
+import { getValidationResult } from "../zghost/utils/validator.js"
+import { 
+    login_validators, 
+    signup_validators, 
+} from "../utils/backend-validators.js"
+
 
 
 export const creat_user = [
-    validator.validatePlainText('first_name', { identifier: 'First Name' }),
-    validator.validatePlainText('last_name', { identifier: 'Last Name'}),
-    validator.validateEmail('email').custom(
-        async(email) =>{
-            const user = await User.findOne({ email })
-            
-            if(user){
-                throw new Error (`The email ${email} has been registered.`)
-            }
-        }
-    ),
-    validator.validatePassword('password'),
-    validator.validatePassword('confirm_password').custom(
-        async(confirm_password, { req }) =>{
-            const { password } = matchedData(req)
-
-            if(confirm_password !== password ){
-                throw new Error ('Password and confirm password must be identical')
-            }
-        }
-    ),
+    ...signup_validators,
 
     (req, res) => {
-        const errors = validationResult(req)
-        console.log(errors.array())
+        const errors = getValidationResult(req)
+
         if(!errors.isEmpty()){
             res.render('accounts/sign-up', 
                 {errors: errors.array(), title: 'Sign Up Error'}
@@ -65,11 +48,10 @@ export const isLoggedIn = (req, res, next) => {
 }
 
 export const login = [
-    validator.validateEmail('username'),
-    validator.validatePassword('password'),
+    ...login_validators,
 
     (req, res, next) =>{
-        const errors = validationResult(req)
+        const errors = getValidationResult(req)
 
         if(!errors.isEmpty()){
             res.render('accounts/login', 

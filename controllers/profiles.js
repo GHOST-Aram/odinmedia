@@ -1,6 +1,7 @@
 import * as database from '../utils/profiles-db.js'
 import { formatPosts, formatProfile } from '../utils/formats.js'
-import { validationResult, validator } from '../zghost/utils/validator.js'
+import { getValidationResult } from '../zghost/utils/validator.js'
+import { profile_info_validators } from '../utils/backend-validators.js'
 
 export const get_user_profile = async(req, res, next) => {
     const userId = req.params.id
@@ -39,14 +40,10 @@ export const get_editing_form = async(req, res, next) =>{
 }
 
 export const update_profile = [
-    validator.validatePlainText('name', {identifier: 'Name'}),
-    validator.validatePlainText('city', {identifier: 'City'}),
-    validator.validatePlainText('region', { identifier: 'Region'}),
-    validator.validateUrl('bannerUrl', {identifier: 'Banner Url'}),
-    validator.validateUrl('pictureUrl', { identifier: 'Picture Url'}),
+    ...profile_info_validators,
 
     async(req, res, next) =>{
-        const errors = validationResult(req)
+        const errors = getValidationResult(req)
         try {
             if(errors.isEmpty()){
                 await database.updateProfileInfo(req)

@@ -1,16 +1,19 @@
 import * as database  from "../utils/posts-db.js"
-import { validator, validationResult } from "../zghost/utils/validator.js"
+import { getValidationResult } from "../zghost/utils/validator.js"
 import { 
     formatPosts, 
     formatPost, 
     filterPosts 
 } from "../utils/formats.js"
+import { 
+    comment_validators, 
+    post_validators 
+} from "../utils/backend-validators.js"
 export const add_new_comment = [
-    validator.validatePlainText('comment', { identifier: 'Comment'}),
-    validator.validateUrl('media_url', { identifier: 'Post Media Url' }),
+    ...comment_validators,
 
     async(req, res, next) =>{
-        const errors = validationResult(req)
+        const errors = getValidationResult(req)
         try {
             if(errors.isEmpty()){
                 await database.addNewComment(req)
@@ -36,10 +39,10 @@ export const change_likes = async(req, res, next) => {
 
 
 export const create_post = [
-    validator.validatePlainText('post_content', {identifier: 'Post content'}),
+    ...post_validators,
 
     async(req, res, next) => {
-        const errors = validationResult(req)
+        const errors = getValidationResult(req)
 
         try {
             if(errors.isEmpty()){

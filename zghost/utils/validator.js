@@ -1,5 +1,4 @@
 import { body, validationResult } from "express-validator";
-import { User } from "../db/User.js";
 
 class Validitor{
     validateName = (field) => {
@@ -64,5 +63,5 @@ class Validitor{
     }
 }
 
-export { validationResult }
+export const getValidationResult = validationResult 
 export const validator = new Validitor()
