@@ -1,30 +1,24 @@
 import { Post } from "../models/post.js"
 import { ObjectId } from "../zghost/app/init.js"
 import { Comment } from "../models/comment.js"
-import fs from 'node:fs'
 
-export const addNewComment = async(request) =>{
+export const addNewComment = async({ authorObjectId, commentText, postId }) =>{
     const comment = await Comment.create({
-        author: request.user._id,
-        text: request.body.comment,
+        author: authorObjectId,
+        text: commentText,
     })
 
-    await Post.findByIdAndUpdate(request.params.id, {
+    await Post.findByIdAndUpdate(postId, {
         $push:{ comments: comment._id}
     })
 }
 
-export const createNewPost = async(request) => {
-    const {post_content, media_url} = request.body
-    const currentUserId = request.user._id
+export const createNewPost = async(postData) => {
     await Post.create({
-        post_content,
-        media_url: media_url.length > 0 ? media_url : undefined,
-        media_file: request.file && { 
-            data: fs.readFileSync(request.file.path),
-            contentType: request.file.mimetype
-        },
-        author: currentUserId
+        post_content: postData.post_content,
+        media_url: postData.media_url,
+        media_file: postData.media_file,
+        author: postData.author
     })
 }
 
@@ -41,8 +35,8 @@ export const findAllPosts = async() =>{
 }
 
 
-export const findPostById = async(request) =>{
-    return await Post.findById(request.params.id)
+export const findPostById = async(postId) =>{
+    return await Post.findById(postId)
         .populate({
         path: 'author',
         select: 'first_name last_name pictureUrl _id'
@@ -56,9 +50,7 @@ export const findPostById = async(request) =>{
         })
 }
 
-export const updateLikes = async(request) =>{
-    const postId = request.params.id
-    const currentUserId = request.user.id
+export const updateLikes = async({ currentUserId, postId }) =>{
     const post = await Post.findById(postId).select('likes')
     
     if(post.likes.includes(new ObjectId(currentUserId))){
@@ -73,10 +65,7 @@ export const updateLikes = async(request) =>{
 
     }
 }
-export const updateReposts = async(request) =>{
-    const postId = request.params.id
-    const currentUserId = request.user.id
-
+export const updateReposts = async({ currentUserId, postId }) =>{
     const post = await Post.findById(postId)
 
     if(!post.reposts.includes(currentUserId)){

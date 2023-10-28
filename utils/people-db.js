@@ -1,10 +1,7 @@
 import { User } from "../zghost/db/User.js"
 import { ObjectId } from "../zghost/app/init.js"
 
-export const addFriend = async(request) =>{
-    const currentUserId = request.user.id
-    const friendId = request.params.id
-
+export const addFriend = async({currentUserId, friendId}) =>{
     await User.findByIdAndUpdate(currentUserId, {
         $pull: { requests_received: new ObjectId(friendId) }
     })
@@ -28,8 +25,8 @@ export const findAllUsers = async() =>{
     )
 }
 
-export const findReceivedRequests = async(request ) =>{
-    const user = await User.findById(request.user.id)
+export const findReceivedRequests = async(currentUserId) =>{
+    const user = await User.findById(currentUserId)
     .select('requests_received')
     .populate({
         path: 'requests_received',
@@ -39,8 +36,8 @@ export const findReceivedRequests = async(request ) =>{
     return user.requests_received
 }
 
-export const findSentRequests = async(request) =>{
-    const user = await User.findById(request.user.id)
+export const findSentRequests = async(currentUserId) =>{
+    const user = await User.findById(currentUserId)
     .select('requests_sent')
     .populate({
         path: 'requests_sent',
@@ -50,10 +47,7 @@ export const findSentRequests = async(request) =>{
     return user.requests_sent
 }
 
-export const recallSentRequests = async(request) =>{
-    const friendId = request.params.id
-    const currentUserId = request.user.id
-
+export const recallSentRequests = async({currentUserId, friendId}) =>{
     await User.findByIdAndUpdate(currentUserId, {
         $pull: { requests_sent: new ObjectId(friendId) }
     })
@@ -62,10 +56,7 @@ export const recallSentRequests = async(request) =>{
     })
 }
 
-export const rejectFriendRequest = async(request) =>{
-    const friendId = request.params.id
-    const currentUserId = request.user.id
-
+export const rejectFriendRequest = async({ currentUserId, friendId }) =>{
     await User.findByIdAndUpdate(currentUserId, {
         $pull: { requests_received: new ObjectId(friendId) }
     })
@@ -74,10 +65,7 @@ export const rejectFriendRequest = async(request) =>{
     })
 }
 
-export const sendFriendRequest = async(request) =>{
-        const friendId = request.params.id
-        const currentUserId = request.user.id
-
+export const sendFriendRequest = async({ currentUserId, friendId }) =>{
         await User.findByIdAndUpdate(currentUserId, {
             $push: { requests_sent: new ObjectId(friendId) }
         })

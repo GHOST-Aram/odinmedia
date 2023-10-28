@@ -1,4 +1,5 @@
 import * as database  from "../utils/posts-db.js"
+import fs from 'node:fs'
 import { getValidationResult } from "../zghost/utils/validator.js"
 import { 
     formatPosts, 
@@ -16,7 +17,12 @@ export const add_new_comment = [
         const errors = getValidationResult(req)
         try {
             if(errors.isEmpty()){
-                await database.addNewComment(req)
+                const commentData = {
+                    authorObjectId: req.user._id,
+                    commentText: req.body.comment,
+                    postId: req.params.id
+                }
+                await database.addNewComment(commentData)
             }
             res.redirect(`/posts/${req.params.id}`)
         } catch (error) {
@@ -28,9 +34,10 @@ export const add_new_comment = [
 ]
 
 export const change_likes = async(req, res, next) => {
-
+    const postId = req.params.id
+    const currentUserId = req.user.id
     try {
-        await database.updateLikes(req)
+        await database.updateLikes({ currentUserId, postId })
         res.redirect(`/posts/${req.params.id}`)
     } catch (error) {
         next(error)
@@ -46,7 +53,18 @@ export const create_post = [
 
         try {
             if(errors.isEmpty()){
-                await database.createNewPost(req)
+                const {post_content, media_url} = req.body
+                const currentUserId = req.user._id
+                const postData = {
+                    post_content,
+                    media_url: media_url.length > 0 ? media_url : undefined,
+                    media_file: req.file && { 
+                        data: fs.readFileSync(req.file.path),
+                        contentType: req.file.mimetype
+                    },
+                    author: currentUserId
+                }
+                await database.createNewPost(postData)
             }
             res.redirect('/')
         } catch (error) {
@@ -75,13 +93,14 @@ export const get_posts = async (req, res, next) => {
 }
 
 export const get_one_post = async(req, res, next) =>{
-
+    const postId = req.params.id
+    const currentUserId = req.user.id
     try {
-        const currentPost = await database.findPostById(req)
-        const formattedPost = formatPost(currentPost, req.user.id)
+        const currentPost = await database.findPostById(postId)
+        const formattedPost = formatPost(currentPost, currentUserId)
         
         res.render('post-details', { 
-            title: `Post | ${req.params.id}`, 
+            title: `Post | ${postId}`, 
             heading: 'Post', 
             post:formattedPost
         })
@@ -91,9 +110,11 @@ export const get_one_post = async(req, res, next) =>{
 }
 
 export const repost = async(req, res, next) =>{
+    const postId = req.params.id
+    const currentUserId = req.user.id
     try {
-        await database.updateReposts(req)
-        res.redirect(`/posts/${req.params.id}`)
+        await database.updateReposts({ currentUserId, postId })
+        res.redirect(`/posts/${postId}`)
     } catch (error) {
         next(error)
     }

@@ -1,9 +1,10 @@
 import * as database from "../utils/friends-db.js"
 import * as formats from "../utils/formats.js"
 export const unfriend = async(req, res, next) => {
-    
+    const currentUserId = req.user.id
+    const friendId = req.params.id
     try {
-        database.removeFromFriends(req)
+        database.removeFromFriends({ currentUserId, friendId })
         res.redirect(`/friends/${req.user.id}/all`)
     } catch (error) {
         next(error)
@@ -11,9 +12,10 @@ export const unfriend = async(req, res, next) => {
 }
 
 export const get_all_friends = async(req, res, next) =>{
+    const userId = req.params.id
     try {
         let friends = []
-        const user = await database.findUserById(req)
+        const user = await database.findUserById(userId)
         
         if(user.friends && user.friends.length > 0){
             friends = user.friends.map(

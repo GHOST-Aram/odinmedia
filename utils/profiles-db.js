@@ -1,7 +1,6 @@
 import { User } from "../zghost/db/User.js"
 import { Post } from "../models/post.js"
 import { ObjectId } from "../zghost/app/init.js"
-import fs from 'node:fs'
 
 export const findProfileById = async(id) =>{
     return await User.findById(id).select(
@@ -19,33 +18,7 @@ export const findPostsByAuthorId = async(authorId) =>{
     )
 }
 
-export const updateProfileInfo = async(request) =>{
-    const {
-        first_name, last_name, 
-        pictureUrl, bannerUrl, city,
-        region
-    } = request.body
-
-    const banner_file = request.files.banner_file ? 
-                        request.files.banner_file[0] : null
-    const picture_file = request.files.avatar ? 
-                        request.files.avatar[0] : undefined
-
-    await User.findByIdAndUpdate(request.user.id, {
-        first_name,
-        last_name,
-        bannerUrl: bannerUrl.trim().length > 1 ? bannerUrl : undefined,
-        pictureUrl: pictureUrl.trim().length > 1 ? pictureUrl: undefined,
-        banner_file: banner_file ? {
-            data: fs.readFileSync(banner_file.path),
-            contentType: banner_file.mimetype 
-        } : null,
-        picture_file: picture_file ? {
-            data: fs.readFileSync(picture_file.path),
-            contentType: picture_file.mimetype
-        } : null,
-        city,
-        region,
-    })
+export const updateProfileInfo = async({ currentUserId, profileData }) =>{
+    await User.findByIdAndUpdate(currentUserId, profileData )
 }
 

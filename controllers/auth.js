@@ -11,7 +11,7 @@ import {
 export const creat_user = [
     ...signup_validators,
 
-    (req, res) => {
+    (req, res) =>{
         const errors = getValidationResult(req)
 
         if(!errors.isEmpty()){
@@ -19,8 +19,14 @@ export const creat_user = [
                 {errors: errors.array(), title: 'Sign Up Error'}
             )
         } else {
+            const userDetails = { 
+                first_name: req.body.first_name, 
+                last_name: req.body, 
+                email: req.body.email, 
+                password: req.body.password
+            }
             try {
-                createUserWithHashedPassword(req)
+                createUserWithHashedPassword(userDetails)
                 res.redirect('/auth/login')
     
             } catch (error) {
