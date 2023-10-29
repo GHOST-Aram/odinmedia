@@ -1,17 +1,11 @@
 import { Authenticator } from "../../zghost/app/init.js"
 import { createUserWithHashedPassword } from "./auth.dal.js"
 import { getValidationResult } from "../../zghost/utils/validator.js"
-import { 
-    login_validators, 
-    signup_validators, 
-} from "../../utils/validators.js"
 
 
 
-export const creat_user = [
-    ...signup_validators,
 
-    (req, res) =>{
+export const creat_user = (req, res) =>{
         const errors = getValidationResult(req)
 
         if(!errors.isEmpty()){
@@ -36,7 +30,7 @@ export const creat_user = [
         }
 
     }
-]
+
 export const get_login_form = (req, res) =>{
     res.render('accounts/login', {title: 'Login', errors: null})
 }
@@ -54,7 +48,6 @@ export const isLoggedIn = (req, res, next) => {
 }
 
 export const login = [
-    ...login_validators,
 
     (req, res, next) =>{
         const errors = getValidationResult(req)
