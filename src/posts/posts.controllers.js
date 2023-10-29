@@ -1,4 +1,4 @@
-import * as database  from "./posts.dal.js"
+import { postDAL }  from "./posts.dal.js"
 import fs from 'node:fs'
 import { getValidationResult } from "../../zghost/utils/validator.js"
 import { 
@@ -17,7 +17,7 @@ export const add_new_comment = async(req, res, next) =>{
                 commentText: req.body.comment,
                 postId: req.params.id
             }
-            await database.addNewComment(commentData)
+            await postDAL.addNewComment(commentData)
         }
         res.redirect(`/posts/${req.params.id}`)
     } catch (error) {
@@ -31,7 +31,7 @@ export const change_likes = async(req, res, next) => {
     const currentUserId = req.user.id
 
     try {
-        await database.updateLikes({ currentUserId, postId })
+        await postDAL.updateLikes({ currentUserId, postId })
         res.redirect(`/posts/${req.params.id}`)
     } catch (error) {
         next(error)
@@ -54,7 +54,7 @@ export const create_post = async(req, res, next) => {
                 },
                 author: currentUserId
             }
-            await database.createNewPost(postData)
+            await postDAL.createNewPost(postData)
         }
         res.redirect('/')
     } catch (error) {
@@ -66,7 +66,7 @@ export const get_posts = async (req, res, next) => {
     const currentUser = req.user
     
     try {
-        const posts = await database.findAllPosts()
+        const posts = await postDAL.findAllPosts()
         const filteredPosts = filterPosts(posts, currentUser)
         const formattedPosts = formatPosts(filteredPosts, currentUser)
                 
@@ -85,7 +85,7 @@ export const get_one_post = async(req, res, next) =>{
     const currentUserId = req.user.id
 
     try {
-        const currentPost = await database.findPostById(postId)
+        const currentPost = await postDAL.findPostById(postId)
         const formattedPost = formatPost(currentPost, currentUserId)
         
         res.render('post-details', { 
@@ -103,7 +103,7 @@ export const repost = async(req, res, next) =>{
     const currentUserId = req.user.id
     
     try {
-        await database.updateReposts({ currentUserId, postId })
+        await postDAL.updateReposts({ currentUserId, postId })
         res.redirect(`/posts/${postId}`)
     } catch (error) {
         next(error)

@@ -1,5 +1,5 @@
 import { Authenticator } from "../../zghost/app/init.js"
-import { createUserWithHashedPassword } from "./auth.dal.js"
+import { authDAL } from "./auth.dal.js"
 import { getValidationResult } from "../../zghost/utils/validator.js"
 
 export const creat_user = (req, res) =>{
@@ -17,7 +17,7 @@ export const creat_user = (req, res) =>{
             password: req.body.password
         }
         try {
-            createUserWithHashedPassword(userDetails)
+            authDAL.createUserWithHashedPassword(userDetails)
             res.redirect('/auth/login')
 
         } catch (error) {

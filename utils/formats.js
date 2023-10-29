@@ -100,12 +100,13 @@ export const formatComments = (comments) => {
 }
 
 export const calculateMutualFriends = (
-    usersFriends, currentUsersFriends) =>{
-        const allFriends = [...usersFriends, ...currentUsersFriends]
-        const mergedList = filterRedundancies(allFriends)
+    usersFriends, currentUsersFriends
+) =>{
+    const allFriends = [...usersFriends, ...currentUsersFriends]
+    const mergedList = filterRedundancies(allFriends)
 
-        const lenghtDiff = allFriends.length - mergedList.length
-        return lenghtDiff >= 0 ? lenghtDiff : 0
+    const lenghtDiff = allFriends.length - mergedList.length
+    return lenghtDiff >= 0 ? lenghtDiff : 0
 }
 
 const filterRedundancies = (mergedList) =>{

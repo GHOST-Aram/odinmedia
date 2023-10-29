@@ -1,4 +1,4 @@
-import * as database from "./friends.dal.js"
+import { friendsDAL } from "./friends.dal.js"
 import * as formats from "../../utils/formats.js"
 
 export const unfriend = async(req, res, next) => {
@@ -6,7 +6,7 @@ export const unfriend = async(req, res, next) => {
     const friendId = req.params.id
 
     try {
-        database.removeFromFriends({ currentUserId, friendId })
+        friendsDAL.removeFromFriends({ currentUserId, friendId })
         res.redirect(`/friends/${req.user.id}/all`)
     } catch (error) {
         next(error)
@@ -18,7 +18,7 @@ export const get_all_friends = async(req, res, next) =>{
 
     try {
         let friends = []
-        const user = await database.findUserById(userId)
+        const user = await friendsDAL.findUserById(userId)
         
         if(user.friends && user.friends.length > 0){
             friends = user.friends.map(

@@ -1,4 +1,4 @@
-import * as database from './profiles.dal.js'
+import { profilesDAL } from './profiles.dal.js'
 import { formatPosts, formatProfile } from '../../utils/formats.js'
 import { getValidationResult } from '../../zghost/utils/validator.js'
 import { profile_info_validators } from '../../utils/validators.js'
@@ -9,8 +9,8 @@ export const get_user_profile = async(req, res, next) => {
     const currentUser = req.user
 
     try {
-        const user = await database.findProfileById(userId)
-        const posts = await database.findPostsByAuthorId(userId)
+        const user = await profilesDAL.findProfileById(userId)
+        const posts = await profilesDAL.findPostsByAuthorId(userId)
         const formattedPosts = formatPosts(posts, currentUser)
         const profile = formatProfile(user)
         
@@ -27,7 +27,7 @@ export const get_user_profile = async(req, res, next) => {
 
 export const get_editing_form = async(req, res, next) =>{
     try {
-        const user = await database.findProfileById(req.user.id)
+        const user = await profilesDAL.findProfileById(req.user.id)
         const profile = formatProfile(user)
 
         res.render('edit-profile', { 
@@ -77,7 +77,7 @@ export const update_profile = [
                     region,
                 }
 
-                await database.updateProfileInfo({ currentUserId, profileData})
+                await profilesDAL.updateProfileInfo({ currentUserId, profileData})
             }
     
             res.redirect(`/profiles/${currentUserId}`)
