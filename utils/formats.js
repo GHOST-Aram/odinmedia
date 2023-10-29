@@ -102,22 +102,22 @@ export const formatComments = (comments) => {
 export const calculateMutualFriends = (
     usersFriends, currentUsersFriends) =>{
         const allFriends = [...usersFriends, ...currentUsersFriends]
-        const mergedList = removeRedundancies(allFriends)
+        const mergedList = filterRedundancies(allFriends)
 
         const lenghtDiff = allFriends.length - mergedList.length
         return lenghtDiff >= 0 ? lenghtDiff : 0
 }
 
-const removeRedundancies = (mergedList) =>{
+const filterRedundancies = (mergedList) =>{
     return [new Set(mergedList)]
 }
-export const removeFriends = (users, currentUserFriends) => {
+export const filterFriends = (users, currentUserFriends) => {
     return users.filter(user => !currentUserFriends.includes(user._id))
 }
 
-export const removeSentRequests = (users, sentRequests) =>{
+export const filterSentRequests = (users, sentRequests) =>{
     return users.filter(user => !sentRequests.includes(user._id))
 }
-export const removeReceivedRequests = (users, receivedRequests) =>{
+export const filterReceivedRequests = (users, receivedRequests) =>{
     return users.filter(user => !receivedRequests.includes(user._id))
 }

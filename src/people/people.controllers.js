@@ -24,19 +24,20 @@ export const decline_friend_request = async(req, res, next) =>{
         next(error)
     }
 }
+
 export const get_all_people = async(req, res, next) =>{
     const currentUser = req.user
 
     try {
         let users = await database.findAllUsers()
 
-        users = formats.removeFriends(
+        users = formats.filterFriends(
             users, currentUser.friends
         )
-        users = formats.removeSentRequests(
+        users = formats.filterSentRequests(
             users, currentUser.requests_sent
         )
-        users = formats.removeReceivedRequests(
+        users = formats.filterReceivedRequests(
             users, currentUser.requests_received
         )
 
