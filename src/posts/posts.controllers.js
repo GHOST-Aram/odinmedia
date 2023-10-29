@@ -8,28 +8,28 @@ import {
 } from "../../utils/formats.js"
 
 export const add_new_comment = async(req, res, next) =>{
-        const errors = getValidationResult(req)
-        try {
-            if(errors.isEmpty()){
-                const commentData = {
-                    authorObjectId: req.user._id,
-                    commentText: req.body.comment,
-                    postId: req.params.id
-                }
-                await database.addNewComment(commentData)
+    const errors = getValidationResult(req)
+
+    try {
+        if(errors.isEmpty()){
+            const commentData = {
+                authorObjectId: req.user._id,
+                commentText: req.body.comment,
+                postId: req.params.id
             }
-            res.redirect(`/posts/${req.params.id}`)
-        } catch (error) {
-            next(error)
+            await database.addNewComment(commentData)
         }
-    
+        res.redirect(`/posts/${req.params.id}`)
+    } catch (error) {
+        next(error)
     }
 
-
+}
 
 export const change_likes = async(req, res, next) => {
     const postId = req.params.id
     const currentUserId = req.user.id
+
     try {
         await database.updateLikes({ currentUserId, postId })
         res.redirect(`/posts/${req.params.id}`)
@@ -38,30 +38,29 @@ export const change_likes = async(req, res, next) => {
     }
 }
 
-
 export const create_post = async(req, res, next) => {
-        const errors = getValidationResult(req)
+    const errors = getValidationResult(req)
 
-        try {
-            if(errors.isEmpty()){
-                const {post_content, media_url} = req.body
-                const currentUserId = req.user._id
-                const postData = {
-                    post_content,
-                    media_url: media_url.length > 0 ? media_url : undefined,
-                    media_file: req.file && { 
-                        data: fs.readFileSync(req.file.path),
-                        contentType: req.file.mimetype
-                    },
-                    author: currentUserId
-                }
-                await database.createNewPost(postData)
+    try {
+        if(errors.isEmpty()){
+            const {post_content, media_url} = req.body
+            const currentUserId = req.user._id
+            const postData = {
+                post_content,
+                media_url: media_url.length > 0 ? media_url : undefined,
+                media_file: req.file && { 
+                    data: fs.readFileSync(req.file.path),
+                    contentType: req.file.mimetype
+                },
+                author: currentUserId
             }
-            res.redirect('/')
-        } catch (error) {
-            next(error)
+            await database.createNewPost(postData)
         }
+        res.redirect('/')
+    } catch (error) {
+        next(error)
     }
+}
     
 export const get_posts = async (req, res, next) => {
     const currentUser = req.user
@@ -102,6 +101,7 @@ export const get_one_post = async(req, res, next) =>{
 export const repost = async(req, res, next) =>{
     const postId = req.params.id
     const currentUserId = req.user.id
+    
     try {
         await database.updateReposts({ currentUserId, postId })
         res.redirect(`/posts/${postId}`)
