@@ -1,6 +1,6 @@
-import * as auth from "../controllers/auth.js";
-import { Router } from "../zghost/app/init.js";
-import { Authenticator } from "../zghost/app/init.js";
+import * as auth from "./auth.controllers.js";
+import { Router } from "../../zghost/app/init.js";
+import { Authenticator } from "../../zghost/app/init.js";
 
 const authRouter = Router()
 

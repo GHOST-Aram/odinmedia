@@ -1,5 +1,5 @@
-import * as database from "../utils/friends-db.js"
-import * as formats from "../utils/formats.js"
+import * as database from "./friends.dal.js"
+import * as formats from "../../utils/formats.js"
 export const unfriend = async(req, res, next) => {
     const currentUserId = req.user.id
     const friendId = req.params.id

@@ -1,5 +1,5 @@
-import { get_all_friends, unfriend } from "../controllers/friends.js";
-import { Router } from "../zghost/app/init.js";
+import { get_all_friends, unfriend } from "./friends.controllers.js";
+import { Router } from "../../zghost/app/init.js";
 
 const friendsRouter = Router()
 

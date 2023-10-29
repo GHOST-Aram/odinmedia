@@ -1,5 +1,5 @@
-import * as profiles from "../controllers/profiles.js";
-import { Router, uploadMultipleFiles } from "../zghost/app/init.js";
+import * as profiles from "./profiles.controllers.js";
+import { Router, uploadMultipleFiles } from "../../zghost/app/init.js";
 
 const profilesRouter = Router()
 

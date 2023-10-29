@@ -1,5 +1,5 @@
-import * as database from "../utils/people-db.js"
-import * as formats from "../utils/formats.js"
+import * as database from "./people.dal.js"
+import * as formats from "../../utils/formats.js"
 
 export const accept_one_friend_request = async(req, res, next) =>{
     const currentUserId = req.user.id

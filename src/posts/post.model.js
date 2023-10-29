@@ -1,4 +1,4 @@
-import { Model, ModelSchema } from "../zghost/db/model.js";
+import { Model, ModelSchema } from "../../zghost/db/model.js";
 
 const postSchema = new ModelSchema({
     post_content: String,

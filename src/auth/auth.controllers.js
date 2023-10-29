@@ -1,10 +1,10 @@
-import { Authenticator } from "../zghost/app/init.js"
-import { createUserWithHashedPassword } from "../utils/auth.js"
-import { getValidationResult } from "../zghost/utils/validator.js"
+import { Authenticator } from "../../zghost/app/init.js"
+import { createUserWithHashedPassword } from "./auth.dal.js"
+import { getValidationResult } from "../../zghost/utils/validator.js"
 import { 
     login_validators, 
     signup_validators, 
-} from "../utils/backend-validators.js"
+} from "../../utils/validators.js"
 
 
 

@@ -1,7 +1,7 @@
-import * as database from '../utils/profiles-db.js'
-import { formatPosts, formatProfile } from '../utils/formats.js'
-import { getValidationResult } from '../zghost/utils/validator.js'
-import { profile_info_validators } from '../utils/backend-validators.js'
+import * as database from './profiles.dal.js'
+import { formatPosts, formatProfile } from '../../utils/formats.js'
+import { getValidationResult } from '../../zghost/utils/validator.js'
+import { profile_info_validators } from '../../utils/validators.js'
 import fs from 'node:fs'
 
 export const get_user_profile = async(req, res, next) => {

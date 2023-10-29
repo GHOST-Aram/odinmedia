@@ -1,5 +1,5 @@
-import * as people from "../controllers/people.js";
-import { Router } from "../zghost/app/init.js";
+import * as people from "./people.controllers.js";
+import { Router } from "../../zghost/app/init.js";
 
 const peopleRouter = Router()
 

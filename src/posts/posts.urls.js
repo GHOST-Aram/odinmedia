@@ -1,5 +1,5 @@
-import * as posts from "../controllers/posts.js";
-import { Router, uploadSingleFile } from "../zghost/app/init.js";
+import * as posts from "./posts.controllers.js";
+import { Router, uploadSingleFile } from "../../zghost/app/init.js";
 
 
 const postsRouter = Router()

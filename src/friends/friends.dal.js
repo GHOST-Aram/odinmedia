@@ -1,5 +1,5 @@
-import { ObjectId } from "../zghost/app/init.js"
-import { User } from "../zghost/db/User.js"
+import { ObjectId } from "../../zghost/app/init.js"
+import { User } from "../../zghost/db/User.js"
 
 export const findUserById = async(userId) =>{
     return await User.findById(userId).populate({

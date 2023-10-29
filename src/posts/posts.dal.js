@@ -1,6 +1,6 @@
-import { Post } from "../models/post.js"
-import { ObjectId } from "../zghost/app/init.js"
-import { Comment } from "../models/comment.js"
+import { Post } from "./post.model.js"
+import { ObjectId } from "../../zghost/app/init.js"
+import { Comment } from "./comment.model.js"
 
 export const addNewComment = async({ authorObjectId, commentText, postId }) =>{
     const comment = await Comment.create({

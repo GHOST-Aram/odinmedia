@@ -1,15 +1,15 @@
-import * as database  from "../utils/posts-db.js"
+import * as database  from "./posts.dal.js"
 import fs from 'node:fs'
-import { getValidationResult } from "../zghost/utils/validator.js"
+import { getValidationResult } from "../../zghost/utils/validator.js"
 import { 
     formatPosts, 
     formatPost, 
     filterPosts 
-} from "../utils/formats.js"
+} from "../../utils/formats.js"
 import { 
     comment_validators, 
     post_validators 
-} from "../utils/backend-validators.js"
+} from "../../utils/validators.js"
 export const add_new_comment = [
     ...comment_validators,
 
