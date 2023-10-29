@@ -10,7 +10,7 @@ class ProfilesDAL{
         )
     }
     
-    findPostsByAuthorId = async(authorId) =>{
+    findPostsByProfileId = async(authorId) =>{
         return await Post.find({author: new ObjectId(authorId)}).populate(
             {
                 path: 'author',

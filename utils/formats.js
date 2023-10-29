@@ -39,6 +39,7 @@ export const formatProfile = (user) =>{
     })
 }
 
+
 export const formatUser = (user) =>{
     return {
         id: user._id.toString(),
