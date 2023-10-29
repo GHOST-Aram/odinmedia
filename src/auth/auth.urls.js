@@ -10,7 +10,7 @@ const authRouter = Router()
 
 authRouter.get('/facebook', Authenticator.authenticate('facebook'))
 authRouter.get('/facebook/callback', Authenticator.authenticate('facebook', {
-    successRedirect: '/',
+    successRedirect: '/posts',
     failureRedirect: '/auth/login'
 }))
 

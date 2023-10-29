@@ -15,9 +15,7 @@ app.use((req, res, next) => {
   res.locals.user = req.user
   next()
 })
-app.get('/', (req, res) => {
-	res.redirect('/posts')
-})
+
 app.use('/auth', authRouter)
 app.use('/posts',isLoggedIn, postsRouter)
 app.use('/social', isLoggedIn, socialRouter)

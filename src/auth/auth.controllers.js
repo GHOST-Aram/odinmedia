@@ -58,7 +58,7 @@ export const login = [
     },
     Authenticator.authenticate('local', {
         failureRedirect: '/auth/login',
-        successRedirect: '/'
+        successRedirect: '/posts'
     })
 ]
 
