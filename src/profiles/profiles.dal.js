@@ -4,7 +4,7 @@ import { ObjectId } from "../../zghost/app/init.js"
 
 export class ProfilesDAL{
     currentUserId
-    
+
     constructor(currentUserId){
         this.currentUserId = currentUserId
     }
@@ -31,7 +31,7 @@ export class ProfilesDAL{
         )
     }
     
-    updateProfileInfo = async( profileData ) =>{
+    updateCurrentUserProfile = async( profileData ) =>{
         await User.findByIdAndUpdate(this.currentUserId, profileData )
     }
 }    

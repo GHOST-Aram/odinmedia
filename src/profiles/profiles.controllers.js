@@ -59,7 +59,7 @@ export const update_profile = [
             })
 
             try {
-                await profilesDAL.updateProfileInfo(profileData)
+                await profilesDAL.updateCurrentUserProfile(profileData)
                 res.redirect(`/profiles/${currentUserId}`)
             } catch (error) {
                 next(error)
