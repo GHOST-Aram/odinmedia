@@ -1,4 +1,4 @@
-import { profilesDAL } from './profiles.dal.js'
+import { ProfilesDAL } from './profiles.dal.js'
 import { formatPosts, formatProfile } from '../../utils/formats.js'
 import { getValidationResult } from '../../zghost/utils/validator.js'
 import { profile_info_validators } from '../../utils/validators.js'
@@ -7,6 +7,7 @@ import fs from 'node:fs'
 export const get_user_profile = async(req, res, next) => {
     const userId = req.params.id
     const currentUser = req.user
+    const profilesDAL = new ProfilesDAL(currentUser.id)
 
     try {
         const user = await profilesDAL.findProfileById(userId)
@@ -26,8 +27,11 @@ export const get_user_profile = async(req, res, next) => {
 }
 
 export const get_editing_form = async(req, res, next) =>{
+    const currentUserId = req.user.id
+    const profilesDAL = new ProfilesDAL(currentUserId)
+
     try {
-        const user = await profilesDAL.findProfileById(req.user.id)
+        const user = await profilesDAL.findCurrentUserProfile()
         const profile = formatProfile(user)
 
         res.render('edit-profile', { 
@@ -45,21 +49,23 @@ export const update_profile = [
 
     async(req, res, next) =>{
         const errors = getValidationResult(req)
-        try {
-            
-            if(errors.isEmpty()){
-                const currentUserId = req.user.id
-                const profileData = collectProfileData({ 
-                    textData: req.body,
-                    files: req.files
+        const currentUserId = req.user.id
+
+        if(errors.isEmpty()){
+            const profilesDAL = new ProfilesDAL(currentUserId)
+            const profileData = collectProfileData({ 
+                textData: req.body,
+                files: req.files
             })
 
-                await profilesDAL.updateProfileInfo({ currentUserId, profileData})
+            try {
+                await profilesDAL.updateProfileInfo(profileData)
                 res.redirect(`/profiles/${currentUserId}`)
+            } catch (error) {
+                next(error)
             }
-    
-        } catch (error) {
-            next(error)
+        } else {
+            res.redirect(`/profiles/${currentUserId}/edit`)
         }
     }
 ]     
