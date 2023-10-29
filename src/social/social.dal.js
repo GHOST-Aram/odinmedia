@@ -1,8 +1,7 @@
 import { User } from "../../zghost/db/User.js"
 import { ObjectId } from "../../zghost/app/init.js"
-import { formatUser } from "../../utils/formats.js"
 
-export class CurrentUserDAL{
+export class SocialDAL{
     currentUserId
     constructor( currentUserId){
         this.currentUserId = currentUserId

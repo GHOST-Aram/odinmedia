@@ -1,6 +1,6 @@
 import { app } from './zghost/app/config.js';
 import { postsRouter } from "./src/posts/posts.urls.js";
-import { socialRouter } from './src/current-user/current-user.urls.js';
+import { socialRouter } from './src/social/social.urls.js';
 import { profilesRouter } from './src/profiles/profiles.urls.js';
 import { authRouter } from './src/auth/auth.urls.js';
 import { isLoggedIn } from './src/auth/auth.controllers.js';

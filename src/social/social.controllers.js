@@ -1,13 +1,13 @@
-import { CurrentUserDAL } from "./current-user.dal.js"
+import { SocialDAL } from "./social.dal.js"
 import * as formats from '../../utils/formats.js'
 
 export const accept_friend_request = async(req, res, next) =>{
     const currentUserId = req.user.id
     const friendId = req.params.id
-    const currentUserDAL = new CurrentUserDAL(currentUserId)
+    const socialDAL = new SocialDAL(currentUserId)
 
     try {
-        await currentUserDAL.acceptFriendRequest(friendId)
+        await socialDAL.acceptFriendRequest(friendId)
         res.redirect('/people/requests/received')
     } catch (error) {
         next(error)
@@ -17,10 +17,10 @@ export const accept_friend_request = async(req, res, next) =>{
 export const decline_friend_request = async(req, res, next) =>{
     const friendId = req.params.id
     const currentUserId = req.user.id
-    const currentUserDAL = new CurrentUserDAL(currentUserId)
+    const socialDAL = new SocialDAL(currentUserId)
 
     try {
-        await currentUserDAL.removeReceivedRequest(friendId)
+        await socialDAL.removeReceivedRequest(friendId)
         res.redirect('/people/requests/received')
     } catch (error) {
         next(error)
@@ -29,10 +29,10 @@ export const decline_friend_request = async(req, res, next) =>{
 
 export const get_all_friends = async(req, res, next) =>{
     const currentUserId = req.user.id
-    const currentUserDAL = new CurrentUserDAL(currentUserId)
+    const socialDAL = new SocialDAL(currentUserId)
 
     try {
-        const friends = await currentUserDAL.findFriends()
+        const friends = await socialDAL.findFriends()
         
         const formattedFriends = friends.map(friend =>({
             ...formats.formatUser(friend),
@@ -53,10 +53,10 @@ export const get_all_friends = async(req, res, next) =>{
 
 export const get_people_you_may_know = async(req, res, next) =>{
     const currentUser = req.user
-    const currentUserDAL = new CurrentUserDAL(currentUser.id)
+    const socialDAL = new SocialDAL(currentUser.id)
 
     try {
-        let users = await currentUserDAL.findPeopleYouMayKnow()
+        let users = await socialDAL.findPeopleYouMayKnow()
 
         users = formats.filterFriends(
             users, currentUser.friends
@@ -88,10 +88,10 @@ export const get_people_you_may_know = async(req, res, next) =>{
 
 export const get_received_requests = async(req, res, next) =>{
     const currentUserId = req.user.id
-    const currentUserDAL = new CurrentUserDAL(currentUserId)
+    const socialDAL = new SocialDAL(currentUserId)
 
     try {
-        const requests_received = await currentUserDAL.findReceivedRequests()
+        const requests_received = await socialDAL.findReceivedRequests()
 
         const formattedRequests = requests_received.map(
             user => ({
@@ -113,10 +113,10 @@ export const get_received_requests = async(req, res, next) =>{
 }
 export const get_sent_requests = async(req, res, next) =>{
     const currentUserId = req.user.id
-    const currentUserDAL = new CurrentUserDAL(currentUserId)
+    const socialDAL = new SocialDAL(currentUserId)
 
     try {
-        const requests_sent = await currentUserDAL.findSentRequests(currentUserId)
+        const requests_sent = await socialDAL.findSentRequests(currentUserId)
         const formattedRequests = requests_sent.map(
             user => ({
                 ...formats.formatUser(user),
@@ -139,10 +139,10 @@ export const get_sent_requests = async(req, res, next) =>{
 export const recall_friend_request = async(req, res, next) =>{
     const friendId = req.params.id
     const currentUserId = req.user.id
-    const currentUserDAL = new CurrentUserDAL(currentUserId)
+    const socialDAL = new SocialDAL(currentUserId)
 
     try {
-       await currentUserDAL.recallSentRequest(friendId)
+       await socialDAL.recallSentRequest(friendId)
 
         res.redirect('/people/requests/sent')
     } catch (error) {
@@ -154,10 +154,10 @@ export const recall_friend_request = async(req, res, next) =>{
 export const removeFriend = async(req, res, next) => {
     const currentUserId = req.user.id
     const friendId = req.params.id
-    const currentUserDAL = new CurrentUserDAL(currentUserId)
+    const socialDAL = new SocialDAL(currentUserId)
 
     try {
-        currentUserDAL.removeFriend(friendId)
+        socialDAL.removeFriend(friendId)
         res.redirect(`/friends/${req.user.id}/all`)
     } catch (error) {
         next(error)
@@ -167,10 +167,10 @@ export const removeFriend = async(req, res, next) => {
 export const send_friend_request = async(req, res, next) =>{
     const friendId = req.params.id
     const currentUserId = req.user.id
-    const currentUserDAL = new CurrentUserDAL(currentUserId)
+    const socialDAL = new SocialDAL(currentUserId)
 
     try {
-        await currentUserDAL.sendFriendRequest(friendId)
+        await socialDAL.sendFriendRequest(friendId)
         res.redirect('/people')
     } catch (error) {
         console.log(error)

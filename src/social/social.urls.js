@@ -1,4 +1,4 @@
-import * as currentUser from './current-user.controllers.js'
+import * as currentUser from './social.controllers.js'
 import { Router } from "../../zghost/app/init.js";
 
 const socialRouter = Router()
