@@ -6,14 +6,8 @@ import {
     formatPost, 
     filterPosts 
 } from "../../utils/formats.js"
-import { 
-    comment_validators, 
-    post_validators 
-} from "../../utils/validators.js"
-export const add_new_comment = [
-    ...comment_validators,
 
-    async(req, res, next) =>{
+export const add_new_comment = async(req, res, next) =>{
         const errors = getValidationResult(req)
         try {
             if(errors.isEmpty()){
@@ -31,7 +25,7 @@ export const add_new_comment = [
     
     }
 
-]
+
 
 export const change_likes = async(req, res, next) => {
     const postId = req.params.id
@@ -45,10 +39,7 @@ export const change_likes = async(req, res, next) => {
 }
 
 
-export const create_post = [
-    ...post_validators,
-
-    async(req, res, next) => {
+export const create_post = async(req, res, next) => {
         const errors = getValidationResult(req)
 
         try {
@@ -72,8 +63,6 @@ export const create_post = [
         }
     }
     
-]
-
 export const get_posts = async (req, res, next) => {
     const currentUser = req.user
     
@@ -95,6 +84,7 @@ export const get_posts = async (req, res, next) => {
 export const get_one_post = async(req, res, next) =>{
     const postId = req.params.id
     const currentUserId = req.user.id
+
     try {
         const currentPost = await database.findPostById(postId)
         const formattedPost = formatPost(currentPost, currentUserId)

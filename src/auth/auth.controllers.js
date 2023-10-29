@@ -2,9 +2,6 @@ import { Authenticator } from "../../zghost/app/init.js"
 import { createUserWithHashedPassword } from "./auth.dal.js"
 import { getValidationResult } from "../../zghost/utils/validator.js"
 
-
-
-
 export const creat_user = (req, res) =>{
         const errors = getValidationResult(req)
 

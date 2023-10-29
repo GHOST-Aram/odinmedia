@@ -16,6 +16,7 @@ export const accept_one_friend_request = async(req, res, next) =>{
 export const decline_friend_request = async(req, res, next) =>{
     const friendId = req.params.id
     const currentUserId = req.user.id
+
     try {
         await database.rejectFriendRequest({ currentUserId, friendId })
         res.redirect('/people/requests/received')
@@ -25,6 +26,7 @@ export const decline_friend_request = async(req, res, next) =>{
 }
 export const get_all_people = async(req, res, next) =>{
     const currentUser = req.user
+
     try {
         let users = await database.findAllUsers()
 
@@ -58,6 +60,7 @@ export const get_all_people = async(req, res, next) =>{
 
 export const get_received_requests = async(req, res, next) =>{
     const currentUserId = req.user.id
+
     try {
         const requests_received = await database.findReceivedRequests(
             currentUserId
@@ -82,6 +85,7 @@ export const get_received_requests = async(req, res, next) =>{
 }
 export const get_sent_requests = async(req, res, next) =>{
     const currentUserId = req.user.id
+
     try {
         const requests_sent = await database.findSentRequests(currentUserId)
         const formattedRequests = requests_sent.map(
@@ -106,6 +110,7 @@ export const get_sent_requests = async(req, res, next) =>{
 export const recall_friend_request = async(req, res, next) =>{
     const friendId = req.params.id
     const currentUserId = req.user.id
+    
     try {
        await database.recallSentRequests({currentUserId, friendId})
 
