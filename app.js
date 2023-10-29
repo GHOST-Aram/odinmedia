@@ -1,5 +1,5 @@
 import { app } from './zghost/app/config.js';
-import { postsRouter } from "./src/posts/posts.urls.js";
+import { postsRouter } from "./src/content/posts.urls.js";
 import { socialRouter } from './src/social/social.urls.js';
 import { profilesRouter } from './src/profiles/profiles.urls.js';
 import { authRouter } from './src/auth/auth.urls.js';

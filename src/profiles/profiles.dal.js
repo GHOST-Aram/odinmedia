@@ -1,5 +1,5 @@
 import { User } from "../../zghost/db/User.js"
-import { Post } from "../posts/post.model.js"
+import { Post } from "../content/post.model.js"
 import { ObjectId } from "../../zghost/app/init.js"
 
 class ProfilesDAL{
