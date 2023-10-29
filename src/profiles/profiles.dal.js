@@ -3,15 +3,15 @@ import { Post } from "../content/post.model.js"
 import { ObjectId } from "../../zghost/app/init.js"
 
 class ProfilesDAL{
-    findProfileById = async(id) =>{
-        return await User.findById(id).select(
+    findProfileById = async(profileID) =>{
+        return await User.findById(profileID).select(
             `pictureUrl friends bannerUrl city _id 
             region first_name last_name createdAt`
         )
     }
     
-    findPostsByProfileId = async(authorId) =>{
-        return await Post.find({author: new ObjectId(authorId)}).populate(
+    findPostsByProfileId = async(profileID) =>{
+        return await Post.find({author: new ObjectId(profileID)}).populate(
             {
                 path: 'author',
                 select: 'first_name last_name pictureUrl _id'
@@ -19,8 +19,8 @@ class ProfilesDAL{
         )
     }
     
-    updateProfileInfo = async({ currentUserId, profileData }) =>{
-        await User.findByIdAndUpdate(currentUserId, profileData )
+    updateProfileInfo = async({ profileID, profileData }) =>{
+        await User.findByIdAndUpdate(profileID, profileData )
     }
 }    
 
