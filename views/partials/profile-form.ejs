@@ -49,17 +49,31 @@
             </div>
         <%}%>
     </div>
-    <div class="name flex flex-col items-start gap-2">
-        <label for="name" class="text-slate-600 font-light">
-            Name
-        </label>
-        <input type="text" name="name" id="name" 
-            placeholder="John Doe" value="<%=profile.name%>"
-            class="border-b rounded-sm text-md font-light border 
-            p-2 w-full"
-            required minLength="2" maxLength="100"
-        >
-        <span class="hidden text-red-500"></span>
+    <div class="name flex flex-col items-start gap-2 lg:flex-row">
+        <div class="w-full">
+            <label for="name" class="text-slate-600 font-light">
+                First Name
+            </label>
+            <input type="text" name="first_name" id="first-name" 
+                placeholder="John Doe" value="<%=profile.first_name%>"
+                class="border-b rounded-sm text-md font-light border 
+                p-2 w-full"
+                required minLength="2" maxLength="100"
+            >
+            <span class="hidden text-red-500"></span>
+        </div>
+        <div class="w-full">
+            <label for="name" class="text-slate-600 font-light">
+                Last Name
+            </label>
+            <input type="text" name="last_name" id="last-name" 
+                placeholder="John Doe" value="<%=profile.last_name%>"
+                class="border-b rounded-sm text-md font-light border 
+                p-2 w-full"
+                required minLength="2" maxLength="100"
+            >
+            <span class="hidden text-red-500"></span>
+        </div>
     </div>
     <div class="location flex flex-col items-start gap-4">
         <div class="md:flex flex-row justify-between gap-4 w-full items-center">

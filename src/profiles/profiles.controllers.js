@@ -13,7 +13,7 @@ export const get_user_profile = async(req, res, next) => {
         const user = await profilesDAL.findProfileById(userId)
         const posts = await profilesDAL.findPostsByProfileId(userId)
         const formattedPosts = formats.formatPosts(posts, currentUser)
-        const profile = formatProfile(user)
+        const profile = formats.formatProfile(user)
         
         res.render('profile', { 
             title: `${profile.name}`, 
