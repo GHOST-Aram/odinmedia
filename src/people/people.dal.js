@@ -1,7 +1,7 @@
 import { User } from "../../zghost/db/User.js"
 import { ObjectId } from "../../zghost/app/init.js"
 
-export const addFriend = async({currentUserId, friendId}) =>{
+export const acceptFriendRequest = async({currentUserId, friendId}) =>{
     await User.findByIdAndUpdate(currentUserId, {
         $pull: { requests_received: new ObjectId(friendId) }
     })
@@ -56,7 +56,7 @@ export const recallSentRequests = async({currentUserId, friendId}) =>{
     })
 }
 
-export const rejectFriendRequest = async({ currentUserId, friendId }) =>{
+export const removeReceivedRequest = async({ currentUserId, friendId }) =>{
     await User.findByIdAndUpdate(currentUserId, {
         $pull: { requests_received: new ObjectId(friendId) }
     })

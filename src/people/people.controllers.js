@@ -6,7 +6,7 @@ export const accept_one_friend_request = async(req, res, next) =>{
     const friendId = req.params.id
 
     try {
-        await database.addFriend({currentUserId, friendId})
+        await database.acceptFriendRequest({currentUserId, friendId})
         res.redirect('/people/requests/received')
     } catch (error) {
         next(error)
@@ -18,7 +18,7 @@ export const decline_friend_request = async(req, res, next) =>{
     const currentUserId = req.user.id
 
     try {
-        await database.rejectFriendRequest({ currentUserId, friendId })
+        await database.removeReceivedRequest({ currentUserId, friendId })
         res.redirect('/people/requests/received')
     } catch (error) {
         next(error)
@@ -110,7 +110,7 @@ export const get_sent_requests = async(req, res, next) =>{
 export const recall_friend_request = async(req, res, next) =>{
     const friendId = req.params.id
     const currentUserId = req.user.id
-    
+
     try {
        await database.recallSentRequests({currentUserId, friendId})
 
