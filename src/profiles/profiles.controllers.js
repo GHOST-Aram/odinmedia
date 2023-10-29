@@ -1,5 +1,5 @@
 import { ProfilesDAL } from './profiles.dal.js'
-import { formatPosts, formatProfile } from '../../utils/formats.js'
+import * as formats from '../../utils/formats.js'
 import { getValidationResult } from '../../zghost/utils/validator.js'
 import { profile_info_validators } from '../../utils/validators.js'
 import fs from 'node:fs'
@@ -12,7 +12,7 @@ export const get_user_profile = async(req, res, next) => {
     try {
         const user = await profilesDAL.findProfileById(userId)
         const posts = await profilesDAL.findPostsByProfileId(userId)
-        const formattedPosts = formatPosts(posts, currentUser)
+        const formattedPosts = formats.formatPosts(posts, currentUser)
         const profile = formatProfile(user)
         
         res.render('profile', { 
@@ -32,7 +32,7 @@ export const get_editing_form = async(req, res, next) =>{
 
     try {
         const user = await profilesDAL.findCurrentUserProfile()
-        const profile = formatProfile(user)
+        const profile = formats.formatProfile(user)
 
         res.render('edit-profile', { 
             title: 'Edit Profile',
