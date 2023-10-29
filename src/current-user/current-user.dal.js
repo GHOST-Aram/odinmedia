@@ -24,9 +24,10 @@ export class CurrentUserDAL{
     }
 
     findFriends = async() =>{
-        return await User.findById(this.currentUserId)
+        const currentUser =  await User.findById(this.currentUserId)
             .populate('friends')
             .select('friends')
+        return currentUser.friends
     }
     
     findPeopleYouMayKnow = async() =>{

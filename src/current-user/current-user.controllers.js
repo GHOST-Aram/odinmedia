@@ -32,10 +32,10 @@ export const get_all_friends = async(req, res, next) =>{
     const currentUserDAL = new CurrentUserDAL(currentUserId)
 
     try {
-        const friends = currentUserDAL.findFriends()
-        const formattedFriends = currentUserDAL.formatFriends(friends)
-        const friendsWithMutualFriends = formattedFriends.map(friend =>({
-            ...friend,
+        const friends = await currentUserDAL.findFriends()
+        
+        const formattedFriends = friends.map(friend =>({
+            ...formats.formatUser(friend),
             mutualFriends: formats.calculateMutualFriends(
                 friend.friends, req.user.friends
             )
@@ -44,7 +44,7 @@ export const get_all_friends = async(req, res, next) =>{
         res.render('friends', { 
             title: `Friends of ${req.user.name}`, 
             heading: `Friends of ${req.user.name}`,
-            friends: friendsWithMutualFriends
+            friends: formattedFriends
         })
     } catch (error) {
         next(error)
