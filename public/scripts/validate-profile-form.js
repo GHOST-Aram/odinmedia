@@ -1,5 +1,6 @@
 const form = document.querySelector('form')
-const nameField = document.querySelector('input#name')
+const firstNameField = document.querySelector('input#first-name')
+const lastNameField = document.querySelector('input#last-name')
 const city = document.querySelector('input#city')
 const region = document.querySelector('input#region')
 const bannerFile = document.querySelector('.banner input[type=file]')
@@ -8,30 +9,48 @@ const pictureFile = document.querySelector('.picture input[type=file]')
 const pictureUrl = document.querySelector('.picture input[type=url]')
 
 // Error fields 
-const nameError = document.querySelector('.name span.hidden')
+const firstNameError = document.querySelector('.first-name span.hidden')
+const lastNameError = document.querySelector('.last-name span.hidden')
 const pictureError = document.querySelector('.picture span.hidden')
 const bannerError = document.querySelector('.banner span.hidden')
 const locationError = document.querySelector('.location span.hidden')
 
 // Validate name field 
-nameField.addEventListener('input', (e) => {
-    if(nameField.validity.valueMissing){
-        nameError.textContent = 'Name Field is Required.'
-        nameError.classList.remove('hidden')
-        nameField.classList.add('border-red-500')
-    } else if(nameField.validity.tooShort){
-        nameError.textContent = 'Name is too short.'
-        nameError.classList.remove('hidden')
-        nameField.classList.add('border-red-500')
-    } else if(nameField.validity.valid){
-        nameError.textContent = ''
-        nameError.classList.add('hidden')
-        nameField.classList.remove('border-red-500')
+firstNameField.addEventListener('input', (e) => {
+    if(firstNameField.validity.valueMissing){
+        firstNameError.textContent = 'Name Field is Required.'
+        firstNameError.classList.remove('hidden')
+        firstNameField.classList.add('border-red-500')
+    } else if(firstNameField.validity.tooShort){
+        firstNameError.textContent = 'Name is too short.'
+        firstNameError.classList.remove('hidden')
+        firstNameField.classList.add('border-red-500')
+    } else if(firstNameField.validity.valid){
+        firstNameError.textContent = ''
+        firstNameError.classList.add('hidden')
+        firstNameField.classList.remove('border-red-500')
+    } 
+})
+
+// Validate name field 
+lastNameField.addEventListener('input', (e) => {
+    if(lastNameField.validity.valueMissing){
+        lastNameError.textContent = 'Name Field is Required.'
+        lastNameError.classList.remove('hidden')
+        lastNameField.classList.add('border-red-500')
+    } else if(lastNameField.validity.tooShort){
+        lastNameError.textContent = 'Name is too short.'
+        lastNameError.classList.remove('hidden')
+        lastNameField.classList.add('border-red-500')
+    } else if(lastNameField.validity.valid){
+        lastNameError.textContent = ''
+        lastNameError.classList.add('hidden')
+        lastNameField.classList.remove('border-red-500')
     } 
 })
 
 form.addEventListener('submit', (e) => {
-    nameField.value = nameField.value.trim()
+    firstNameField.value = firstNameField.value.trim()
     city.value = city.value.trim()
     region.value = region.value.trim()
     bannerFile.value = bannerFile.value.trim()
