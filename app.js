@@ -1,7 +1,8 @@
 import { app } from './zghost/app/config.js';
 import { postsRouter } from "./src/posts/posts.urls.js";
-import { peopleRouter } from './src/people/people.urls.js';
-import { friendsRouter } from './src/friends/friends.urls.js';
+// import { peopleRouter } from './src/people/people.urls.js';
+// import { friendsRouter } from './src/friends/friends.urls.js';
+import { socialRouter } from './src/current-user/current-user.urls.js';
 import { profilesRouter } from './src/profiles/profiles.urls.js';
 import { authRouter } from './src/auth/auth.urls.js';
 import { isLoggedIn } from './src/auth/auth.controllers.js';
@@ -21,8 +22,9 @@ app.get('/', (req, res) => {
 })
 app.use('/auth', authRouter)
 app.use('/posts',isLoggedIn, postsRouter)
-app.use('/people',isLoggedIn, peopleRouter)
-app.use('/friends',isLoggedIn, friendsRouter)
+// app.use('/people',isLoggedIn, peopleRouter)
+// app.use('/friends',isLoggedIn, friendsRouter)
+app.use('/social', isLoggedIn, socialRouter)
 app.use('/profiles',isLoggedIn, profilesRouter)
 
 //Error handling
