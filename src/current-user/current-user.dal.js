@@ -61,11 +61,6 @@ export class CurrentUserDAL{
         return user.requests_sent
     }
     
-    formatFriends = (friends) =>{
-        return friends.map(
-            user => ({ ...formatUser(user)})
-        )
-    }
 
     recallSentRequest = async(friendId) =>{
         await User.findByIdAndUpdate(this.currentUserId, {
