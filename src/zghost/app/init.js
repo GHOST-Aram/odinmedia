@@ -18,7 +18,7 @@ const json = () => express.json()
 const logger = (mode) => morgan(mode)
 const Router = () => express.Router()
 const static_dir =(dirname) => express.static(dirname)
-const upload = multer({ dest: '/uploads'})
+const upload = multer({ dest: 'uploads'})
 const urlencoded = (options) => express.urlencoded(options)
 
 const uploadSingleFile = (field) => upload.single(field)

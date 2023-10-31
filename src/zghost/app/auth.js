@@ -2,6 +2,7 @@ import { app, Authenticator } from './init.js';
 import * as strategies from '../utils/auth-strategies.js';
 import { authentication_session } from '../utils/session.js';
 import * as cookies from '../utils/cookies.js';
+import 'dotenv/config.js'
 
 app.use(authentication_session())
 

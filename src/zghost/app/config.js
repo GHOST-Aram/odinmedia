@@ -20,7 +20,7 @@ import { app } from './auth.js';
     app.use(logger('dev'));
     app.set('views','views');
     app.set('view engine', 'ejs');
-    app.use(static_dir('public'));
+    app.use(static_dir('static'));
 
 
 
