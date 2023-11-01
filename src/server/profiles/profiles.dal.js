@@ -3,14 +3,9 @@ import { Post } from "../content/post.model.js"
 import { ObjectId } from "../../zghost/app/init.js"
 
 export class ProfilesDAL{
-    currentUserId
 
-    constructor(currentUserId){
-        this.currentUserId = currentUserId
-    }
-
-    findCurrentUserProfile = async() =>{
-        return await User.findById(this.currentUserId).select(
+    findCurrentUserProfile = async(currentUserId) =>{
+        return await User.findById(currentUserId).select(
             `pictureUrl friends bannerUrl city _id 
             region first_name last_name createdAt`
         )
@@ -31,8 +26,9 @@ export class ProfilesDAL{
         )
     }
     
-    updateCurrentUserProfile = async( profileData ) =>{
-        await User.findByIdAndUpdate(this.currentUserId, profileData )
+    updateCurrentUserProfile = async( currentUserId, profileData ) =>{
+        await User.findByIdAndUpdate(currentUserId, profileData )
     }
 }    
 
+export const profilesDAL = new ProfilesDAL()
