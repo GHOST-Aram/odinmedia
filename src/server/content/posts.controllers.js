@@ -1,4 +1,3 @@
-import { postDAL }  from "./posts.dal.js"
 import fs from 'node:fs'
 import { getValidationResult } from "../../zghost/utils/validator.js"
 import { 
@@ -7,105 +6,112 @@ import {
     filterPosts 
 } from "../../utils/formats.js"
 
-export const add_new_comment = async(req, res, next) =>{
-    const errors = getValidationResult(req)
+export class PostsController{
+    #dataAccessLayer
 
-    try {
-        if(errors.isEmpty()){
-            const commentData = {
-                authorObjectId: req.user._id,
-                commentText: req.body.comment,
-                postId: req.params.id
-            }
-            await postDAL.addNewComment(commentData)
-        }
-        res.redirect(`/posts/${req.params.id}`)
-    } catch (error) {
-        next(error)
+    constructor(dataAccessLayer){
+        this.#dataAccessLayer = dataAccessLayer
     }
-
-}
-
-export const change_likes = async(req, res, next) => {
-    const postId = req.params.id
-    const currentUserId = req.user.id
-
-    try {
-        await postDAL.updateLikes({ currentUserId, postId })
-        res.redirect(`/posts/${req.params.id}`)
-    } catch (error) {
-        next(error)
-    }
-}
-
-export const create_post = async(req, res, next) => {
-    const errors = getValidationResult(req)
-
-    try {
-        if(errors.isEmpty()){
-            const {post_content, media_url} = req.body
-            const currentUserId = req.user._id
-            const postData = {
-                post_content,
-                media_url: media_url.length > 0 ? media_url : undefined,
-                media_file: req.file && { 
-                    data: fs.readFileSync(req.file.path),
-                    contentType: req.file.mimetype
-                },
-                author: currentUserId
-            }
-            await postDAL.createNewPost(postData)
-        }
-        res.redirect('/')
-    } catch (error) {
-        next(error)
-    }
-}
+    add_new_comment = async(req, res, next) =>{
+        const errors = getValidationResult(req)
     
-export const get_posts = async (req, res, next) => {
-    const currentUser = req.user
+        try {
+            if(errors.isEmpty()){
+                const commentData = {
+                    authorObjectId: req.user._id,
+                    commentText: req.body.comment,
+                    postId: req.params.id
+                }
+                await this.#dataAccessLayer.addNewComment(commentData)
+            }
+            res.redirect(`/posts/${req.params.id}`)
+        } catch (error) {
+            next(error)
+        }
     
-    try {
-        const posts = await postDAL.findAllPosts()
-        const filteredPosts = filterPosts(posts, currentUser)
-        const formattedPosts = formatPosts(filteredPosts, currentUser)
-                
-        res.render('index', { 
-            title: 'Home',
-            heading: 'Posts', 
-            posts: formattedPosts
-        })
-    } catch (error) {
-        next(error)
     }
-}
-
-export const get_one_post = async(req, res, next) =>{
-    const postId = req.params.id
-    const currentUserId = req.user.id
-
-    try {
-        const currentPost = await postDAL.findPostById(postId)
-        const formattedPost = formatPost(currentPost, currentUserId)
+    
+    change_likes = async(req, res, next) => {
+        const postId = req.params.id
+        const currentUserId = req.user.id
+    
+        try {
+            await this.#dataAccessLayer.updateLikes({ currentUserId, postId })
+            res.redirect(`/posts/${req.params.id}`)
+        } catch (error) {
+            next(error)
+        }
+    }
+    
+    create_post = async(req, res, next) => {
+        const errors = getValidationResult(req)
+    
+        try {
+            if(errors.isEmpty()){
+                const {post_content, media_url} = req.body
+                const currentUserId = req.user._id
+                const postData = {
+                    post_content,
+                    media_url: media_url.length > 0 ? media_url : undefined,
+                    media_file: req.file && { 
+                        data: fs.readFileSync(req.file.path),
+                        contentType: req.file.mimetype
+                    },
+                    author: currentUserId
+                }
+                await this.#dataAccessLayer.createNewPost(postData)
+            }
+            res.redirect('/')
+        } catch (error) {
+            next(error)
+        }
+    }
         
-        res.render('post-details', { 
-            title: `Post | ${postId}`, 
-            heading: 'Post', 
-            post:formattedPost
-        })
-    } catch (error) {
-        next(error)
+    get_posts = async (req, res, next) => {
+        const currentUser = req.user
+        
+        try {
+            const posts = await this.#dataAccessLayer.findAllPosts()
+            const filteredPosts = filterPosts(posts, currentUser)
+            const formattedPosts = formatPosts(filteredPosts, currentUser)
+                    
+            res.render('index', { 
+                title: 'Home',
+                heading: 'Posts', 
+                posts: formattedPosts
+            })
+        } catch (error) {
+            next(error)
+        }
     }
-}
-
-export const repost = async(req, res, next) =>{
-    const postId = req.params.id
-    const currentUserId = req.user.id
     
-    try {
-        await postDAL.updateReposts({ currentUserId, postId })
-        res.redirect(`/posts/${postId}`)
-    } catch (error) {
-        next(error)
+    get_one_post = async(req, res, next) =>{
+        const postId = req.params.id
+        const currentUserId = req.user.id
+    
+        try {
+            const currentPost = await this.#dataAccessLayer.findPostById(postId)
+            const formattedPost = formatPost(currentPost, currentUserId)
+            
+            res.render('post-details', { 
+                title: `Post | ${postId}`, 
+                heading: 'Post', 
+                post:formattedPost
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+    
+    repost = async(req, res, next) =>{
+        const postId = req.params.id
+        const currentUserId = req.user.id
+        
+        try {
+            await this.#dataAccessLayer.updateReposts({ currentUserId, postId })
+            res.redirect(`/posts/${postId}`)
+        } catch (error) {
+            next(error)
+        }
     }
 }
