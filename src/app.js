@@ -12,8 +12,14 @@ import {
 
 
 app.use((req, res, next) => {
-  res.locals.user = req.user
-  next()
+	if(req.isAuthenticated()){
+		res.locals.user = req.user
+	}
+	next()
+})
+
+app.get('/', (req, res) => {
+	res.redirect('/posts')
 })
 
 app.use('/auth', authRouter)
