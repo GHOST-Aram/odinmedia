@@ -1,4 +1,5 @@
-import * as auth from "./auth.controllers.js";
+import {AuthController} from "./auth.controllers.js";
+import { authDAL } from "./auth.dal.js"
 import { Router } from "../../zghost/app/init.js";
 import { Authenticator } from "../../zghost/app/init.js";
 import { 
@@ -7,6 +8,7 @@ import {
 } from "../../utils/validators.js"
 
 const authRouter = Router()
+const auth = new AuthController(authDAL)
 
 authRouter.get('/facebook', Authenticator.authenticate('facebook'))
 authRouter.get('/facebook/callback', Authenticator.authenticate('facebook', {
