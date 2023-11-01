@@ -18,9 +18,9 @@ import { app } from './auth.js';
     app.use(json());
     app.use(urlencoded({ extended: true }));
     app.use(logger('dev'));
-    app.set('views','views');
+    app.set('views','src/views');
     app.set('view engine', 'ejs');
-    app.use(static_dir('static'));
+    app.use(static_dir('src/static'));
 
 
 
