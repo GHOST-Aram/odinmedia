@@ -8,7 +8,7 @@ export const accept_friend_request = async(req, res, next) =>{
 
     try {
         await socialDAL.acceptFriendRequest(friendId)
-        res.redirect('/people/requests/received')
+        res.redirect('/social/requests/received')
     } catch (error) {
         next(error)
     }
@@ -21,7 +21,7 @@ export const decline_friend_request = async(req, res, next) =>{
 
     try {
         await socialDAL.removeReceivedRequest(friendId)
-        res.redirect('/people/requests/received')
+        res.redirect('/social/requests/received')
     } catch (error) {
         next(error)
     }
@@ -144,7 +144,7 @@ export const recall_friend_request = async(req, res, next) =>{
     try {
        await socialDAL.recallSentRequest(friendId)
 
-        res.redirect('/people/requests/sent')
+        res.redirect('/social/requests/sent')
     } catch (error) {
         next(error)
     }
@@ -171,7 +171,7 @@ export const send_friend_request = async(req, res, next) =>{
 
     try {
         await socialDAL.sendFriendRequest(friendId)
-        res.redirect('/people')
+        res.redirect('/social/people-you-may-know')
     } catch (error) {
         console.log(error)
         next(error)
