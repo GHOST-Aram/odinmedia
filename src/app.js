@@ -1,9 +1,9 @@
 import { app } from './zghost/app/config.js';
-import { postsRouter } from "./server/content/posts.urls.js";
-import { socialRouter } from './server/social/social.urls.js';
-import { profilesRouter } from './server/profiles/profiles.urls.js';
-import { authRouter } from './server/auth/auth.urls.js';
-import { isLoggedIn } from './server/auth/auth.controllers.js';
+import { postsRouter } from "./apps/content/posts.urls.js";
+import { socialRouter } from './apps/social/social.urls.js';
+import { profilesRouter } from './apps/profiles/profiles.urls.js';
+import { authRouter } from './apps/auth/auth.urls.js';
+import { isLoggedIn } from './apps/auth/auth.controllers.js';
 import { 
 	get_404_error_page, 
 	get_500_error_page, 

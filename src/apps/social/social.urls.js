@@ -4,6 +4,7 @@ import { Router } from "../../zghost/app/init.js";
 
 const socialRouter = Router()
 const currentUser = new SocialController(socialDAL)
+
 socialRouter.get('/people-you-may-know', currentUser.get_people_you_may_know)
 socialRouter.get('/requests/sent', currentUser.get_sent_requests)
 socialRouter.get('/requests/received', currentUser.get_received_requests)
